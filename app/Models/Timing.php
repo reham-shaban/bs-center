@@ -21,6 +21,7 @@ class Timing extends Model
         'duration',
         'lang',
         'is_upcoming',
+        'is_banner',
         'hidden',
     ];
 

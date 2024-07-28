@@ -24,6 +24,7 @@ class UpdateTimingRequest extends FormRequest
             'duration' => 'nullable|string|max:255',
             'lang' => 'nullable|string|max:5',
             'is_upcoming' => 'boolean',
+            'is_banner' => 'boolean',
         ];
     }
 }

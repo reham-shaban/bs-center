@@ -15,7 +15,6 @@ class UpdateCourseDetailsRequest extends FormRequest
     {
         return [
             'category_id' => 'nullable|exists:categories,id',
-            'status' => 'nullable|boolean',
             'title' => 'nullable|string|max:999',
             'slug' => 'nullable|string|max:255|unique:courses,slug,' . $this->course,
             'h1' => 'nullable|string|max:255',

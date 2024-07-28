@@ -15,7 +15,6 @@ class CreateCoursesTable extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('category_id')->nullable();
-            $table->boolean('status')->default(0); // upcoming or not
             $table->string('title', 999)->nullable();
             $table->string('slug', 255)->nullable();
             $table->string('h1', 255)->nullable();
