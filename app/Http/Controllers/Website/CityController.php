@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Models\City;
 use App\Models\Course;
 use App\Services\CourseService;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class CityController extends Controller
 {
     protected $courseService;
 
@@ -16,15 +16,15 @@ class CategoryController extends Controller
     {
         $this->courseService = $courseService;
     }
-    
+
     public function index(Request $request)
     {
         // Use the refactored search method
         $query = $this->courseService->applySearchFilters($request, Course::query());
         $courses = $query->with('timings.city')->get();
 
-        $categories = Category::all();
+        $cities = City::all();
 
-        return view('screen.categories', compact('courses', 'categories'));
+        return view('screen.venus', compact('courses', 'cities'));
     }
 }

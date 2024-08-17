@@ -1,6 +1,6 @@
 <div class="container">
     <h1>Search Courses</h1>
-    <form action="{{ route('home.index') }}" method="GET">
+    <form action="{{ $searchRoute }}" method="GET">
         <div class="form-group">
             <label for="course_title">Course Title</label>
             <input type="text" name="course_title" id="course_title" class="form-control" value="{{ request('course_title') }}">

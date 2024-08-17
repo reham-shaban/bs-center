@@ -2,7 +2,7 @@
 
 @section('content')
 
-@include('includes.search')
+@include('includes.search', ['searchRoute' => route('home.index')])
 @include('includes.isbanner')
 @include('includes.upcoming')
 
