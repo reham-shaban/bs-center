@@ -28,7 +28,6 @@ class CourseFactory extends Factory
 
         return [
             'category_id' => $this->faker->optional()->randomElement($categoryIds),
-            'status' => $this->faker->boolean,
             'title' => $title,
             'slug' => $slug,
             'h1' => $this->faker->sentence,

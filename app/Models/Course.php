@@ -70,6 +70,25 @@ class Course extends Model implements HasMedia
         return $this->hasMany(Download::class, 'course_id', 'id');
     }
 
+    // Function to get upcoming courses
+    public static function getUpcomingCourses()
+    {
+        return self::whereHas('timings', function($query) {
+            $query->where('is_upcoming', true)
+                  ->where('date_from', '>', now())
+                  ->orderBy('date_from', 'asc');
+        })->with('timings.city')->get();
+    }
+
+    // Function to get banner courses
+    public static function getBannerCourses()
+    {
+        return self::whereHas('timings', function($query) {
+            $query->where('is_banner', true)
+                  ->orderBy('date_from', 'asc');
+        })->with('timings.city')->get();
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';
