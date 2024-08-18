@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Exception;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCourseDetailsRequest;
-use App\Http\Requests\StoreCourseSEORequest;
 use App\Http\Requests\UpdateCourseDetailsRequest;
 use App\Http\Requests\UpdateCourseSEORequest;
 use App\Models\Course;
@@ -14,12 +13,13 @@ use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
-    // Show courese with lang 'en' or 'ar' & pagination
+    // Show courses with lang 'en' or 'ar', pagination, and search functionality
     public function index(Request $request)
     {
         try {
             $perPage = $request->input('per_page', config('pagination.per_page'));
             $lang = $request->input('lang');
+            $search = $request->input('search');
 
             $query = Course::query();
 
@@ -27,9 +27,17 @@ class CourseController extends Controller
                 $query->where('lang', $lang);
             }
 
+            if ($search) {
+                $query->where(function($q) use ($search) {
+                    $q->where('title', 'like', "%{$search}%")
+                      ->orWhere('slug', 'like', "%{$search}%")
+                      ->orWhere('h1', 'like', "%{$search}%");
+                });
+            }
+
             $courses = $query->with('category:id,title')
-                         ->select('id', 'title', 'slug', 'h1', 'category_id')
-                         ->paginate($perPage);
+                ->select('id', 'title', 'slug', 'h1', 'category_id', 'hidden')
+                ->paginate($perPage);
 
             // Add image URLs to each course
             $courses->transform(function ($course) {
@@ -119,47 +127,33 @@ class CourseController extends Controller
         }
     }
 
-    // Bulk hide courses
+    // Bulk toggle hidden status for courses
     public function bulkHide(Request $request)
     {
         // Validate the incoming request
         $request->validate([
             'ids' => 'required|array|min:1',
-            'ids.*' => 'integer|exists:categories,id'
+            'ids.*' => 'integer|exists:courses,id'
         ]);
 
         // Get the array of IDs from the request
         $ids = $request->input('ids');
 
-        // Perform the bulk update and get the number of affected rows
-        $affectedRows = Course::whereIn('id', $ids)->update(['hidden' => true]);
+        // Perform the bulk update to toggle the hidden status and get the number of affected rows
+        $affectedRows = 0;
+        $courses = Course::whereIn('id', $ids)->get();
+
+        foreach ($courses as $course) {
+            $course->hidden = !$course->hidden;
+            $course->save();
+            $affectedRows++;
+        }
 
         if ($affectedRows === 0) {
             return response()->json(['error' => 'No courses were updated.'], 404);
         }
 
-        return response()->json(['message' => "$affectedRows courses hidden successfully."], 200);
+        return response()->json(['message' => "$affectedRows courses updated successfully."], 200);
     }
-
-    // Unhide after being hidden
-    public function unhide($id)
-    {
-        try {
-            $course = Course::findOrFail($id);
-
-            if ($course->hidden) {
-                $course->hidden = false;
-                $course->save();
-                return response()->json(['message' => 'Course unhidden successfully'], 200);
-            } else {
-                return response()->json(['error' => 'Course is not hidden'], 400);
-            }
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['error' => 'Course not found'], 404);
-        } catch (Exception $e) {
-            return response()->json(['error' => 'Failed to unhide course', 'message' => $e->getMessage()], 500);
-        }
-    }
-
 
 }

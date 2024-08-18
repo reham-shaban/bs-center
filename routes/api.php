@@ -3,6 +3,7 @@
 use App\Http\Controllers\APIs\AuthController;
 use App\Http\Controllers\APIs\CategoryController;
 use App\Http\Controllers\APIs\CourseController;
+use App\Http\Controllers\APIs\TimingController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('api')->group(function () {
@@ -13,29 +14,35 @@ Route::middleware('api')->group(function () {
     Route::middleware('admin')->group(function () {
         // Categories routes
         Route::prefix('categories')->group(function () {
-            Route::post('/hide', [CategoryController::class, 'bulkHide']);
-            Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
-            Route::post('/', [CategoryController::class, 'store'])->name('categories.store');
-            Route::get('{slug}', [CategoryController::class, 'show'])->name('categories.show');
-            Route::put('{slug}', [CategoryController::class, 'update'])->name('categories.update');
-            Route::post('{id}/unhide', [CategoryController::class, 'unhide'])->name('categories.unhide');
-            Route::put('{slug}/seo', [CategoryController::class, 'updateSEO'])->name('categories.updateSEO');
-            Route::get('{slug}/multi-images', [CategoryController::class, 'getMultiImages'])->name('categories.getMultiImages');
-            Route::delete('{slug}/multi-images/{mediaId}', [CategoryController::class, 'deleteMultiImage'])->name('categories.deleteMultiImage');
+            Route::post('/toggle-hide', [CategoryController::class, 'bulkHide']);
+            Route::get('/', [CategoryController::class, 'index']);
+            Route::post('/', [CategoryController::class, 'store']);
+            Route::get('{slug}', [CategoryController::class, 'show']);
+            Route::put('{slug}', [CategoryController::class, 'update']);
+            Route::put('{slug}/seo', [CategoryController::class, 'updateSEO']);
+            Route::get('{slug}/multi-images', [CategoryController::class, 'getMultiImages']);
+            Route::delete('{slug}/multi-images/{mediaId}', [CategoryController::class, 'deleteMultiImage']);
         });
 
         // Courses routes
         Route::prefix('courses')->group(function () {
-            Route::post('/hide', [CourseController::class, 'bulkHide']);
+            Route::post('/toggle-hide', [CourseController::class, 'bulkHide']);
             Route::get('/', [CourseController::class, 'index']);
             Route::post('/', [CourseController::class, 'store']);
             Route::get('{slug}', [CourseController::class, 'show']);
             Route::put('{slug}', [CourseController::class, 'update']);
-            Route::post('{id}/unhide', [CourseController::class, 'unhide']);
             Route::put('{slug}/seo', [CourseController::class, 'updateSEO']);
+
+            // Timings for one course
+            Route::get('{slug}/timings', [TimingController::class, 'indexCourseTimings']);
+            Route::post('{slug}/timings', [TimingController::class, 'store']);
         });
 
         // Timings routes
-        Route::get('course/{slug}/timings', [CourseController::class, 'indexCourseTimings']);
+        Route::patch('timings/{id}/toggle-banner', [TimingController::class, 'toggleBanner']);
+        Route::patch('timings/{id}/toggle-upcoming', [TimingController::class, 'toggleUpcoming']);
+        Route::post('timings/toggle-hide', [TimingController::class, 'bulkHide']);
+
+        // Venus routes
     });
 });

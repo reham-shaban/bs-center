@@ -7,7 +7,6 @@ use App\Models\Category;
 use Exception;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCategoryDetailsRequest;
-use App\Http\Requests\StoreCategorySEORequest;
 use App\Http\Requests\UpdateCategoryDetailsRequest;
 use App\Http\Requests\UpdateCategorySEORequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -25,7 +24,7 @@ class CategoryController extends Controller
                 $query->where('lang', $lang);
             }
 
-            $categories = $query->select('id', 'title', 'slug', 'h1')->get();
+            $categories = $query->select('id', 'title', 'slug', 'h1', 'hidden')->get();
 
             // Add image URLs to each category
             $categories->transform(function ($category) {
@@ -188,7 +187,7 @@ class CategoryController extends Controller
         }
     }
 
-    // Bulk hide categories
+    // Bulk toggle hidden status for categories
     public function bulkHide(Request $request)
     {
         // Validate the incoming request
@@ -200,35 +199,21 @@ class CategoryController extends Controller
         // Get the array of IDs from the request
         $ids = $request->input('ids');
 
-        // Perform the bulk update and get the number of affected rows
-        $affectedRows = Category::whereIn('id', $ids)->update(['hidden' => true]);
+        // Perform the bulk update to toggle the hidden status and get the number of affected rows
+        $affectedRows = 0;
+        $categories = Category::whereIn('id', $ids)->get();
+
+        foreach ($categories as $category) {
+            $category->hidden = !$category->hidden;
+            $category->save();
+            $affectedRows++;
+        }
 
         if ($affectedRows === 0) {
             return response()->json(['error' => 'No categories were updated.'], 404);
         }
 
-        return response()->json(['message' => "$affectedRows categories hidden successfully."], 200);
+        return response()->json(['message' => "$affectedRows categories updated successfully."], 200);
     }
-
-    // Unhide after being hidden
-    public function unhide($id)
-    {
-        try {
-            $category = Category::findOrFail($id);
-
-            if ($category->hidden) {
-                $category->hidden = false;
-                $category->save();
-                return response()->json(['message' => 'Record unhidden successfully'], 200);
-            } else {
-                return response()->json(['error' => 'Record is not hidden'], 400);
-            }
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['error' => 'Record not found'], 404);
-        } catch (Exception $e) {
-            return response()->json(['error' => 'Failed to unhide record', 'message' => $e->getMessage()], 500);
-        }
-    }
-
 
 }

@@ -15,10 +15,10 @@ class StoreTimingRequest extends FormRequest
     public function rules()
     {
         return [
-            'course_id' => 'required|exists:courses,id',
+            'course_id' => 'nullable|exists:courses,id',
             'city_id' => 'required|exists:cities,id',
             'title' => 'nullable|string|max:250',
-            'price' => 'required|numeric|min:0',
+            'price' => 'nullable|numeric|min:0',
             'date_from' => 'nullable|date',
             'date_to' => 'nullable|date',
             'duration' => 'nullable|string|max:255',
