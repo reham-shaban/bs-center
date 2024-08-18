@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\APIs\AuthController;
 use App\Http\Controllers\APIs\CategoryController;
+use App\Http\Controllers\APIs\CityController;
 use App\Http\Controllers\APIs\CourseController;
 use App\Http\Controllers\APIs\TimingController;
 use Illuminate\Support\Facades\Route;
@@ -44,5 +45,13 @@ Route::middleware('api')->group(function () {
         Route::post('timings/toggle-hide', [TimingController::class, 'bulkHide']);
 
         // Venus routes
+        Route::prefix('venus')->group(function () {
+            Route::post('/toggle-hide', [CityController::class, 'bulkHide']);
+            Route::get('/', [CityController::class, 'index']);
+            Route::post('/', [CityController::class, 'store']);
+            Route::get('{slug}', [CityController::class, 'show']);
+            Route::put('{slug}', [CityController::class, 'update']);
+            Route::put('{slug}/seo', [CityController::class, 'updateSEO']);
+        });
     });
 });
