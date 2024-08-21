@@ -41,7 +41,16 @@ class CourseController extends Controller
 
             // Add image URLs to each course
             $courses->transform(function ($course) {
-                $course->image = $course->getFirstMediaUrl('images');
+                if ($course && $course->getFirstMedia('images')) {
+                    $course->image = url(
+                        'storage/app/public/'
+                        . $course->getFirstMedia('images')->id . '/'
+                        . $course->getFirstMedia('images')->file_name
+                    );
+                } else {
+                    // Handle the case where $course or media is null
+                    $course->image = null; // or set a default image
+                }
                 unset($course->media);
                 return $course;
             });

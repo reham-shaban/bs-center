@@ -29,7 +29,17 @@ class CityController extends Controller
 
             // Add image URLs to each city
             $cities->transform(function ($city) {
-                $city->image = $city->getFirstMediaUrl('images');
+                if ($city && $city->getFirstMedia('images')) {
+                    $city->image = url(
+                        'storage/app/public/'
+                        . $city->getFirstMedia('images')->id . '/'
+                        . $city->getFirstMedia('images')->file_name
+                    );
+                } else {
+                    // Handle the case where $city or media is null
+                    $city->image = null; // or set a default image
+                }
+
                 unset($city->media);
                 return $city;
             });
@@ -68,7 +78,16 @@ class CityController extends Controller
             $city = City::where('slug', $slug)->firstOrFail();
 
             // Load the media associated with the City
-            $image = $city->getFirstMediaUrl('images');
+            if ($city && $city->getFirstMedia('images')) {
+                $image = url(
+                    'storage/app/public/'
+                    . $city->getFirstMedia('images')->id . '/'
+                    . $city->getFirstMedia('images')->file_name
+                );
+            } else {
+                // Handle the case where $city or media is null
+                $city->image = null; // or set a default image
+            }
 
             // Add the image URL to the City attributes
             $cityData = $city->toArray();

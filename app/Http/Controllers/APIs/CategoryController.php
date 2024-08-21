@@ -28,7 +28,12 @@ class CategoryController extends Controller
 
             // Add image URLs to each category
             $categories->transform(function ($category) {
-                $category->image = $category->getFirstMediaUrl('images');
+                if ($category && $category->getFirstMedia('images')) {
+                    $category->image = url('storage/app/public/' . $category->getFirstMedia('images')->id . '/' . $category->getFirstMedia('images')->file_name);
+                } else {
+                    // Handle the case where $category or media is null
+                    $category->image = null; // or set a default image
+                }
                 unset($category->media);
                 return $category;
             });
@@ -70,16 +75,24 @@ class CategoryController extends Controller
         try {
             $category = Category::where('slug', $slug)->firstOrFail();
 
-            // Retrieve all media items in the 'multi_images' collection
-            $mediaItems = $category->getMedia('multi_images');
+            if ($category && $category->getMedia('multi_images')) {
+                $mediaItems = $category->getMedia('multi_images');
 
-            // Transform media items to include IDs and URLs
-            $images = $mediaItems->map(function ($mediaItem) {
-                return [
-                    'id' => $mediaItem->id,
-                    'url' => $mediaItem->getUrl(),
-                ];
-            });
+                // Check if there are any media items
+                if ($mediaItems->isNotEmpty()) {
+                    // Transform media items to include IDs and custom URLs
+                    $images = $mediaItems->map(function ($mediaItem) {
+                        return [
+                            'id' => $mediaItem->id,
+                            'url' => url('storage/app/public/' . $mediaItem->id . '/' . $mediaItem->file_name),
+                        ];
+                    });
+                }
+            }
+            else {
+                // No media items found, return an empty array or a default response
+                $images = [];
+            }
 
             return response()->json($images, 200);
         } catch (ModelNotFoundException $e) {
@@ -117,8 +130,16 @@ class CategoryController extends Controller
             $category = Category::where('slug', $slug)->firstOrFail();
 
             // Load the media associated with the category
-            $image = $category->getFirstMediaUrl('images');
-
+            if ($category && $category->getFirstMedia('images')) {
+                $image = url(
+                    'storage/app/public/'
+                    . $category->getFirstMedia('images')->id . '/'
+                    . $category->getFirstMedia('images')->file_name
+                );
+            } else {
+                // Handle the case where $category or media is null
+                $category->image = null; // or set a default image
+            }
             // Add the image URL to the category attributes
             $categoryData = $category->toArray();
             $categoryData['image'] = $image;
