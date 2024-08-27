@@ -59,7 +59,15 @@ class CityController extends Controller
                 $city->addMediaFromRequest('image')->toMediaCollection('images');
             }
 
-            return response()->json($city, 201);
+            // Retrieve the image URL if an image was uploaded
+            $imageUrl = $city->getFirstMediaUrl('images');
+
+            // Include the image URL in the response
+            unset($city->media);
+            $response = $city->toArray();
+            $response['image_url'] = $imageUrl;
+
+            return response()->json($response, 201);
         } catch (Exception $e) {
             return response()->json(['error' => 'Failed to create City', 'message' => $e->getMessage()], 500);
         }
@@ -115,7 +123,15 @@ class CityController extends Controller
 
             $city->save();
 
-            return response()->json($city, 200);
+            // Retrieve the image URL if an image was uploaded
+            $imageUrl = $city->getFirstMediaUrl('images');
+
+            // Include the image URL in the response
+            unset($city->media);
+            $response = $city->toArray();
+            $response['image_url'] = $imageUrl;
+
+            return response()->json($response, 201);
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => 'City not found'], 404);
         } catch (Exception $e) {

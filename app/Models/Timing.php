@@ -28,7 +28,7 @@ class Timing extends Model
     // Define relationships
     public function course()
     {
-        return $this->belongsTo(Course::class, 'courese_id', 'id');
+        return $this->belongsTo(Course::class, 'course_id', 'id');
     }
 
     public function city()

@@ -75,7 +75,16 @@ class CourseController extends Controller
             if ($request->hasFile('image')) {
                 $course->addMediaFromRequest('image')->toMediaCollection('images');
             }
-            return response()->json($course, 201);
+
+            // Retrieve the image URL if an image was uploaded
+            $imageUrl = $course->getFirstMediaUrl('images');
+
+            // Include the image URL in the response
+            unset($course->media);
+            $response = $course->toArray();
+            $response['image_url'] = $imageUrl;
+
+            return response()->json($response, 201);
         } catch (Exception $e) {
             return response()->json(['error' => 'Failed to create course.', 'message' => $e->getMessage()], 500);
         }
@@ -127,7 +136,15 @@ class CourseController extends Controller
                     ->toMediaCollection('images');
             }
 
-            return response()->json($course, 200);
+            // Retrieve the image URL if an image was uploaded
+            $imageUrl = $course->getFirstMediaUrl('images');
+
+            // Include the image URL in the response
+            unset($course->media);
+            $response = $course->toArray();
+            $response['image_url'] = $imageUrl;
+
+            return response()->json($response, 201);
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => 'Course not found', 'message' => $e->getMessage()], 404);
         } catch (Exception $e) {

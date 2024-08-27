@@ -43,6 +43,8 @@ Route::middleware('api')->group(function () {
         Route::patch('timings/{id}/toggle-banner', [TimingController::class, 'toggleBanner']);
         Route::patch('timings/{id}/toggle-upcoming', [TimingController::class, 'toggleUpcoming']);
         Route::post('timings/toggle-hide', [TimingController::class, 'bulkHide']);
+        Route::put('timings/batch-update', [TimingController::class, 'timingBatchUpdate']);
+        Route::get('timings/search', [TimingController::class, 'index']);
 
         // Venus routes
         Route::prefix('venus')->group(function () {

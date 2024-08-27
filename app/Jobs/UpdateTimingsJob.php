@@ -8,6 +8,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Timing;
+use Illuminate\Support\Facades\Log;
 
 class UpdateTimingsJob implements ShouldQueue
 {
@@ -36,7 +37,14 @@ class UpdateTimingsJob implements ShouldQueue
      */
     public function handle()
     {
-        // Update the timings in the database
-        Timing::whereIn('id', $this->selectedTimings)->update($this->newValues);
+        Log::info('UpdateTimingsJob handle method called', [
+            'selectedTimings' => $this->selectedTimings,
+            'newValues' => $this->newValues,
+        ]);
+
+        $affectedRows = Timing::whereIn('id', $this->selectedTimings)->update($this->newValues);
+
+        Log::info('Rows affected:', ['count' => $affectedRows]);
     }
+
 }

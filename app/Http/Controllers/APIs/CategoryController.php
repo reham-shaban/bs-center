@@ -51,18 +51,32 @@ class CategoryController extends Controller
             // Create the category
             $category = Category::create($validatedData);
 
+            // Initialize arrays to store image URLs
+            $imageUrl = null;
+            $multiImagesUrls = [];
+
             // Handle image upload and association
             if ($request->hasFile('image')) {
-                $category->addMediaFromRequest('image')->toMediaCollection('images');
+                $media = $category->addMediaFromRequest('image')->toMediaCollection('images');
+                $imageUrl = $media->getUrl();  // Get the URL of the single image
             }
+
             // Handle multi images
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $image) {
-                    $category->addMedia($image)->toMediaCollection('multi_images');
+                    $media = $category->addMedia($image)->toMediaCollection('multi_images');
+                    $multiImagesUrls[] = $media->getUrl();  // Get the URL of each multi image
                 }
             }
 
-            return response()->json($category, 201);
+            // Include the image URLs in the response
+            $response = [
+                'category' => $category,
+                'image_url' => $imageUrl,
+                'multi_images_urls' => $multiImagesUrls,
+            ];
+
+            return response()->json($response, 201);
         } catch (Exception $e) {
             return response()->json(['error' => 'Failed to create category', 'message' => $e->getMessage()], 500);
         }
@@ -147,15 +161,23 @@ class CategoryController extends Controller
             // Find the category by slug
             $category = Category::where('slug', $slug)->firstOrFail();
 
+            // Update the category with the new data
             $category->update($validatedData);
+
+            // Initialize arrays to store image URLs
+            $imageUrl = $category->getFirstMediaUrl('images');
+            $multiImagesUrls = [];
 
             // Handle image upload and association
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $category
-                    ->clearMediaCollection('images')
+                    ->clearMediaCollection('images') // Clear the old image
                     ->addMedia($image)
                     ->toMediaCollection('images');
+
+                // Get the updated URL of the single image
+                $imageUrl = $category->getFirstMediaUrl('images');
             }
 
             // Handle multi images
@@ -164,13 +186,24 @@ class CategoryController extends Controller
                 $category->clearMediaCollection('multi_images');
 
                 foreach ($request->file('images') as $image) {
-                    $category
-                        ->addMedia($image)
-                        ->toMediaCollection('multi_images');
+                    $media = $category->addMedia($image)->toMediaCollection('multi_images');
+                    $multiImagesUrls[] = $media->getUrl();  // Get the URL of each multi image
                 }
+            } else {
+                // If no new multi images were uploaded, retain the existing ones
+                $multiImagesUrls = $category->getMedia('multi_images')->map(function ($media) {
+                    return $media->getUrl();
+                })->toArray();
             }
 
-            return response()->json($category, 200);
+            // Include the image URLs in the response
+            $response = [
+                'category' => $category,
+                'image_url' => $imageUrl,
+                'multi_images_urls' => $multiImagesUrls,
+            ];
+
+            return response()->json($response, 200);
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => 'Category not found'], 404);
         } catch (Exception $e) {

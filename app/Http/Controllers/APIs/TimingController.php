@@ -13,6 +13,53 @@ use Exception;
 
 class TimingController extends Controller
 {
+    // Index method with search functionality
+    public function index(Request $request)
+    {
+        $query = Timing::query();
+        $lang = $request->input('lang');
+
+        if ($lang) {
+            $query->where('lang', $lang);
+        }
+
+        // Join with courses to filter by category_id
+        if ($request->filled('category_id')) {
+            $query->whereHas('course', function ($q) use ($request) {
+                $q->where('category_id', $request->input('category_id'));
+            });
+        }
+
+        // Filter by city
+        if ($request->filled('city_id')) {
+            $query->where('city_id', $request->input('city_id'));
+        }
+
+        // Filter by price
+        if ($request->filled('price')) {
+            $query->where('price', $request->input('price'));
+        }
+
+        // Filter by date range
+        if ($request->filled('date_from')) {
+            $query->where('date_from', '>=', $request->input('date_from'));
+        }
+        if ($request->filled('date_to')) {
+            $query->where('date_to', '<=', $request->input('date_to'));
+        }
+
+        // Filter by duration
+        if ($request->filled('duration')) {
+            $query->where('duration', $request->input('duration'));
+        }
+
+        // Get the results without pagination
+        $timings = $query->get();
+
+        return response()->json($timings, 200);
+    }
+
+
     // Show timings for one course
     public function indexCourseTimings(Request $request, $slug)
     {
@@ -131,27 +178,37 @@ class TimingController extends Controller
         }
     }
 
+    // Search
+
+    // Batch update
     public function timingBatchUpdate(UpdateTimingRequest $request)
     {
         try {
-            // Validate that selected_timings is present and is an array
-            $request->validate([
-                'selected_timings' => 'required|array|min:1',
-                'selected_timings.*' => 'integer|exists:timings,id', // Ensure each timing ID exists in the timings table
-            ]);
+            // Validate and get the validated data
+            $validatedData = $request->validated();
 
-            // Retrieve the validated selected_timings array
-            $selectedTimings = $request->input('selected_timings');
-
-            // Retrieve all other new values to update the timings
+            // Extract the selected timings and new values
+            $selectedTimings = $validatedData['selected_timings'];
             $newValues = $request->except('selected_timings');
 
             // Dispatch the job to update the timings
             UpdateTimingsJob::dispatch($selectedTimings, $newValues);
 
-            return response()->json(['message' => 'Timings update job dispatched successfully'], 200);
+            // Retrieve the information of the selected timings
+            $timingsInfo = Timing::whereIn('id', $selectedTimings)->get();
+
+            // Return the response with the list of selected timings info
+            return response()->json([
+                'message' => 'Timings update job dispatched successfully',
+                'selected_timings' => $timingsInfo,
+            ], 200);
         } catch (Exception $e) {
-            return response()->json(['error' => 'Failed to dispatch timing update job.', 'message' => $e->getMessage()], 500);
+            return response()->json([
+                'error' => 'Failed to dispatch timing update job.',
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
+
+
 }
