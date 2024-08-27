@@ -74,51 +74,22 @@ class CategoryController extends Controller
         try {
             $category = Category::where('slug', $slug)->firstOrFail();
 
-            if ($category && $category->getMedia('multi_images')) {
-                $mediaItems = $category->getMedia('multi_images');
+            // Retrieve all media items in the 'multi_images' collection
+            $mediaItems = $category->getMedia('multi_images');
 
-                // Check if there are any media items
-                if ($mediaItems->isNotEmpty()) {
-                    // Transform media items to include IDs and custom URLs
-                    $images = $mediaItems->map(function ($mediaItem) {
-                        return [
-                            'id' => $mediaItem->id,
-                            'url' => url('storage/app/public/' . $mediaItem->id . '/' . $mediaItem->file_name),
-                        ];
-                    });
-                }
-            }
-            else {
-                // No media items found, return an empty array or a default response
-                $images = [];
-            }
+            // Transform media items to include IDs and URLs
+            $images = $mediaItems->map(function ($mediaItem) {
+                return [
+                    'id' => $mediaItem->id,
+                    'url' => $mediaItem->getUrl(),
+                ];
+            });
 
             return response()->json($images, 200);
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => 'Category not found'], 404);
         } catch (Exception $e) {
             return response()->json(['error' => 'Failed to retrieve images', 'message' => $e->getMessage()], 500);
-        }
-    }
-
-    public function deleteMultiImage($slug, $mediaId)
-    {
-        try {
-            $category = Category::where('slug', $slug)->firstOrFail();
-
-            // Find the specific media item by its ID
-            $mediaItem = $category->getMedia('multi_images')->where('id', $mediaId)->first();
-
-            if ($mediaItem) {
-                $mediaItem->delete();
-                return response()->json(['message' => 'Image deleted successfully'], 200);
-            } else {
-                return response()->json(['error' => 'Image not found'], 404);
-            }
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['error' => 'Category not found'], 404);
-        } catch (Exception $e) {
-            return response()->json(['error' => 'Failed to delete image', 'message' => $e->getMessage()], 500);
         }
     }
 
