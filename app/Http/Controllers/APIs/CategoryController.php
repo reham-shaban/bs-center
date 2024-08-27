@@ -29,11 +29,10 @@ class CategoryController extends Controller
             // Add image URLs to each category
             $categories->transform(function ($category) {
                 // Check if the category has associated media
-                $media = $category->getFirstMedia('images');
-                if ($media) {
-                    $category->image = url('storage/app/public/' . $media->id . '/' . $media->file_name);
+                if($category && $category->getFirstMediaUrl('images')){
+                    $category->image = $category->getFirstMediaUrl('images');
                 } else {
-                    $category->image = null; // or set a default image URL here
+                    $category->image = null;
                 }
                 return $category;
             });
@@ -133,9 +132,8 @@ class CategoryController extends Controller
             $image = null;
 
             // Load the media associated with the category
-            if ($category->getFirstMedia('images')) {
-                $media = $category->getFirstMedia('images');
-                $image = url('storage/app/public/' . $media->id . '/' . $media->file_name);
+            if ($category->getFirstMediaUrl('images')) {
+                $image = $category->getFirstMediUrl('images');
             }
 
             // Add the image URL to the category attributes

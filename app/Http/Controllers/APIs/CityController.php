@@ -30,9 +30,8 @@ class CityController extends Controller
             // Add image URLs to each city
             $cities->transform(function ($city) {
                 // Check if the city has associated media
-                $media = $city->getFirstMedia('images');
-                if($media){
-                    $city->image = url('storage/app/public/' . $media->id . '/' . $media->file_name);
+                if($city->getFirstMediaUrl('images')){
+                    $city->image = $city->getFirstMediaUrl('images');
                 } else {
                     $city->image = null;
                 }
@@ -77,9 +76,8 @@ class CityController extends Controller
             $image = null;
 
             // Load the media associated with the City
-            if ($city->getFirstMedia('images')) {
-                $media = $city->getFirstMedia('images');
-                $image = url('storage/app/public/' . $media->id . '/' . $media->file_name);
+            if ($city->getFirstMediaUrl('images')) {
+                $image = $city->getFirstMediaUrl('images');
             }
 
             // Add the image URL to the City attributes

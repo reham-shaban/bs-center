@@ -45,9 +45,8 @@ class CourseController extends Controller
                 $image = null;
 
                 // Check if the course has associated media
-                if ($course->getFirstMedia('images')) {
-                    $media = $course->getFirstMedia('images');
-                    $image = url('storage/app/public/' . $media->id . '/' . $media->file_name);
+                if ($course->getFirstMediaUrl('images')) {
+                    $image = $course->getFirstMediaUrl('images');
                 }
 
                 // Add the image URL to the course object
@@ -93,9 +92,8 @@ class CourseController extends Controller
             $image = null;
 
             // Check if the course has associated media
-            if ($course->getFirstMedia('images')) {
-                $media = $course->getFirstMedia('images');
-                $image = url('storage/app/public/' . $media->id . '/' . $media->file_name);
+            if ($course->getFirstMediaUrl('images')) {
+                $image = $course->getFirstMediaUrl('images');
             }
 
             // Add the image URL to the course object
