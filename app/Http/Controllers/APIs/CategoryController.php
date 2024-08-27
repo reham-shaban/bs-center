@@ -104,7 +104,7 @@ class CategoryController extends Controller
 
             // Load the media associated with the category
             if ($category->getFirstMediaUrl('images')) {
-                $image = $category->getFirstMediUrl('images');
+                $image = $category->getFirstMediaUrl('images');
             }
 
             // Add the image URL to the category attributes
