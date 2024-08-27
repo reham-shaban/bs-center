@@ -93,6 +93,25 @@ class CategoryController extends Controller
         }
     }
 
+    public function deleteMultiImage($slug, $mediaId)
+    {
+        try {
+            $category = Category::where('slug', $slug)->firstOrFail();
+            // Find the specific media item by its ID
+            $mediaItem = $category->getMedia('multi_images')->where('id', $mediaId)->first();
+            if ($mediaItem) {
+                $mediaItem->delete();
+                return response()->json(['message' => 'Image deleted successfully'], 200);
+            } else {
+                return response()->json(['error' => 'Image not found'], 404);
+            }
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['error' => 'Category not found'], 404);
+        } catch (Exception $e) {
+            return response()->json(['error' => 'Failed to delete image', 'message' => $e->getMessage()], 500);
+        }
+    }
+
     public function show($slug)
     {
         try {
@@ -141,12 +160,14 @@ class CategoryController extends Controller
 
             // Handle multi images
             if ($request->hasFile('images')) {
+                // Clear the existing multi_images collection before adding new images
+                $category->clearMediaCollection('multi_images');
+
                 foreach ($request->file('images') as $image) {
                     $category
-                        ->clearMediaCollection('multi_images')
                         ->addMedia($image)
                         ->toMediaCollection('multi_images');
-                    }
+                }
             }
 
             return response()->json($category, 200);
