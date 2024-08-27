@@ -30,8 +30,8 @@ class CourseController extends Controller
             if ($search) {
                 $query->where(function($q) use ($search) {
                     $q->where('title', 'like', "%{$search}%")
-                      ->orWhere('slug', 'like', "%{$search}%")
-                      ->orWhere('h1', 'like', "%{$search}%");
+                    ->orWhere('slug', 'like', "%{$search}%")
+                    ->orWhere('h1', 'like', "%{$search}%");
                 });
             }
 
@@ -41,16 +41,18 @@ class CourseController extends Controller
 
             // Add image URLs to each course
             $courses->transform(function ($course) {
-                if ($course && $course->getFirstMedia('images')) {
-                    $course->image = url(
-                        'storage/app/public/'
-                        . $course->getFirstMedia('images')->id . '/'
-                        . $course->getFirstMedia('images')->file_name
-                    );
-                } else {
-                    // Handle the case where $course or media is null
-                    $course->image = null; // or set a default image
+                // Initialize the $image variable
+                $image = null;
+
+                // Check if the course has associated media
+                if ($course->getFirstMedia('images')) {
+                    $media = $course->getFirstMedia('images');
+                    $image = url('storage/app/public/' . $media->id . '/' . $media->file_name);
                 }
+
+                // Add the image URL to the course object
+                $course->image = $image;
+
                 unset($course->media);
                 return $course;
             });
@@ -84,16 +86,30 @@ class CourseController extends Controller
     public function show($slug)
     {
         try {
-            // Find the course by slug
-            $course = Course::where('slug', $slug)->firstOrFail();
+            // Find the course by slug and eager load any required relationships
+            $course = Course::with('media')->where('slug', $slug)->firstOrFail();
 
-            return response()->json($course, 200);
+            // Initialize the $image variable
+            $image = null;
+
+            // Check if the course has associated media
+            if ($course->getFirstMedia('images')) {
+                $media = $course->getFirstMedia('images');
+                $image = url('storage/app/public/' . $media->id . '/' . $media->file_name);
+            }
+
+            // Add the image URL to the course object
+            $courseData = $course->toArray();
+            $courseData['image'] = $image;
+
+            return response()->json($courseData, 200);
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => 'Course not found', 'message' => $e->getMessage()], 404);
         } catch (Exception $e) {
             return response()->json(['error' => 'Failed to retrieve course.', 'message' => $e->getMessage()], 500);
         }
     }
+
 
     // update course details
     public function update(UpdateCourseDetailsRequest $request, $slug)

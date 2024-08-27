@@ -29,17 +29,13 @@ class CityController extends Controller
 
             // Add image URLs to each city
             $cities->transform(function ($city) {
-                if ($city && $city->getFirstMedia('images')) {
-                    $city->image = url(
-                        'storage/app/public/'
-                        . $city->getFirstMedia('images')->id . '/'
-                        . $city->getFirstMedia('images')->file_name
-                    );
+                // Check if the city has associated media
+                $media = $city->getFirstMedia('images');
+                if($media){
+                    $city->image = url('storage/app/public/' . $media->id . '/' . $media->file_name);
                 } else {
-                    // Handle the case where $city or media is null
-                    $city->image = null; // or set a default image
+                    $city->image = null;
                 }
-
                 unset($city->media);
                 return $city;
             });
@@ -77,16 +73,13 @@ class CityController extends Controller
             // Find the City by slug
             $city = City::where('slug', $slug)->firstOrFail();
 
+            // Initialize the $image variable
+            $image = null;
+
             // Load the media associated with the City
-            if ($city && $city->getFirstMedia('images')) {
-                $image = url(
-                    'storage/app/public/'
-                    . $city->getFirstMedia('images')->id . '/'
-                    . $city->getFirstMedia('images')->file_name
-                );
-            } else {
-                // Handle the case where $city or media is null
-                $city->image = null; // or set a default image
+            if ($city->getFirstMedia('images')) {
+                $media = $city->getFirstMedia('images');
+                $image = url('storage/app/public/' . $media->id . '/' . $media->file_name);
             }
 
             // Add the image URL to the City attributes
@@ -100,6 +93,7 @@ class CityController extends Controller
             return response()->json(['error' => 'Failed to retrieve city', 'message' => $e->getMessage()], 500);
         }
     }
+
 
     // Update city details
     public function update(UpdateCityDetailsRequest $request, $slug)

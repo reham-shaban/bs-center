@@ -27,13 +27,13 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             CategorySeeder::class,
-            // CitiesTableSeeder::class,
-            // MetaSeeder::class
+            CitiesTableSeeder::class,
+            MetaSeeder::class
         ]);
 
-        // Blog::factory()->count(10)->create();
+        Blog::factory()->count(10)->create();
         Course::factory()->count(10)->create();
-        // Timing::factory()->count(10)->create();
+        Timing::factory()->count(10)->create();
 
         // ContactUs::create([
         //     'full_name' => 'Reham Shaban',

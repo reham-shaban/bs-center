@@ -28,13 +28,13 @@ class CategoryController extends Controller
 
             // Add image URLs to each category
             $categories->transform(function ($category) {
-                if ($category && $category->getFirstMedia('images')) {
-                    $category->image = url('storage/app/public/' . $category->getFirstMedia('images')->id . '/' . $category->getFirstMedia('images')->file_name);
+                // Check if the category has associated media
+                $media = $category->getFirstMedia('images');
+                if ($media) {
+                    $category->image = url('storage/app/public/' . $media->id . '/' . $media->file_name);
                 } else {
-                    // Handle the case where $category or media is null
-                    $category->image = null; // or set a default image
+                    $category->image = null; // or set a default image URL here
                 }
-                unset($category->media);
                 return $category;
             });
 
@@ -129,17 +129,15 @@ class CategoryController extends Controller
             // Find the category by slug
             $category = Category::where('slug', $slug)->firstOrFail();
 
+            // Initialize the $image variable
+            $image = null;
+
             // Load the media associated with the category
-            if ($category && $category->getFirstMedia('images')) {
-                $image = url(
-                    'storage/app/public/'
-                    . $category->getFirstMedia('images')->id . '/'
-                    . $category->getFirstMedia('images')->file_name
-                );
-            } else {
-                // Handle the case where $category or media is null
-                $category->image = null; // or set a default image
+            if ($category->getFirstMedia('images')) {
+                $media = $category->getFirstMedia('images');
+                $image = url('storage/app/public/' . $media->id . '/' . $media->file_name);
             }
+
             // Add the image URL to the category attributes
             $categoryData = $category->toArray();
             $categoryData['image'] = $image;

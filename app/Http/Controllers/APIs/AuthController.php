@@ -24,7 +24,7 @@ class AuthController extends Controller
                 "password" => "required"
             ]);
 
-            // Auth Facade
+            // Attempt to authenticate the user
             $token = auth()->attempt([
                 "email" => $request->email,
                 "password" => $request->password
@@ -34,13 +34,17 @@ class AuthController extends Controller
                 return response()->json([
                     "status" => false,
                     "message" => "Invalid login details"
-                ]);
+                ], 401);
             }
+
+            // Get the authenticated user
+            $user = auth()->user();
 
             return response()->json([
                 "status" => true,
                 "message" => "User logged in",
                 "token" => $token,
+                "user" => $user,
             ]);
         } catch (Exception $e) {
             return response()->json([
@@ -50,6 +54,7 @@ class AuthController extends Controller
             ], 500);
         }
     }
+
 
     // Logout API - GET (JWT Auth Token)
     public function logout()
