@@ -12,7 +12,7 @@ Route::middleware('api')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::get('/logout', [AuthController::class, 'logout']);
 
-    Route::middleware('admin')->group(function () {
+    // Route::middleware('admin')->group(function () {
         // Categories routes
         Route::prefix('categories')->group(function () {
             Route::post('/toggle-hide', [CategoryController::class, 'bulkHide']);
@@ -55,5 +55,5 @@ Route::middleware('api')->group(function () {
             Route::put('{slug}', [CityController::class, 'update']);
             Route::put('{slug}/seo', [CityController::class, 'updateSEO']);
         });
-    });
+    // });
 });
