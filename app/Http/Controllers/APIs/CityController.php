@@ -163,7 +163,7 @@ class CityController extends Controller
         // Validate the incoming request
         $request->validate([
             'ids' => 'required|array|min:1',
-            'ids.*' => 'integer|exists:Cities,id'
+            'ids.*' => 'integer|exists:cities,id'
         ]);
 
         // Get the array of IDs from the request
