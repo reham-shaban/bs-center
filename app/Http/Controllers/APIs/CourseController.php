@@ -126,6 +126,7 @@ class CourseController extends Controller
             $course = Course::where('slug', $slug)->firstOrFail();
 
             $course->update($request->validated());
+            $imageUrl = $course->getFirstMediaUrl('images');
 
             // Handle image upload and association
             if ($request->hasFile('image')) {
@@ -134,11 +135,10 @@ class CourseController extends Controller
                     ->clearMediaCollection('images')
                     ->addMedia($image)
                     ->toMediaCollection('images');
+                // Get the updated URL of the single image
+                $imageUrl = $course->getFirstMediaUrl('images');
             }
-
-            // Retrieve the image URL if an image was uploaded
-            $imageUrl = $course->getFirstMediaUrl('images');
-
+            
             // Include the image URL in the response
             unset($course->media);
             $response = $course->toArray();

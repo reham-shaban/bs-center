@@ -1,40 +1,54 @@
-<!-- resources/views/layouts/app.blade.php -->
-
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <!-- Additional styles (if any) -->
-    @stack('styles')
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ config('app.name', 'BSC') }}</title>
+    <!-- Css File -->
+    <link rel="icon" href="{{ asset('assets/favIcon.svg') }}" />
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/about.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/blog.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/blogs.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/categories.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/city.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/course.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/courses.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/forms.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/privacy.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sitemap.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/venus.css') }}">
+    <!-- Swiper js CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
+
 <body>
-    <div id="app">
+    <a href="https://api.whatsapp.com/send?phone=971506252099&text=Check%20out%20this%20message%20with%20the%20image%20link%3A%20http%3A%2F%2Fexample.com%2Fpath%2Fto%2Fimage.jpg"
+        target="_blank">
+        <img class="whats-app" src="{{ asset('assets/imgs/whats.webp') }}" alt="whats-img" style="width:125px;height:auto;">
+    </a>
 
-        @include('includes.nav')
-        
-        <!-- Main Content Area -->
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+    @include('includes.nav')
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    @yield('content')
 
-    <!-- Additional scripts (if any) -->
-    @stack('scripts')
+    @include('includes.footer')
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="{{ asset('main.js') }}"></script>
+    <script src="{{ asset('navBar.js') }}"></script>
+    <script src="{{ asset('js/blog.js') }}"></script>
+    <script src="{{ asset('js/categories.js') }}"></script>
+    <script src="{{ asset('js/course.js') }}"></script>
+    <script src="{{ asset('js/createCardGrid.js') }}"></script>
+    <script src="{{ asset('js/dropdown.js') }}"></script>
+    <script src="{{ asset('js/phoneNumber.js') }}"></script>
+    <script src="{{ asset('js/slideCards.js') }}"></script>
+    <script src="{{ asset('js/statistics.js') }}"></script>
+    <script src="{{ asset('js/swiper.js') }}"></script>
+    <script src="{{ asset('js/venus.js') }}"></script>
 </body>
+
 </html>

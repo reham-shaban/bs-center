@@ -2,8 +2,193 @@
 
 @section('content')
 
+<div>
+    <section id="hero1" class="hero">
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="img-container">
+                        <img src="./assets/imgs/hero-bg-1.webp" alt="">
+                        <div class="overlay"></div>
+                        <div class="content">
+                            <h1>Risk Management for Medical Devices</h1>
+                            <p>2024-11-04</p>
+                            <p>Istanbul</p>
+                            <div class="buttons-hero">
+                                <a href="./pages/registration.html" class="register-button">Register Now</a>
+                                <a href="./pages/course.html" class="learn-more-button">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="img-container">
+                        <img src="./assets/imgs/hero-bg-2.webp" alt="">
+                        <div class="overlay"></div>
+                        <div class="content">
+                            <h1>Risk Management for Medical Devices</h1>
+                            <p>2024-11-04</p>
+                            <p>Istanbul</p>
+                            <div class="buttons-hero">
+                                <a href="./pages/registration.html" class="register-button">Register Now</a>
+                                <a href="./pages/course.html" class="learn-more-button">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="img-container">
+                        <img src="./assets/imgs/hero-bg-2.webp" alt="">
+                        <div class="overlay"></div>
+                        <div class="content">
+                            <h1>Risk Management for Medical Devices</h1>
+                            <p>2024-11-04</p>
+                            <p>Istanbul</p>
+                            <div class="buttons-hero">
+                                <a href="./pages/registration.html" class="register-button">Register Now</a>
+                                <a href="./pages/course.html" class="learn-more-button">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+    </section>
+    <div class="swiper-button-next hero-btn"></div>
+    <div class="swiper-button-prev hero-btn"></div>
+</div>
+
 @include('includes.search', ['searchRoute' => route('home.index')])
-@include('includes.isbanner')
-@include('includes.upcoming')
+
+<section class="search-courses home-courses">
+    <div class="container">
+        <h2>Upcoming Courses</h2>
+        <div class="card-container"></div>
+    </div>
+</section>
+
+<section class="search-courses about-us">
+    <div class="container">
+        <div class="about">
+            <div class="about-left">
+                <h2>About <strong>BSC</strong> Project</h2>
+                <p>At BSC, we believe in the power of education to unlock human potential. Our team of passionate
+                    educators and industry experts have curated a diverse
+                    range of courses tailored to empower learners at every stage</p>
+                <a href="./pages/about.html">Learn more</a>
+            </div>
+            <div class="about-right">
+                <div class="part-about">
+                    <div>
+                        <img src="./assets/imgs/about/icon1.svg" alt="">
+                    </div>
+                    <p>Certification
+                        of completion</p>
+                </div>
+                <div class="part-about">
+                    <div>
+                        <img src="./assets/imgs/about/icon2.svg" alt="">
+                    </div>
+                    <p>Money Back
+                        Guarantee</p>
+                </div>
+                <div class="part-about">
+                    <div>
+                        <img src="./assets/imgs/about/icon3.svg" alt="">
+                    </div>
+                    <p>32 Moduls
+                        Access on</p>
+                </div>
+                <div class="part-about">
+                    <div>
+                        <img src="./assets/imgs/about/icon4.svg" alt="">
+                    </div>
+                    <p>Access on all devices</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="search-courses categories-home categories">
+    <div class="container">
+        <div class="section-title">
+            <h2>Categories</h2>
+            <div class="arrows">
+                <div class="swiper-button-prev arrow-btn"></div>
+                <div class="swiper-button-next arrow-btn"></div>
+            </div>
+        </div>
+    </div>
+    <div class="swiper mySwiper2">
+        <div class="swiper-wrapper wrap">
+        </div>
+    </div>
+</section>
+
+<section class="search-courses success">
+    <div class="container">
+        <h2>Our Success</h2>
+        <div class="statistics-list">
+
+        </div>
+</section>
+
+<section class="search-courses services">
+    <div class="container">
+        <h2>Our Services</h2>
+        <div class="service-cards">
+            <div class="service-card">
+                <div class="service-svg">
+                    <img src="./assets/icons/serv-icon1.svg" alt="">
+                </div>
+                <h5>Public</h5>
+                <p><span>Lorem ipsum dolor sit amet, </span>consectetur adipiscing elit, sed do eiusmod tempor Lorem
+                    ipsum dolor sit amet, consectetur adipiscing </p>
+            </div>
+            <div class="service-card">
+                <div class="service-svg">
+                    <img src="./assets/icons/serv-icon2.svg" alt="">
+                </div>
+                <h5>Online</h5>
+                <p><span>Lorem ipsum dolor sit amet, </span>consectetur adipiscing elit, sed do eiusmod tempor Lorem
+                    ipsum dolor sit amet, consectetur adipiscing </p>
+            </div>
+            <div class="service-card">
+                <div class="service-svg">
+                    <img src="./assets/icons/serv-icon3.svg" alt="">
+                </div>
+                <h5>In-house</h5>
+                <p><span>Lorem ipsum dolor sit amet, </span>consectetur adipiscing elit, sed do eiusmod tempor Lorem
+                    ipsum dolor sit amet, consectetur adipiscing </p>
+            </div>
+        </div>
+</section>
+
+<section class="search-courses faqs">
+    <div class="container">
+        <h2>FAQ</h2>
+    </div>
+    <div class="faqs-container">
+        <h4>frequently asked question</h4>
+        <div class="faq-container"></div>
+    </div>
+</section>
+
+<section class="search-courses trusted">
+    <div class="container">
+        <h2>Trusted By</h2>
+    </div>
+    <div class="swiper mySwiper-about">
+        <div class="swiper-wrapper wrap2">
+            <div class="swiper-slide"><img src="./assets/imgs/logos/logo1.png" alt=""></div>
+            <div class="swiper-slide"><img src="./assets/imgs/logos/logo2.png" alt=""></div>
+            <div class="swiper-slide"><img src="./assets/imgs/logos/logo3.png" alt=""></div>
+            <div class="swiper-slide"><img src="./assets/imgs/logos/logo4.png" alt=""></div>
+            <div class="swiper-slide"><img src="./assets/imgs/logos/logo1.png" alt=""></div>
+        </div>
+    </div>
+</section>
+
 
 @endsection

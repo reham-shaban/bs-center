@@ -8,11 +8,7 @@ use App\Http\Controllers\Website\BlogController;
 use App\Http\Controllers\Website\ContactUsController;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/home', [HomeController::class, 'index'])->name('home.index');
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/venus', [CityController::class, 'index'])->name('cities.index');
 Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');

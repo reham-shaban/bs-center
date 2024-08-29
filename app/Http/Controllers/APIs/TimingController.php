@@ -85,7 +85,7 @@ class TimingController extends Controller
         // Validate the incoming request
         $request->validate([
             'ids' => 'required|array|min:1',
-            'ids.*' => 'integer|exists:courses,id'
+            'ids.*' => 'integer|exists:timings,id'
         ]);
 
         // Get the array of IDs from the request
