@@ -77,16 +77,29 @@ class Course extends Model implements HasMedia
             $query->where('is_upcoming', true)
                   ->where('date_from', '>', now())
                   ->orderBy('date_from', 'asc');
-        })->with('timings.city')->get();
+        })->with(['timings.city', 'media']) // Eager load the media relationship
+        ->get()
+        ->map(function ($course) {
+            // Add the image URL to each course
+            $course->image_url = $course->getFirstMediaUrl('images');
+            return $course;
+        });
     }
 
     // Function to get banner courses
-    public static function getBannerCourses()
+        public static function getBannerCourses()
     {
         return self::whereHas('timings', function($query) {
-            $query->where('is_banner', true)
-                  ->orderBy('date_from', 'asc');
-        })->with('timings.city')->get();
+                $query->where('is_banner', true)
+                    ->orderBy('date_from', 'asc');
+            })
+            ->with(['timings.city', 'media']) // Eager load the media relationship
+            ->get()
+            ->map(function ($course) {
+                // Add the image URL to each course
+                $course->image_url = $course->getFirstMediaUrl('images');
+                return $course;
+            });
     }
 
     public function getRouteKeyName()

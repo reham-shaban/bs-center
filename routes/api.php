@@ -5,12 +5,17 @@ use App\Http\Controllers\APIs\CategoryController;
 use App\Http\Controllers\APIs\CityController;
 use App\Http\Controllers\APIs\CourseController;
 use App\Http\Controllers\APIs\TimingController;
+use App\Http\Controllers\Website\HomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('api')->group(function () {
     // Auth routes
     Route::post('/login', [AuthController::class, 'login']);
     Route::get('/logout', [AuthController::class, 'logout']);
+
+    // helper for website
+    Route::get('/upcoming-courses', [HomeController::class, 'getUpcomingCourses']);
+    Route::get('/search-courses', [HomeController::class, 'searchCourses']);
 
     // Route::middleware('admin')->group(function () {
         // Categories routes

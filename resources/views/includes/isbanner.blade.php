@@ -1,21 +1,30 @@
-<div class="container">
-    <h1>Banner Courses</h1>
+<div>
     @if($bannerCourses->isNotEmpty())
-        <ul>
-            @foreach($bannerCourses as $course)
-                @foreach($course->timings as $timing)
-                    @if($timing->is_banner)
-                        <li>
-                            <strong>{{ $course->title }}</strong>
-                            <br>
-                            {{ $timing->city->title }}:
-                            {{ $timing->date_from }} - {{ $timing->date_to }}
-                        </li>
-                    @endif
+    <section id="hero1" class="hero">
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                @foreach($bannerCourses as $course)
+                <div class="swiper-slide">
+                    <div class="img-container">
+                        <img src="{{ $course->image_url }}" alt="{{ $course->image_alt }}">
+                        <div class="overlay"></div>
+                        <div class="content">
+                            <h1>{{ $course->title }}</h1>
+                            <p>{{ $course->timings->first()->date_from }}</p>
+                            <p>{{ $course->timings->first()->city->name }}</p>
+                            <div class="buttons-hero">
+                                <a href="" class="register-button">Register Now</a>
+                                <a href="" class="learn-more-button">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 @endforeach
-            @endforeach
-        </ul>
-    @else
-        <p>No banner courses found.</p>
+            </div>
+            <div class="swiper-pagination"></div>
+    </section>
+    <div class="swiper-button-next hero-btn"></div>
+    <div class="swiper-button-prev hero-btn"></div>
+
     @endif
 </div>

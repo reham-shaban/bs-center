@@ -2,62 +2,7 @@
 
 @section('content')
 
-<div>
-    <section id="hero1" class="hero">
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="img-container">
-                        <img src="./assets/imgs/hero-bg-1.webp" alt="">
-                        <div class="overlay"></div>
-                        <div class="content">
-                            <h1>Risk Management for Medical Devices</h1>
-                            <p>2024-11-04</p>
-                            <p>Istanbul</p>
-                            <div class="buttons-hero">
-                                <a href="./pages/registration.html" class="register-button">Register Now</a>
-                                <a href="./pages/course.html" class="learn-more-button">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="img-container">
-                        <img src="./assets/imgs/hero-bg-2.webp" alt="">
-                        <div class="overlay"></div>
-                        <div class="content">
-                            <h1>Risk Management for Medical Devices</h1>
-                            <p>2024-11-04</p>
-                            <p>Istanbul</p>
-                            <div class="buttons-hero">
-                                <a href="./pages/registration.html" class="register-button">Register Now</a>
-                                <a href="./pages/course.html" class="learn-more-button">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="img-container">
-                        <img src="./assets/imgs/hero-bg-2.webp" alt="">
-                        <div class="overlay"></div>
-                        <div class="content">
-                            <h1>Risk Management for Medical Devices</h1>
-                            <p>2024-11-04</p>
-                            <p>Istanbul</p>
-                            <div class="buttons-hero">
-                                <a href="./pages/registration.html" class="register-button">Register Now</a>
-                                <a href="./pages/course.html" class="learn-more-button">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="swiper-pagination"></div>
-    </section>
-    <div class="swiper-button-next hero-btn"></div>
-    <div class="swiper-button-prev hero-btn"></div>
-</div>
-
+@include('includes.isbanner')
 @include('includes.search', ['searchRoute' => route('home.index')])
 
 <section class="search-courses home-courses">
@@ -67,6 +12,7 @@
     </div>
 </section>
 
+{{-- About us --}}
 <section class="search-courses about-us">
     <div class="container">
         <div class="about">
@@ -110,30 +56,18 @@
     </div>
 </section>
 
-<section class="search-courses categories-home categories">
-    <div class="container">
-        <div class="section-title">
-            <h2>Categories</h2>
-            <div class="arrows">
-                <div class="swiper-button-prev arrow-btn"></div>
-                <div class="swiper-button-next arrow-btn"></div>
-            </div>
-        </div>
-    </div>
-    <div class="swiper mySwiper2">
-        <div class="swiper-wrapper wrap">
-        </div>
-    </div>
-</section>
+{{-- Categories --}}
+@include('includes.categories-list')
 
+{{-- Our Success --}}
 <section class="search-courses success">
     <div class="container">
         <h2>Our Success</h2>
         <div class="statistics-list">
-
         </div>
 </section>
 
+{{-- Our Services --}}
 <section class="search-courses services">
     <div class="container">
         <h2>Our Services</h2>
@@ -165,6 +99,7 @@
         </div>
 </section>
 
+{{-- FAQ  --}}
 <section class="search-courses faqs">
     <div class="container">
         <h2>FAQ</h2>
@@ -175,6 +110,7 @@
     </div>
 </section>
 
+{{-- Trusted by  --}}
 <section class="search-courses trusted">
     <div class="container">
         <h2>Trusted By</h2>

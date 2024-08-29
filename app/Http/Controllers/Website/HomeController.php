@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\City;
 use App\Services\CourseService;
 use App\Models\Course;
@@ -26,8 +27,21 @@ class HomeController extends Controller
         $cities = City::all();
         $upcomingCourses = Course::getUpcomingCourses();
         $bannerCourses = Course::getBannerCourses();
+        $categories = Category::all();
 
-        return view('screen.home', compact('courses', 'upcomingCourses', 'bannerCourses', 'cities'));
+        return view('screen.home', compact('courses', 'upcomingCourses', 'bannerCourses', 'cities', 'categories'));
+    }
+
+    public function getUpcomingCourses()
+    {
+        $upcomingCourses = Course::getUpcomingCourses();
+        return response()->json($upcomingCourses);
+    }
+
+    public function searchCourses(Request $request)
+    {
+        $query = $this->courseService->applySearchFilters($request, Course::query());
+        return response()->json($query);
     }
 
 }

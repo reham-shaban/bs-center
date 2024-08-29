@@ -56,7 +56,6 @@
                         </div>
                         <input type="hidden" name="duration" id="duration_input" value="{{ request('duration') }}">
                     </div>
-
                 </div>
                 <div class="row3">
                     <button type="submit">Search
@@ -72,48 +71,40 @@
         @if(request()->hasAny(['course_title', 'category_title', 'city_title', 'month', 'duration']))
             @if(isset($courses) && $courses->isNotEmpty())
                 <h2>Search Results</h2>
-
-                <div class="card-container">
+                <div class="my-search-card-container">
                     @foreach($courses as $course)
-                        @php
-                            $firstTiming = $course->timings->first();
-                            $imgSrc = $course->image_url ?? '/assets/imgs/default-course-img.png'; // Fallback image
-                        @endphp
-                        <a href="" class="card">
-                            <img src="{{ $imgSrc }}" alt="{{ $course->title }}">
-                            <div class="card-content">
-                                <div class="card-title">{{ $course->title }}</div>
-                                <div class="card-dates">
-                                    <img src="{{ asset('assets/icons/calender2.svg') }}" alt="" />
-                                    @if($firstTiming)
-                                        <span>{{ $firstTiming->date_from }} to {{ $firstTiming->date_to }} {{ $firstTiming->date_to }}</span>
-                                    @else
-                                        <span>No timings available</span>
-                                    @endif
-                                </div>
-                                <div class="card-location">
-                                    <img src="{{ asset('assets/icons/location.svg') }}" alt="" class="location-icon" />
-                                    @if($firstTiming)
-                                        <span>{{ $firstTiming->city->title }}</span>
-                                    @else
-                                        <span>Location not available</span>
-                                    @endif
-                                </div>
-                                <div class="card-buttons">
-                                    <a href="" class="btn-primary">Register Now</a>
-                                    <a href="" class="btn-secondary">Learn more</a>
-                                </div>
-                            </div>
-                        </a>
+                    <img src="{{ $course->image_url }}" alt="{{ $course->image_alt }}">
+                    <div class="card-content">
+                        <div class="card-title">{{ $course->title }}</div>
+                        <div class="card-dates">
+                            <img src="/assets/icons/calender2.svg" alt="" />
+                            <span>{{ $course->date_form }} to {{ $course->date_to }}</span>
+                        </div>
+                        <div class="card-location">
+                            <img src="/assets/icons/location.svg" alt="" class="location-icon"  />
+                            @php
+                                $firstTiming = $course->timings->first();
+                            @endphp
+
+                            @if ($firstTiming)
+                                <span>{{ $firstTiming->city->title }}</span>
+                            @endif
+                        </div>
+                        <div class="card-buttons">
+                            <a href="" class="btn-primary">Register Now</a>
+                            <a href="" class="btn-secondary">Learn more</a>
+                        </div>
+                    </div>
                     @endforeach
                 </div>
-            @elseif(isset($courses))
-                <p>No courses found.</p>
             @endif
-        @endif
+            @endif
+        </div>
+    </div>
 </section>
 
 <script>
+
     function resetForm() {
         const form = document.querySelector('.search-courses-form');
 
@@ -123,6 +114,7 @@
         // Clear the query string by reloading the page without query parameters
         window.location.href = window.location.pathname;
     }
+
     document.querySelectorAll('.custom-option').forEach(option => {
         option.addEventListener('click', function() {
             const select = this.closest('.custom-select');
@@ -140,7 +132,5 @@
             }
         });
     });
-
-
 
 </script>

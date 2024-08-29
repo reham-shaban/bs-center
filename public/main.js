@@ -42,203 +42,144 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// Upcoming courses
+document.addEventListener("DOMContentLoaded", function () {
+    const cardContainer = document.querySelector(".card-container");
+
+    fetch("/api/upcoming-courses") // Replace with your actual API endpoint
+      .then((response) => response.json())
+      .then((data) => {
+        data.forEach((course) => {
+          const card = document.createElement("a");
+          card.href = `/courses/${course.slug}`; // Dynamic link to the course detail page
+          card.classList.add("card");
+
+          card.innerHTML = `
+              <img src="${course.image_url}" alt="${course.title}">
+              <div class="card-content">
+                  <div class="card-title">${course.title}</div>
+                  <div class="card-dates">
+                    <img src="/assets/icons/calender2.svg" alt="" />
+                    <span>${course.timings[0].date_from} to ${course.timings[0].date_to} ${new Date(course.timings[0].date_from).getFullYear()}</span>
+                  </div>
+                <div class="card-location">
+                  <img src="/assets/icons/location.svg" alt="" class="location-icon"  />
+                <span>${course.timings[0].city.name}</span></div>
+                  <div class="card-buttons">
+                      <a href='/courses/${course.slug}/register' class="btn-primary">Register Now</a>
+                      <a href="/courses/${course.slug}" class="btn-secondary">Learn more</a>
+                  </div>
+              </div>
+          `;
+
+          cardContainer?.appendChild(card);
+        });
+      })
+      .catch((error) => console.error("Error fetching course data:", error));
+  });
+
+// Category list
 // document.addEventListener("DOMContentLoaded", function () {
 //   const cardData = [
 //     {
-//       imgSrc: "/assets/imgs/course-img.png",
-//       title: "Strategic planning in healthcare organizations",
-//       startDate: "10 Sep",
-//       endDate: "20 Sep",
-//       location: "Istanbul",
-//       year: "2024",
+//       imgSrc: "/assets/imgs/categories/1.png",
+//       title: "Sales and Marketing",
+//       description:
+//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
+//       link: "/pages/courses.html",
 //     },
 //     {
-//       imgSrc: "/assets/imgs/course-img.png",
-//       title: "Strategic planning in healthcare organizations",
-//       startDate: "10 Sep",
-//       endDate: "20 Sep",
-//       location: "Istanbul",
-//       year: "2024",
+//       imgSrc: "/assets/imgs/categories/2.png",
+//       title: "Quality and Productivity",
+//       description:
+//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
+//       link: "/pages/courses.html",
 //     },
 //     {
-//       imgSrc: "/assets/imgs/course-img.png",
-//       title: "Strategic planning in healthcare organizations",
-//       startDate: "10 Sep",
-//       endDate: "20 Sep",
-//       location: "Istanbul",
-//       year: "2024",
+//       imgSrc: "/assets/imgs/categories/3.png",
+//       title: "Leadership",
+//       description:
+//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
+//       link: "/pages/courses.html",
 //     },
 //     {
-//       imgSrc: "/assets/imgs/course-img.png",
-//       title: "Strategic planning in healthcare organizations",
-//       startDate: "10 Sep",
-//       endDate: "20 Sep",
-//       location: "Istanbul",
-//       year: "2024",
+//       imgSrc: "/assets/imgs/categories/5.png",
+//       title: "Oil & Gas and Petroleum",
+//       description:
+//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
+//       link: "/pages/courses.html",
 //     },
 //     {
-//       imgSrc: "/assets/imgs/course-img.png",
-//       title: "Strategic planning in healthcare organizations",
-//       startDate: "10 Sep",
-//       endDate: "20 Sep",
-//       location: "Istanbul",
-//       year: "2024",
+//       imgSrc: "/assets/imgs/categories/6.png",
+//       title: "Healthcare Management",
+//       description:
+//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
+//       link: "/pages/courses.html",
 //     },
 //     {
-//       imgSrc: "/assets/imgs/course-img.png",
-//       title: "Strategic planning in healthcare organizations",
-//       startDate: "10 Sep",
-//       endDate: "20 Sep",
-//       location: "Istanbul",
-//       year: "2024",
+//       imgSrc: "/assets/imgs/categories/6.png",
+//       title: "Project Management",
+//       description:
+//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
+//       link: "/pages/courses.html",
 //     },
 //     {
-//       imgSrc: "/assets/imgs/course-img.png",
-//       title: "Strategic planning in healthcare organizations",
-//       startDate: "10 Sep",
-//       endDate: "20 Sep",
-//       location: "Istanbul",
-//       year: "2024",
+//       imgSrc: "/assets/imgs/categories/1.png",
+//       title: "Sales And Marketing",
+//       description:
+//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
+//       link: "/pages/courses.html",
 //     },
 //     {
-//       imgSrc: "/assets/imgs/course-img.png",
-//       title: "Strategic planning in healthcare organizations",
-//       startDate: "10 Sep",
-//       endDate: "20 Sep",
-//       location: "Istanbul",
-//       year: "2024",
+//       imgSrc: "/assets/imgs/categories/2.png",
+//       title: "Quality and Productivity",
+//       description:
+//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
+//       link: "/pages/courses.html",
+//     },
+//     {
+//       imgSrc: "/assets/imgs/categories/3.png",
+//       title: "Leadership",
+//       description:
+//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
+//       link: "/pages/courses.html",
+//     },
+//     {
+//       imgSrc: "/assets/imgs/categories/2.png",
+//       title: "Quality and Productivity",
+//       description:
+//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
+//       link: "/pages/courses.html",
+//     },
+//     {
+//       imgSrc: "/assets/imgs/categories/3.png",
+//       title: "Leadership",
+//       description:
+//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
+//       link: "/pages/courses.html",
 //     },
 //   ];
 
-//   const cardContainer = document.querySelector(".card-container");
-
+//   const cardContainer2 = document.querySelector(".wrap");
 //   cardData.forEach((data) => {
-//     const card = document.createElement("a");
-//     card.href = "/pages/course.html";
-//     card.classList.add("card");
-
+//     const card = document.createElement("div");
+//     card.classList.add("swiper-slide");
 //     card.innerHTML = `
-//             <img src="${data.imgSrc}" alt="${data.title}">
-//             <div class="card-content">
-//                 <div class="card-title">${data.title}</div>
-//                 <div class="card-dates">
-//                   <img src="/assets/icons/calender2.svg" alt="" />
-//                   <span>${data.startDate} to ${data.endDate} ${data.year}</span>
-//                 </div>
-//               <div class="card-location">
-//                 <img src="/assets/icons/location.svg" alt="" class="location-icon"  />
-//               <span>${data.location}</span></div>
-//                 <div class="card-buttons">
-//                     <a href='./pages/requestInHouse.html' class="btn-primary">Register Now</a>
-//                     <a href="./pages/course.html" class="btn-secondary">Learn more</a>
+//             <div class="category-card" onclick=(changePage())>
+//                 <img src="${data.imgSrc}" alt="${data.title}">
+//                 <div class="card-overlay">
+//                     <h3>${data.title}</h3>
+//                     <p>${data.description}</p>
+//                     <span class="line-card"></span>
+//                     <a href='${data.link}' class="category-card-arrow"><img src="./assets/icons/arrow.svg" alt=""></a>
 //                 </div>
 //             </div>
 //         `;
 
-//     cardContainer?.appendChild(card);
+//     cardContainer2?.appendChild(card);
 //   });
 // });
 
-document.addEventListener("DOMContentLoaded", function () {
-  const cardData = [
-    {
-      imgSrc: "/assets/imgs/categories/1.png",
-      title: "Sales and Marketing",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
-      link: "/pages/courses.html",
-    },
-    {
-      imgSrc: "/assets/imgs/categories/2.png",
-      title: "Quality and Productivity",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
-      link: "/pages/courses.html",
-    },
-    {
-      imgSrc: "/assets/imgs/categories/3.png",
-      title: "Leadership",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
-      link: "/pages/courses.html",
-    },
-    {
-      imgSrc: "/assets/imgs/categories/5.png",
-      title: "Oil & Gas and Petroleum",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
-      link: "/pages/courses.html",
-    },
-    {
-      imgSrc: "/assets/imgs/categories/6.png",
-      title: "Healthcare Management",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
-      link: "/pages/courses.html",
-    },
-    {
-      imgSrc: "/assets/imgs/categories/6.png",
-      title: "Project Management",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
-      link: "/pages/courses.html",
-    },
-    {
-      imgSrc: "/assets/imgs/categories/1.png",
-      title: "Sales And Marketing",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
-      link: "/pages/courses.html",
-    },
-    {
-      imgSrc: "/assets/imgs/categories/2.png",
-      title: "Quality and Productivity",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
-      link: "/pages/courses.html",
-    },
-    {
-      imgSrc: "/assets/imgs/categories/3.png",
-      title: "Leadership",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
-      link: "/pages/courses.html",
-    },
-    {
-      imgSrc: "/assets/imgs/categories/2.png",
-      title: "Quality and Productivity",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
-      link: "/pages/courses.html",
-    },
-    {
-      imgSrc: "/assets/imgs/categories/3.png",
-      title: "Leadership",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
-      link: "/pages/courses.html",
-    },
-  ];
-
-  const cardContainer2 = document.querySelector(".wrap");
-  cardData.forEach((data) => {
-    const card = document.createElement("div");
-    card.classList.add("swiper-slide");
-    card.innerHTML = `
-            <div class="category-card" onclick=(changePage())>
-                <img src="${data.imgSrc}" alt="${data.title}">
-                <div class="card-overlay">
-                    <h3>${data.title}</h3>
-                    <p>${data.description}</p>
-                    <span class="line-card"></span>
-                    <a href='${data.link}' class="category-card-arrow"><img src="./assets/icons/arrow.svg" alt=""></a>
-                </div>
-            </div>
-        `;
-
-    cardContainer2?.appendChild(card);
-  });
-});
 function changePage() {
   window.location.href = "/pages/courses.html";
 }
