@@ -8,12 +8,12 @@
         </div>
         <div class="nav-links">
             <ul class="flex-between">
-                <li><a class="active-link-nav" href="{{ route('home.index') }}">Home</a></li>
-                <li><a href="{{ route('categories.index') }}">Categories</a></li>
-                <li><a href="{{ route('cities.index') }}">Venus</a></li>
-                <li><a href="{{ route('blogs.index') }}">Blogs</a></li>
-                <li><a href="">About us</a></li>
-                <li><a href="{{ route('contact.create') }}">Contact</a></li>
+                <li><a class="{{ Route::currentRouteName() == 'home.index' ? 'active-link-nav' : '' }}" href="{{ route('home.index') }}">Home</a></li>
+                <li><a class="{{ Route::currentRouteName() == 'categories.index' ? 'active-link-nav' : '' }}" href="{{ route('categories.index') }}">Categories</a></li>
+                <li><a class="{{ Route::currentRouteName() == 'cities.index' ? 'active-link-nav' : '' }}" href="{{ route('cities.index') }}">Venus</a></li>
+                <li><a class="{{ Route::currentRouteName() == 'blogs.index' ? 'active-link-nav' : '' }}" href="{{ route('blogs.index') }}">Blogs</a></li>
+                <li><a class="{{ Route::currentRouteName() == 'about' ? 'active-link-nav' : '' }}" href="{{ route('about') }}">About us</a></li>
+                <li><a class="{{ Route::currentRouteName() == 'contact.create' ? 'active-link-nav' : '' }}" href="{{ route('contact.create') }}">Contact</a></li>
             </ul>
         </div>
         <div class="search-container">
@@ -30,7 +30,6 @@
 </nav>
 <div class="mobile-overlay"></div>
 
-
 <div class="nav-links-phone">
     <div class="flex-between mebile-menu-header">
         <a href="{{ route('home.index') }}" style="display: flex; align-items: center; gap: 16px;">
@@ -40,21 +39,21 @@
             <img src="/assets/icons/x-close.svg" alt="" width="30px">
         </div>
     </div>
-            <ul class="flex-colmun">
-                <li><a class="active-link-nav" href="{{ route('home.index') }}">Home</a></li>
-                <li><a href="{{ route('categories.index') }}">Categories</a></li>
-                <li><a href="{{ route('cities.index') }}">Venus</a></li>
-                <li><a href="{{ route('blogs.index') }}">Blogs</a></li>
-                <li><a href="">About us</a></li>
-                <li><a href="{{ route('contact.create') }}">Contact</a></li>
-            </ul>
-            <div class="search-phone">
-                <div>
-                    <input type="text">
-                    <img src="/assets/icons/search.svg" alt="search-icon" id="search-icon">
-                </div>
-                <div class="search flex-between">
-                    <h3 style="flex-shrink: 0;">الدورات بالعربية</h3>
-                </div>
-            </div>
+    <ul class="flex-column">
+        <li><a class="{{ Route::currentRouteName() == 'home.index' ? 'active-link-nav' : '' }}" href="{{ route('home.index') }}">Home</a></li>
+        <li><a class="{{ Route::currentRouteName() == 'categories.index' ? 'active-link-nav' : '' }}" href="{{ route('categories.index') }}">Categories</a></li>
+        <li><a class="{{ Route::currentRouteName() == 'cities.index' ? 'active-link-nav' : '' }}" href="{{ route('cities.index') }}">Venus</a></li>
+        <li><a class="{{ Route::currentRouteName() == 'blogs.index' ? 'active-link-nav' : '' }}" href="{{ route('blogs.index') }}">Blogs</a></li>
+        <li><a class="{{ Route::currentRouteName() == 'about' ? 'active-link-nav' : '' }}" href="{{ route('about') }}">About us</a></li>
+        <li><a class="{{ Route::currentRouteName() == 'contact.create' ? 'active-link-nav' : '' }}" href="{{ route('contact.create') }}">Contact</a></li>
+    </ul>
+    <div class="search-phone">
+        <div>
+            <input type="text">
+            <img src="/assets/icons/search.svg" alt="search-icon" id="search-icon">
+        </div>
+        <div class="search flex-between">
+            <h3 style="flex-shrink: 0;">الدورات بالعربية</h3>
+        </div>
+    </div>
 </div>

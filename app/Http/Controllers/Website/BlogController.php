@@ -10,8 +10,10 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $blogs = Blog::all();
+        // Fetch all blogs
+        $blogs = Blog::where('hidden', false)->get();
 
+        // Pass blogs to the view
         return view('screen.blogs', compact('blogs'));
     }
 }

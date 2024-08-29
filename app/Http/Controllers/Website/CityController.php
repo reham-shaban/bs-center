@@ -23,7 +23,7 @@ class CityController extends Controller
         $query = $this->courseService->applySearchFilters($request, Course::query());
         $courses = $query->with('timings.city')->get();
 
-        $cities = City::all();
+        $cities = City::with('media')->get(); // Fetch cities with their media
 
         return view('screen.venus', compact('courses', 'cities'));
     }

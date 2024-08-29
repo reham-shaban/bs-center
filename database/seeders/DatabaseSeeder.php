@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
 
         Blog::factory()->count(10)->create();
         Course::factory()->count(10)->create();
-        Timing::factory()->count(10)->create();
+        Timing::factory()->count(50)->create();
 
         // ContactUs::create([
         //     'full_name' => 'Reham Shaban',

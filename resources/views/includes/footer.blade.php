@@ -12,7 +12,7 @@
         <div class="footer-col">
             <ul>
                 <li><a href="{{ route('home.index') }}">Home</a></li>
-                <li><a href="">About us</a></li>
+                <li><a href="{{ route('about') }}">About us</a></li>
                 <li><a href="{{ route('blogs.index') }}">Blogs</a></li>
                 <li><a href="{{ route('categories.index') }}">Categories </a></li>
             </ul>

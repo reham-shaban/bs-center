@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ${
       item.desc.length > 125
         ? `<p>${item.desc}</p>
-          <a href='${item.link}'>more</a> 
+          <a href='${item.link}'>more</a>
         `
         : `<p>${item.desc}</p>`
     }

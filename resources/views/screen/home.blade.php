@@ -57,7 +57,7 @@
 </section>
 
 {{-- Categories --}}
-@include('includes.categories-list')
+@include('includes.home-categories-list')
 
 {{-- Our Success --}}
 <section class="search-courses success">
