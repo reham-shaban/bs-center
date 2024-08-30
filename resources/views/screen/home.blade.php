@@ -2,9 +2,24 @@
 
 @section('content')
 
+{{-- Banner courses --}}
 @include('includes.isbanner')
-@include('includes.search', ['searchRoute' => route('home.index')])
 
+{{-- Search --}}
+<section class="search-section home-search-section">
+    <div class="container">
+        <h2>Search For Your Course</h2>
+        <div class="home-search">
+            @include('includes.search-form', ['searchRoute' => route('home.index')])
+        </div>
+    </div>
+</section>
+
+{{-- Search Results --}}
+@include('includes.search-results', ['courses' => $courses])
+
+
+{{-- Upcoming courses --}}
 <section class="search-courses home-courses">
     <div class="container">
         <h2>Upcoming Courses</h2>

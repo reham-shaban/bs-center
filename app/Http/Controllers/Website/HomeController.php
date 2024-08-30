@@ -25,11 +25,10 @@ class HomeController extends Controller
 
         $courses = $query->with('timings.city')->get();
         $cities = City::all();
-        $upcomingCourses = Course::getUpcomingCourses();
         $bannerCourses = Course::getBannerCourses();
         $categories = Category::all();
 
-        return view('screen.home', compact('courses', 'upcomingCourses', 'bannerCourses', 'cities', 'categories'));
+        return view('screen.home', compact('courses', 'bannerCourses', 'cities', 'categories'));
     }
 
     public function getUpcomingCourses()
