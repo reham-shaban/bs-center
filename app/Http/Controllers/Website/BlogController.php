@@ -10,8 +10,10 @@ class BlogController extends Controller
 {
     public function index()
     {
+        $currentLocale = app()->getLocale(); // Get the current language
+
         // Fetch all blogs
-        $blogs = Blog::where('hidden', false)->get();
+        $blogs = Blog::where('lang', $currentLocale)->where('hidden', false)->get();
 
         // Pass blogs to the view
         return view('screen.blogs', compact('blogs'));

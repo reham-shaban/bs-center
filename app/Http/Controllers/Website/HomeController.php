@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\City;
 use App\Services\CourseService;
 use App\Models\Course;
+use App\Models\Timing;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -20,27 +21,64 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-        // Use the refactored search method
-        $query = $this->courseService->applySearchFilters($request, Course::query());
+        $currentLocale = app()->getLocale(); // Get the current language
 
-        $courses = $query->with('timings.city')->get();
-        $cities = City::all();
+        // Start with the Timing model and apply filters
+        $query = Timing::where('lang', $currentLocale)->where('hidden', false);
+        $query = $this->courseService->applySearchFilters($request, $query);
+
+        // Get the filtered timings with related course and city data
+        $timings = $query->with(['course', 'city'])
+                        ->get(['course_id', 'city_id', 'date_from', 'date_to'])
+                        ->map(function ($timing) {
+                            return [
+                                'course_title' => $timing->course->title,
+                                'course_image' => $timing->course->getFirstMediaUrl('images'), // Adjust the media collection name if needed
+                                'date_from' => $timing->date_from,
+                                'date_to' => $timing->date_to,
+                                'city_title' => $timing->city->title,
+                            ];
+                        });
+
+        // Fetch filtered cities
+        $cities = City::where('lang', $currentLocale)
+                      ->where('hidden', false)
+                      ->get();
+
+        // Fetch filtered banner courses
         $bannerCourses = Course::getBannerCourses();
-        $categories = Category::all();
 
-        return view('screen.home', compact('courses', 'bannerCourses', 'cities', 'categories'));
+        // Fetch filtered categories
+        $categories = Category::where('lang', $currentLocale)
+                              ->where('hidden', false)
+                              ->get();
+
+        return view('screen.home', compact('timings', 'bannerCourses', 'cities', 'categories'));
     }
 
     public function getUpcomingCourses()
     {
-        $upcomingCourses = Course::getUpcomingCourses();
+        $currentLocale = app()->getLocale(); // Get the current language
+
+        // Fetch filtered upcoming courses
+        $upcomingCourses = Course::where('is_upcoming', true)
+                                 ->where('lang', $currentLocale)
+                                 ->where('hidden', false)
+                                 ->get();
+
         return response()->json($upcomingCourses);
     }
 
     public function searchCourses(Request $request)
     {
-        $query = $this->courseService->applySearchFilters($request, Course::query());
-        return response()->json($query);
-    }
+        $currentLocale = app()->getLocale(); // Get the current language
 
+        // Apply language and hidden filters to the search query
+        $query = $this->courseService->applySearchFilters(
+            $request,
+            Course::query()->where('lang', $currentLocale)->where('hidden', false)
+        );
+
+        return response()->json($query->get());
+    }
 }

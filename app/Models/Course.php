@@ -73,7 +73,11 @@ class Course extends Model implements HasMedia
     // Function to get upcoming courses
     public static function getUpcomingCourses()
     {
-        return self::whereHas('timings', function($query) {
+        $currentLocale = app()->getLocale();
+
+        return self::where('lang', $currentLocale)
+            ->where('hidden', false)
+            ->whereHas('timings', function($query) {
             $query->where('is_upcoming', true)
                   ->where('date_from', '>', now())
                   ->orderBy('date_from', 'asc');
@@ -87,9 +91,13 @@ class Course extends Model implements HasMedia
     }
 
     // Function to get banner courses
-        public static function getBannerCourses()
+    public static function getBannerCourses()
     {
-        return self::whereHas('timings', function($query) {
+        $currentLocale = app()->getLocale();
+
+        return self::where('lang', $currentLocale)
+            ->where('hidden', false)
+            ->whereHas('timings', function($query) {
                 $query->where('is_banner', true)
                     ->orderBy('date_from', 'asc');
             })

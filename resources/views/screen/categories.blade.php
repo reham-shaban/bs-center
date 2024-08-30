@@ -35,7 +35,7 @@
     </div>
 
     {{-- Search Results --}}
-    @include('includes.search-results', ['courses' => $courses])
+    @include('includes.search-results', ['timings' => $timings])
 
     {{-- Categores list --}}
     <section class="categories-section">
