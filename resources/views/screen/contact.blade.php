@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
+@section('title')
+{{ config('app.name', 'BSC') }} | Contact
+@endsection
+
 @section('content')
-
-
 <div class="breadcrumb-bar">
     <div class="about-header container">
       <ul></ul>

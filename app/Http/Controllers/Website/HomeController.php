@@ -58,14 +58,7 @@ class HomeController extends Controller
 
     public function getUpcomingCourses()
     {
-        $currentLocale = app()->getLocale(); // Get the current language
-
-        // Fetch filtered upcoming courses
-        $upcomingCourses = Course::where('is_upcoming', true)
-                                 ->where('lang', $currentLocale)
-                                 ->where('hidden', false)
-                                 ->get();
-
+        $upcomingCourses = Course::getUpcomingCourses();
         return response()->json($upcomingCourses);
     }
 

@@ -1,91 +1,89 @@
-<section class="search-section home-search-section">
-    <div class="container">
-        <h2>Search For Your Course</h2>
-        <div class="home-search">
-            <form action="{{ $searchRoute }}" method="GET" class="search-courses-form">
-                <div class="row1">
-                    <div>
-                        <input type="text" name="course_title" id="course_title" placeholder="Search for course" value="{{ request('course_title') }}">
-                        <img src="{{ asset('assets/icons/search.svg') }}" alt="">
-                    </div>
-                    <input class="category-input" type="text" name="category_title" id="category_title" placeholder="Categories" value="{{ request('category_title') }}">
-                </div>
-                <div class="row2">
-                    <div class="custom-select-wrapper">
-                        <div class="custom-select">
-                            <div class="custom-select-trigger">
-                                <span>{{ request('city_title', 'Venue') }}</span>
-                                <img src="{{ asset('assets/icons/arrow-down-2.svg') }}" alt="Arrow Down">
-                            </div>
-                            <div class="custom-options">
-                                @foreach($cities as $city)
-                                    <span class="custom-option" data-value="{{ $city->id }}">{{ $city->title }}</span>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                    <div class="custom-select-wrapper">
-                        <div class="custom-select">
-                            <div class="custom-select-trigger">
-                                <span>{{ request('month', 'Month') }}</span>
-                                <img src="{{ asset('assets/icons/arrow-down-2.svg') }}" alt="Arrow Down">
-                            </div>
-                            <div class="custom-options">
-                                @foreach(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] as $month)
-                                    <span class="custom-option" data-value="{{ strtolower($month) }}">{{ $month }}</span>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                    <div class="custom-select-wrapper">
-                        <div class="custom-select">
-                            <div class="custom-select-trigger">
-                                <span>{{ request('duration', 'Duration') }}</span>
-                                <img src="{{ asset('assets/icons/arrow-down-2.svg') }}" alt="Arrow Down">
-                            </div>
-                            <div class="custom-options">
-                                <span class="custom-option" data-value="1week">1 Week</span>
-                                <span class="custom-option" data-value="1month">1 Month</span>
-                                <span class="custom-option" data-value="3months">3 Months</span>
-                                <span class="custom-option" data-value="6months">6 Months</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row3">
-                    <button type="submit">Search
-                        <img src="{{ asset('assets/icons/arrow-right.svg') }}" alt="">
-                    </button>
-                    <button type="reset">
-                        Reset
-                        <img src="{{ asset('assets/icons/reload.svg') }}" alt="">
-                    </button>
-                </div>
+<div class="breadcrumb-bar">
+    <div class="about-header container">
+        <ul>
+            <li><a href="{{ route('categories.index') }}">Categories</a></li>
+            <img src="/assets/icons/arrow.svg" alt="" />
+            <li><a href="">Courses</a></li>
+            <img src="/assets/icons/arrow.svg" alt="" />
+            <li>{{ $course->title }}</li>
+        </ul>
+    </div>
+</div>
+
+<section class="hero-single-course">
+    <img src="{{ $course->getFirstMediaUrl('images') }}" alt="{{ $course->image_alt }}" />
+    <div class="course-hero-title">
+        <div>
+            <h1>{{ $course->title }}</h1>
+            <p>{{ $course->brief }}</p>
+        </div>
+    </div>
+</section>
+
+<section class="course-table container">
+    <div class="flex-between">
+        <!-- Popup for downloading brochure -->
+        <div class="popup-bg" onclick="hidePopup()"></div>
+        <div id="popup-3" class="form-popup popup">
+            <form>
+                <!-- Form Inputs -->
+                <!-- ... -->
             </form>
         </div>
-
-        @if(isset($courses) && $courses->isNotEmpty())
-            <h2>Search Results</h2>
-            <ul>
-                @foreach($courses as $course)
-                    @php
-                        $firstTiming = $course->timings->first();
-                    @endphp
-                    <li>
-                        <strong>{{ $course->title }}</strong>
-                        @if($firstTiming)
-                            ({{ $firstTiming->city->title }})
-                            <br>
-                            {{ $firstTiming->date_from }} to {{ $firstTiming->date_to }}
-                        @else
-                            (No timings available)
-                        @endif
-                    </li>
-                @endforeach
-            </ul>
-        @elseif(isset($courses))
-            <p>No courses found.</p>
-        @endif
-
+        <div class="course-buttons">
+            <button class="btn-primary" type="button">
+                <a href="">Request In House</a>
+            </button>
+            <button class="btn-primary" type="button">
+                <a href="">Request Online</a>
+            </button>
+        </div>
     </div>
+    <div class="table-container">
+        <table id="row-table">
+            <tr>
+                <th>City</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Price</th>
+                <th>Register</th>
+                <th>Enquire</th>
+                <th>Download & Print</th>
+            </tr>
+            @foreach($course->timings as $timing)
+                <tr>
+                    <td>{{ $timing->city->name }}</td>
+                    <td>{{ $timing->date_from }}</td>
+                    <td>{{ $timing->date_to }}</td>
+                    <td>${{ number_format($timing->price, 2) }}</td>
+                    <td><a href="">Register</a></td>
+                    <td><a href="">Enquire</a></td>
+                    <td><a href="">Download</a></td>
+                </tr>
+            @endforeach
+        </table>
+    </div>
+    <button class="btn-primary see-more-btn">See more</button>
+</section>
+
+{{-- Overview --}}
+<section class="container">
+    <div class="course-content">
+        <h3>Overview</h3>
+        <ul class="group-1">
+            <li>{{ $course->overview }}</li>
+            <!-- Additional overview points if stored separately -->
+        </ul>
+    </div>
+
+    {{-- Objective --}}
+    <div class="course-content">
+        <h3>Objective</h3>
+        <ul>
+            <li>{{ $course->objectives }}</li>
+            <!-- Additional objectives if stored separately -->
+        </ul>
+    </div>
+
+    <span style="display: block; width: 89%; margin: auto; height: 1px; background-color: #d9d9d9;"></span>
 </section>

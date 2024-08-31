@@ -1,74 +1,79 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const tableData = [
-    {
-      city: "London",
-      startDate: "19 Jun 2023",
-      endDate: "29 Jun 2023",
-      price: "$4,500",
-    },
-    {
-      city: "London",
-      startDate: "19 Jun 2023",
-      endDate: "29 Jun 2023",
-      price: "$4,500",
-    },
-    {
-      city: "London",
-      startDate: "19 Jun 2023",
-      endDate: "29 Jun 2023",
-      price: "$4,500",
-    },
-  ];
+    const tableContainer = document.querySelector(".table-container");
+    const slug = tableContainer.getAttribute("data-slug");
 
-  const table = document.getElementById("row-table");
+    // Fetch data from the API
+    fetch(`/${slug}/all-timings`)
+      .then((response) => response.json()) // Parse JSON response
+      .then((data) => {
+        console.log("API Response:", data); // Log the response to inspect it
 
-  tableData.forEach((item) => {
-    const row = table.insertRow();
-    row.insertCell().textContent = item.city;
-    row.insertCell().textContent = item.startDate;
-    row.insertCell().textContent = item.endDate;
-    row.insertCell().textContent = item.price;
+        // Assuming 'timings' is the key holding the array
+        const tableData = data.timings;
 
-    // Create and add the Register button
-    const registerBtn = document.createElement("a");
-    registerBtn.textContent = "Register";
-    registerBtn.href = "/pages/registration.html";
-    registerBtn.classList.add("table-btn");
-    row.insertCell().appendChild(registerBtn);
+        if (!Array.isArray(tableData)) {
+          console.error("Expected an array but received:", tableData);
+          return;
+        }
 
-    // Create and add the Enquire button
-    const enquireBtn = document.createElement("a");
-    enquireBtn.textContent = "Enquire";
-    enquireBtn.href = "/pages/enquireNow.html";
-    enquireBtn.classList.add("table-btn");
-    row.insertCell().appendChild(enquireBtn);
+        const table = document.getElementById("row-table");
 
-    const tableBtn = document.createElement("a");
-    tableBtn.textContent = "Download/Print";
-    tableBtn.style.cursor = "pointer";
-    tableBtn.classList.add("table-btn");
-    tableBtn.addEventListener("click", showPopup);
-    const registerImg = document.createElement("img");
-    registerImg.src = "/assets/icons/download.svg";
-    registerImg.className = "downloadIcon";
-    tableBtn.appendChild(registerImg);
-    row.insertCell().appendChild(tableBtn);
+        // Populate the table with the data
+        tableData.forEach((item) => {
+          const row = table.insertRow();
+          row.insertCell().textContent = item.city.title;
+          row.insertCell().textContent = item.date_from;
+          row.insertCell().textContent = item.date_to;
+          row.insertCell().textContent = item.price;
+
+          // Create and add the Register button
+          const registerBtn = document.createElement("a");
+          registerBtn.textContent = "Register";
+          registerBtn.href = "/pages/registration.html";
+          registerBtn.classList.add("table-btn");
+          row.insertCell().appendChild(registerBtn);
+
+          // Create and add the Enquire button
+          const enquireBtn = document.createElement("a");
+          enquireBtn.textContent = "Enquire";
+          enquireBtn.href = "/pages/enquireNow.html";
+          enquireBtn.classList.add("table-btn");
+          row.insertCell().appendChild(enquireBtn);
+
+          // Create and add the Download/Print button
+          const tableBtn = document.createElement("a");
+          tableBtn.textContent = "Download/Print";
+          tableBtn.style.cursor = "pointer";
+          tableBtn.classList.add("table-btn");
+          tableBtn.addEventListener("click", showPopup);
+          const registerImg = document.createElement("img");
+          registerImg.src = "/assets/icons/download.svg";
+          registerImg.className = "downloadIcon";
+          tableBtn.appendChild(registerImg);
+          row.insertCell().appendChild(tableBtn);
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching timings data:", error);
+      });
   });
-});
 
-function showPopup() {
-  document.querySelector(".popup").style.display = "block";
-  document.querySelector(".popup-bg").style.display = "block";
-}
-function hidePopup() {
-  document.querySelector(".popup").style.display = "none";
-  document.querySelector(".popup-bg").style.display = "none";
-}
-window.addEventListener("click", function (event) {
-  if (event.target === document.querySelector(".popup-bg")) {
-    hidePopup();
+  function showPopup() {
+    document.querySelector(".popup").style.display = "block";
+    document.querySelector(".popup-bg").style.display = "block";
   }
-});
+
+  function hidePopup() {
+    document.querySelector(".popup").style.display = "none";
+    document.querySelector(".popup-bg").style.display = "none";
+  }
+
+  window.addEventListener("click", function (event) {
+    if (event.target === document.querySelector(".popup-bg")) {
+      hidePopup();
+    }
+  });
+
 
 document.addEventListener("DOMContentLoaded", function () {
   const data = [
@@ -106,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   data.forEach((data) => {
     const card = document.createElement("a");
-    card.href = "/pages/course.html";
+    card.href = "/course.html";
     card.classList.add("card");
 
     card.innerHTML = `
@@ -122,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   <span>${data.location}</span></div>
                 </div>
                 <div class="card-buttons">
-                    <a href='/pages/registration.html' class="btn-primary">Register Now</a>
+                    <a href='/registration.html' class="btn-primary">Register Now</a>
                     <a href="course.html" class="btn-secondary">Learn more</a>
                 </div>
             </div>

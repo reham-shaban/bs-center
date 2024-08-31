@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class ContactUsController extends Controller
 {
-    public function create()
+    public function index()
     {
         return view('screen.contact');
     }

@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
-@section('content')
+@section('title')
+{{ config('app.name', 'BSC') }}
+@endsection
 
+@section('content')
 {{-- Banner courses --}}
 @include('includes.isbanner')
 
@@ -36,7 +39,7 @@
                 <p>At BSC, we believe in the power of education to unlock human potential. Our team of passionate
                     educators and industry experts have curated a diverse
                     range of courses tailored to empower learners at every stage</p>
-                <a href="./pages/about.html">Learn more</a>
+                <a href="">Learn more</a>
             </div>
             <div class="about-right">
                 <div class="part-about">
@@ -140,6 +143,4 @@
         </div>
     </div>
 </section>
-
-
 @endsection

@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ config('app.name', 'BSC') }}</title>
+    <title>
+        @yield('title')
+    </title>
     <!-- Css File -->
     <link rel="icon" href="{{ asset('assets/favIcon.svg') }}" />
     <link rel="stylesheet" href="{{ asset('style.css') }}">
@@ -35,6 +37,8 @@
     @yield('content')
 
     @include('includes.footer')
+
+    @yield('scripts')
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="{{ asset('main.js') }}"></script>

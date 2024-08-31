@@ -9,12 +9,12 @@
                         <img src="{{ $course->image_url }}" alt="{{ $course->image_alt }}">
                         <div class="overlay"></div>
                         <div class="content">
-                            <h1>{{ $course->title }}</h1>
+                            <h1>{{ $course->h1 }}</h1>
                             <p>{{ $course->timings->first()->date_from }}</p>
                             <p>{{ $course->timings->first()->city->name }}</p>
                             <div class="buttons-hero">
-                                <a href="" class="register-button">Register Now</a>
-                                <a href="" class="learn-more-button">Learn More</a>
+                                <a href="{{ route('register') }}" class="register-button">Register Now</a>
+                                <a href="{{ route('course.show', ['slug' => $course->slug]) }}" class="learn-more-button">Learn More</a>
                             </div>
                         </div>
                     </div>

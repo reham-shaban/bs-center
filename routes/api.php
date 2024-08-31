@@ -13,10 +13,6 @@ Route::middleware('api')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::get('/logout', [AuthController::class, 'logout']);
 
-    // helper for website
-    Route::get('/upcoming-courses', [HomeController::class, 'getUpcomingCourses']);
-    Route::get('/search-courses', [HomeController::class, 'searchCourses']);
-
     // Route::middleware('admin')->group(function () {
         // Categories routes
         Route::prefix('categories')->group(function () {
