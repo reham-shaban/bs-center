@@ -8,12 +8,12 @@
         </div>
         <div class="nav-links">
             <ul class="flex-between">
-                <li><a class="{{ Route::currentRouteName() == 'home.index' ? 'active-link-nav' : '' }}" href="{{ route('home.index') }}">Home</a></li>
-                <li><a class="{{ Route::currentRouteName() == 'categories.index' ? 'active-link-nav' : '' }}" href="{{ route('categories.index') }}">Categories</a></li>
-                <li><a class="{{ Route::currentRouteName() == 'cities.index' ? 'active-link-nav' : '' }}" href="{{ route('cities.index') }}">Venus</a></li>
-                <li><a class="{{ Route::currentRouteName() == 'blogs.index' ? 'active-link-nav' : '' }}" href="{{ route('blogs.index') }}">Blogs</a></li>
-                <li><a class="{{ Route::currentRouteName() == 'about' ? 'active-link-nav' : '' }}" href="{{ route('about') }}">About us</a></li>
-                <li><a class="{{ Route::currentRouteName() == 'contact.index' ? 'active-link-nav' : '' }}" href="{{ route('contact.index') }}">Contact</a></li>
+                <li><a href="{{ route('home.index') }}">Home</a></li>
+                <li><a href="{{ route('categories.index') }}">Categories</a></li>
+                <li><a href="{{ route('cities.index') }}">Venus</a></li>
+                <li><a href="{{ route('blogs.index') }}">Blogs</a></li>
+                <li><a href="{{ route('about') }}">About us</a></li>
+                <li><a href="{{ route('contact.index') }}">Contact</a></li>
             </ul>
         </div>
         <div class="search-container">
@@ -40,12 +40,12 @@
         </div>
     </div>
     <ul class="flex-column">
-        <li><a class="{{ Route::currentRouteName() == 'home.index' ? 'active-link-nav' : '' }}" href="{{ route('home.index') }}">Home</a></li>
-        <li><a class="{{ Route::currentRouteName() == 'categories.index' ? 'active-link-nav' : '' }}" href="{{ route('categories.index') }}">Categories</a></li>
-        <li><a class="{{ Route::currentRouteName() == 'cities.index' ? 'active-link-nav' : '' }}" href="{{ route('cities.index') }}">Venus</a></li>
-        <li><a class="{{ Route::currentRouteName() == 'blogs.index' ? 'active-link-nav' : '' }}" href="{{ route('blogs.index') }}">Blogs</a></li>
-        <li><a class="{{ Route::currentRouteName() == 'about' ? 'active-link-nav' : '' }}" href="{{ route('about') }}">About us</a></li>
-        <li><a class="{{ Route::currentRouteName() == 'contact.index' ? 'active-link-nav' : '' }}" href="{{ route('contact.index') }}">Contact</a></li>
+        <li><a href="{{ route('home.index') }}">Home</a></li>
+        <li><a href="{{ route('categories.index') }}">Categories</a></li>
+        <li><a href="{{ route('cities.index') }}">Venus</a></li>
+        <li><a href="{{ route('blogs.index') }}">Blogs</a></li>
+        <li><a href="{{ route('about') }}">About us</a></li>
+        <li><a href="{{ route('contact.index') }}">Contact</a></li>
     </ul>
     <div class="search-phone">
         <div>

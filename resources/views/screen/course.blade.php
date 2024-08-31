@@ -8,9 +8,9 @@
 <div class="breadcrumb-bar">
     <div class="about-header container">
       <ul>
-        <li><a href="/Categories.html">Categories</a></li>
+        <li><a href="{{ route('categories.index') }}">Categories</a></li>
         <img src="/assets/icons/arrow.svg" alt="" />
-        <li><a href="/courses.html">Courses</a></li>
+        <li><a href="{{ route('courses.index', ['slug' => $course->category->slug]) }}">Courses</a></li>
         <img src="/assets/icons/arrow.svg" alt="" />
         <li>{{ $course->title }}</li>
       </ul>
@@ -99,10 +99,10 @@
       </div>
       <div class="course-buttons">
         <button class="btn-primary" type="button">
-          <a href="./requestInHouse.html">Request In House</a>
+          <a href="{{ route('request-in-house.index', ['slug' => $course->slug]) }}">Request In House</a>
         </button>
         <button class="btn-primary" type="button">
-          <a href="./requestOnline.html">Request Online</a>
+          <a href="{{ route('request-online.index', ['slug' => $course->slug]) }}">Request Online</a>
         </button>
       </div>
     </div>
@@ -150,7 +150,9 @@
     <div class="container">
       <div class="course-card-title">
         <h2>Related Courses</h2>
-        <a href="courses.html">see all</a>
+        <h3>{{ $course->slug }}</h3>
+        <h3>{{ $course->category->slug }}</h3>
+        <a href="{{ route('courses.index', ['slug' => $course->category->slug]) }}">see all</a>
       </div>
       <div class="courses-container"></div>
     </div>
@@ -172,60 +174,44 @@
   async
   defer
 ></script>
+
 <script>
-      const courses = [
-        {
-          imgSrc: "/assets/imgs/course-img.png",
-          title: "Strategic planning in healthcare organizations",
-          startDate: "10 Sep",
-          endDate: "20 Sep",
-          location: "Istanbul",
-          year: "2024",
-        },
-        {
-          imgSrc: "/assets/imgs/course-img.png",
-          title: "Strategic planning in healthcare organizations",
-          startDate: "10 Sep",
-          endDate: "20 Sep",
-          location: "Istanbul",
-          year: "2024",
-        },
-        {
-          imgSrc: "/assets/imgs/course-img.png",
-          title: "Strategic planning in healthcare organizations",
-          startDate: "10 Sep",
-          endDate: "20 Sep",
-          location: "Istanbul",
-          year: "2024",
-        },
-        {
-          imgSrc: "/assets/imgs/course-img.png",
-          title: "Strategic planning in healthcare organizations",
-          startDate: "10 Sep",
-          endDate: "20 Sep",
-          location: "Istanbul",
-          year: "2024",
-        },
-      ];
-      courses.map((data) => {
-        document.querySelector(".courses-container").innerHTML += `
-            <div class="card">
-            <img src="${data.imgSrc}" alt="${data.title}">
-                <div class="card-title">${data.title}</div>
-                <div class="card-dates">
-                  <img src="/assets/icons/calender2.svg" alt="" />
-                  <span>${data.startDate} to ${data.endDate} ${data.year}</span>
-                </div>
-                <div class="card-location">
-                <img src="/assets/icons/location.svg" alt="" class="location-icon"  />
-                <span>${data.location}</span>
-                </div>
-                <div class="card-buttons">
-                    <a href='/requestInHouse.html' class="btn-primary">Register Now</a>
-                    <a href="/course.html" class="btn-secondary">Learn more</a>
-                </div>
-            </div>
-        `;
-      });
+    document.addEventListener('DOMContentLoaded', () => {
+        const slug = "{{ $course->slug }}";
+        const url = `/${slug}/related-timings`;
+        console.log("in scripte -------------")
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                console.log("in scripte -------------")
+                console.log("in scripte -------------")
+                console.log(data)
+                const container = document.querySelector(".courses-container");
+                container.innerHTML = ''; // Clear the container before adding new data
+
+                data.timings.forEach(item => {
+                    container.innerHTML += `
+                        <div class="card">
+                            <img src="${item.image_url}" alt="${item.image_alt}">
+                            <div class="card-title">${item.course_title}</div>
+                            <div class="card-dates">
+                                <img src="/assets/icons/calender2.svg" alt="" />
+                                <span>${item.date_from} to ${item.date_to}</span>
+                            </div>
+                            <div class="card-location">
+                                <img src="/assets/icons/location.svg" alt="" class="location-icon" />
+                                <span>${item.city_title}</span>
+                            </div>
+                            <div class="card-buttons">
+                                <a href='/request-in-house' class="btn-primary">Register Now</a>
+                                <a href="/course/${item.course_slug}" class="btn-secondary">Learn more</a>
+                            </div>
+                        </div>
+                    `;
+                });
+            })
+            .catch(error => console.error('Error fetching related timings:', error));
+    });
 </script>
+
 @endsection

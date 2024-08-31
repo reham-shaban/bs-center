@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\City;
 use App\Models\Course;
 use App\Models\Timing;
@@ -42,5 +43,52 @@ class CityController extends Controller
         $cities = City::where('lang', $currentLocale)->with('media')->get(); // Fetch cities with their media
 
         return view('screen.venus', compact('timings', 'cities'));
+    }
+
+    public function show($slug){
+        $city = City::where('slug', $slug)->first();
+
+        if (!$city) {
+            return response()->json(['message' => 'City not found'], 404);
+        }
+       return view('screen.city', compact('city'));
+    }
+
+    public function getCategoriesByCity($slug)
+    {
+        $city = City::where('slug', $slug)->first();
+
+        if (!$city) {
+            return response()->json(['message' => 'City not found'], 404);
+        }
+
+        // Get all categories available in the city
+        $categories = Category::whereHas('courses.timings', function ($query) use ($city) {
+            $query->where('city_id', $city->id);
+        })->get()
+        ->map(function($category) {
+            $category->media_url = $category->getFirstMediaUrl('images');
+            return $category;
+        });
+
+        // Return the categories
+        return response()->json($categories);
+    }
+
+    public function getCoursesByCity($slug)
+    {
+        $city = City::where('slug', $slug)->first();
+
+        if (!$city) {
+            return response()->json(['message' => 'City not found'], 404);
+        }
+
+        // Get all courses available in the city
+        $courses = Course::whereHas('timings', function ($query) use ($city) {
+            $query->where('city_id', $city->id);
+        })->get();
+
+        // Return the courses
+        return response()->json($courses);
     }
 }

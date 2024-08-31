@@ -39,7 +39,7 @@
                 <p>At BSC, we believe in the power of education to unlock human potential. Our team of passionate
                     educators and industry experts have curated a diverse
                     range of courses tailored to empower learners at every stage</p>
-                <a href="">Learn more</a>
+                <a href="{{ route('about') }}">Learn more</a>
             </div>
             <div class="about-right">
                 <div class="part-about">

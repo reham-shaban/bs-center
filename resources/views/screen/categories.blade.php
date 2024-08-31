@@ -8,7 +8,7 @@
 <div class="breadcrumb-bar">
     <div class="about-header container">
       <ul>
-        <li><a class="main-li" href="/index.html">Categories</a></li>
+        <li><a class="main-li" href="{{ route('home.index') }}">Categories</a></li>
         <img src="/assets/icons/arrow.svg" />
       </ul>
     </div>
@@ -34,4 +34,8 @@
           <div class="categories-cards" id="category-data" data-categories='@json($categories)'></div>
       </div>
 </section>
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/categories.js') }}"></script>
 @endsection

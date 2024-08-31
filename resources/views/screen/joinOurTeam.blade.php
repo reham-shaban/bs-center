@@ -8,7 +8,7 @@
 <div class="breadcrumb-bar">
     <div class="about-header container">
       <ul>
-        <li><a href="../pages/Categories.html">Categories</a></li>
+        <li><a href="{{ route('categories.index') }}">Categories</a></li>
         <img src="../assets/icons/arrow.svg" />
         <li>Join Our Team</li>
       </ul>

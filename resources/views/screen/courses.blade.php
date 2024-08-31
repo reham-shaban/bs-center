@@ -8,36 +8,25 @@
 <div class="breadcrumb-bar">
     <div class="about-header container">
       <ul>
-        <li><a href="/pages/categories.html">Categories</a></li>
+        <li><a href="{{ route('categories.index') }}">Categories</a></li>
         <img src="/assets/icons/arrow.svg" alt="" />
-        <li>Healthcare Management</li>
+        <li>{{ $category->title }}</li>
       </ul>
     </div>
 </div>
 <div class="hero-container hero-courses">
     <div class="container">
       <div>
-        <h1>Healthcare Management</h1>
-        <p>Healthcare Management</p>
+        <h1>{{ $category->title }}</h1>
+        <p></p>
       </div>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-        eiusmod tempos
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-        eiusmod tempos
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-        eiusmod tempos
-      </p>
+      {{ $category->description }}
     </div>
 </div>
 
 <div class="courses-section container">
     <div class="courses-section-head">
-      <p>Courses Specializes in Healthcare Management</p>
+      <p>Courses Specializes in {{ $category->title }}</p>
       <div class="search-area">
         <input
           type="text"
@@ -50,3 +39,36 @@
     <div class="courses-items"></div>
 </div>
 @endsection
+
+@section('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const slug = "{{ $category->slug }}";
+        const url = `/categories/${slug}/courses`;
+        console.log("in scripte -------------")
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                console.log("in scripte -------------")
+                console.log("in scripte -------------")
+                console.log(data)
+                const container = document.querySelector(".courses-items");
+                container.innerHTML = ''; // Clear the container before adding new data
+
+                data.courses.forEach(item => {
+                    container.innerHTML += `
+                        <a class="course-item" href='/course/${item.slug}'>
+                        <p>${item.title}</p>
+                        <span href='/course/${item.slug}'>
+                            <img src="/assets/icons/arrow.svg" alt="" />
+                        </span>
+                        </a>
+                    `;
+                });
+            })
+            .catch(error => console.error('Error fetching Couses:', error));
+    });
+</script>
+
+@endsection
+

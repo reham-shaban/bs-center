@@ -1,3 +1,4 @@
+// Select
 document.addEventListener("DOMContentLoaded", function () {
   const customSelectWrappers = document.querySelectorAll(
     ".custom-select-wrapper"
@@ -49,25 +50,25 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch("/api/upcoming-courses") // Replace with your actual API endpoint
       .then((response) => response.json())
       .then((data) => {
-        data.forEach((course) => {
+        data.forEach((item) => {
           const card = document.createElement("a");
-          card.href = `/courses/${course.slug}`; // Dynamic link to the course detail page
+          card.href = `/course/${item.course_slug}`; // Dynamic link to the course detail page
           card.classList.add("card");
 
           card.innerHTML = `
-              <img src="${course.image_url}" alt="${course.title}">
+              <img src="${item.course_image}" alt="${item.image_alt}">
               <div class="card-content">
-                  <div class="card-title">${course.title}</div>
+                  <div class="card-title">${item.course_title}</div>
                   <div class="card-dates">
                     <img src="/assets/icons/calender2.svg" alt="" />
-                    <span>${course.timings[0].date_from} to ${course.timings[0].date_to} ${new Date(course.timings[0].date_from).getFullYear()}</span>
+                    <span>${item.date_from} to ${item.date_to} ${new Date(item.date_from).getFullYear()}</span>
                   </div>
                 <div class="card-location">
                   <img src="/assets/icons/location.svg" alt="" class="location-icon"  />
-                <span>${course.timings[0].city.name}</span></div>
+                <span>${item.city_title}</span></div>
                   <div class="card-buttons">
-                      <a href='/courses/${course.slug}/register' class="btn-primary">Register Now</a>
-                      <a href="/courses/${course.slug}" class="btn-secondary">Learn more</a>
+                      <a href='/register' class="btn-primary">Register Now</a>
+                      <a href="/course/${item.course_slug}" class="btn-secondary">Learn more</a>
                   </div>
               </div>
           `;
@@ -78,112 +79,11 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch((error) => console.error("Error fetching course data:", error));
   });
 
-// Category list
-// document.addEventListener("DOMContentLoaded", function () {
-//   const cardData = [
-//     {
-//       imgSrc: "/assets/imgs/categories/1.png",
-//       title: "Sales and Marketing",
-//       description:
-//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
-//       link: "/pages/courses.html",
-//     },
-//     {
-//       imgSrc: "/assets/imgs/categories/2.png",
-//       title: "Quality and Productivity",
-//       description:
-//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
-//       link: "/pages/courses.html",
-//     },
-//     {
-//       imgSrc: "/assets/imgs/categories/3.png",
-//       title: "Leadership",
-//       description:
-//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
-//       link: "/pages/courses.html",
-//     },
-//     {
-//       imgSrc: "/assets/imgs/categories/5.png",
-//       title: "Oil & Gas and Petroleum",
-//       description:
-//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
-//       link: "/pages/courses.html",
-//     },
-//     {
-//       imgSrc: "/assets/imgs/categories/6.png",
-//       title: "Healthcare Management",
-//       description:
-//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
-//       link: "/pages/courses.html",
-//     },
-//     {
-//       imgSrc: "/assets/imgs/categories/6.png",
-//       title: "Project Management",
-//       description:
-//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
-//       link: "/pages/courses.html",
-//     },
-//     {
-//       imgSrc: "/assets/imgs/categories/1.png",
-//       title: "Sales And Marketing",
-//       description:
-//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
-//       link: "/pages/courses.html",
-//     },
-//     {
-//       imgSrc: "/assets/imgs/categories/2.png",
-//       title: "Quality and Productivity",
-//       description:
-//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
-//       link: "/pages/courses.html",
-//     },
-//     {
-//       imgSrc: "/assets/imgs/categories/3.png",
-//       title: "Leadership",
-//       description:
-//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
-//       link: "/pages/courses.html",
-//     },
-//     {
-//       imgSrc: "/assets/imgs/categories/2.png",
-//       title: "Quality and Productivity",
-//       description:
-//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
-//       link: "/pages/courses.html",
-//     },
-//     {
-//       imgSrc: "/assets/imgs/categories/3.png",
-//       title: "Leadership",
-//       description:
-//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipiscing ",
-//       link: "/pages/courses.html",
-//     },
-//   ];
-
-//   const cardContainer2 = document.querySelector(".wrap");
-//   cardData.forEach((data) => {
-//     const card = document.createElement("div");
-//     card.classList.add("swiper-slide");
-//     card.innerHTML = `
-//             <div class="category-card" onclick=(changePage())>
-//                 <img src="${data.imgSrc}" alt="${data.title}">
-//                 <div class="card-overlay">
-//                     <h3>${data.title}</h3>
-//                     <p>${data.description}</p>
-//                     <span class="line-card"></span>
-//                     <a href='${data.link}' class="category-card-arrow"><img src="./assets/icons/arrow.svg" alt=""></a>
-//                 </div>
-//             </div>
-//         `;
-
-//     cardContainer2?.appendChild(card);
-//   });
-// });
-
-function changePage() {
-  window.location.href = "/pages/courses.html";
+function changePage(slug) {
+  window.location.href = "/courses/"+ slug;
 }
 
+// FAQ
 document.addEventListener("DOMContentLoaded", function () {
   const faqData = [
     {
@@ -249,6 +149,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+// Scroll
 window.addEventListener("scroll", function () {
   const imageContainer = document.getElementsByClassName("whats-app");
   const heroSection = document.querySelector("#hero1");

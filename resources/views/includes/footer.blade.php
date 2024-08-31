@@ -2,7 +2,7 @@
     <div class="container footer-top">
         <div class="footer-col">
             <ul>
-                <li><a href="{{ route('home.index') }}"><img src="/assets/imgs/footer-logo.svg" alt=""></a></li>
+                <li><a href="{{ route('home.index') }}"><img src="{{ asset('assets/imgs/footer-logo.svg') }}" alt=""></a></li>
                 <li>
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
                 </li>
@@ -19,10 +19,10 @@
         </div>
         <div class="footer-col">
             <ul>
-                <li><a href="">Join Our Team</a></li>
-                <li><a href=""> Sitemap</a></li>
-                <li><a href="">Terms & conditions</a></li>
-                <li><a href="">privacy policy </a></li>
+                <li><a href="{{ route('join-team.index') }}">Join Our Team</a></li>
+                <li><a href="{{ route('sitemap') }}"> Sitemap</a></li>
+                <li><a href="{{ route('terms') }}">Terms & conditions</a></li>
+                <li><a href="{{ route('privacy-policy') }}">privacy policy </a></li>
             </ul>
         </div>
         <div class="footer-col">
@@ -40,20 +40,20 @@
     <div class="hr"></div>
     <div class="footer-bottom">
         <div class="container">
-            <span><a href="{{ route('home.index') }}"><img src="/assets/imgs/footer-logo.svg" alt=""></a></span>
-            <p>Copyright © 2023 BSCdubai.com</p>
+            <span><a href="{{ route('home.index') }}"><img src="{{ asset('assets/imgs/footer-logo.svg') }}" alt=""></a></span>
+            <p>Copyright © 2023 BSCdubai.com</p>
             <div class="social-links">
                 <a href="#">
-                    <img src="./assets/icons/facebook.svg" alt="">
+                    <img src="{{ asset('assets/icons/facebook.svg') }}" alt="">
                 </a>
                 <a href="#">
-                    <img src="./assets/icons/instagram.svg" alt="">
+                    <img src="{{ asset('assets/icons/instagram.svg') }}" alt="">
                 </a>
                 <a href="#">
-                    <img src="./assets/icons/twitter.svg" alt="">
+                    <img src="{{ asset('assets/icons/twitter.svg') }}" alt="">
                 </a>
                 <a href="#">
-                    <img src="./assets/icons/linkedin.svg" alt="">
+                    <img src="{{ asset('assets/icons/linkedin.svg') }}" alt="">
                 </a>
             </div>
         </div>

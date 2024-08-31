@@ -44,8 +44,8 @@
     <script src="{{ asset('main.js') }}"></script>
     <script src="{{ asset('navBar.js') }}"></script>
     <script src="{{ asset('js/blog.js') }}"></script>
-    <script src="{{ asset('js/categories.js') }}"></script>
     <script src="{{ asset('js/course.js') }}"></script>
+    <script src="{{ asset('js/courses.js') }}"></script>
     <script src="{{ asset('js/createCardGrid.js') }}"></script>
     <script src="{{ asset('js/dropdown.js') }}"></script>
     <script src="{{ asset('js/phoneNumber.js') }}"></script>

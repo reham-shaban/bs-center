@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     categories.forEach((item) => {
         document.querySelector(".categories-cards").innerHTML += `
-            <a class="category-card" href='/category/${item.slug}'>
+            <a class="category-card" href='/courses/${item.slug}'>
                 <img src="${item.media_url}" alt="${item.image_alt}">
                 <div class="card-overlay">
                     <h3>${item.title}</h3>

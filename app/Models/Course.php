@@ -70,46 +70,6 @@ class Course extends Model implements HasMedia
         return $this->hasMany(Download::class, 'course_id', 'id');
     }
 
-    // Function to get upcoming courses
-    public static function getUpcomingCourses()
-    {
-        $currentLocale = app()->getLocale();
-
-        return self::where('lang', $currentLocale)
-            ->where('hidden', false)
-            ->whereHas('timings', function($query) {
-            $query->where('is_upcoming', true)
-                  ->where('date_from', '>', now())
-                  ->orderBy('date_from', 'asc');
-        })->with(['timings.city', 'media']) // Eager load the media relationship
-        ->get()
-        ->map(function ($course) {
-            // Add the image URL to each course
-            $course->image_url = $course->getFirstMediaUrl('images');
-            return $course;
-        });
-    }
-
-    // Function to get banner courses
-    public static function getBannerCourses()
-    {
-        $currentLocale = app()->getLocale();
-
-        return self::where('lang', $currentLocale)
-            ->where('hidden', false)
-            ->whereHas('timings', function($query) {
-                $query->where('is_banner', true)
-                    ->orderBy('date_from', 'asc');
-            })
-            ->with(['timings.city', 'media']) // Eager load the media relationship
-            ->get()
-            ->map(function ($course) {
-                // Add the image URL to each course
-                $course->image_url = $course->getFirstMediaUrl('images');
-                return $course;
-            });
-    }
-
     public function getRouteKeyName()
     {
         return 'slug';

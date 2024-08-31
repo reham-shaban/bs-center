@@ -8,7 +8,9 @@ use App\Models\City;
 use App\Models\Course;
 use App\Models\Timing;
 use App\Services\CourseService;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
@@ -50,5 +52,39 @@ class CategoryController extends Controller
         $cities = City::where('lang', $currentLocale)->where('hidden', false)->get();
 
         return view('screen.categories', compact('timings', 'categories', 'cities'));
+    }
+
+    public function show($slug)
+    {
+        $category = Category::where('slug', $slug)->first();
+
+            if (!$category) {
+                return response()->json(['message' => 'Category not found'], 404);
+            }
+       return view('screen.courses', compact('category'));
+    }
+
+    public function getCategoryCourses($category)
+    {
+        try{
+            $currentLocale = app()->getLocale(); // Get the current language
+
+            // Find the category by the provided ID or slug
+            $category = Category::where('id', $category)->orWhere('slug', $category)->first();
+            Log::info("message =============");
+            if (!$category) {
+                return response()->json(['message' => 'Category not found'], 404);
+            }
+
+            // Retrieve the courses associated with the category, filtered by lang and hidden fields
+            $courses = $category->courses()
+                ->where('lang', $currentLocale)
+                ->where('hidden', false)
+                ->get(['id', 'title', 'slug', 'description', 'lang', 'hidden']);
+
+            return response()->json(['courses' => $courses], 200);
+        } catch (Exception $e) {
+            return response()->json(['error' => 'Failed to retrieve timings.', 'message' => $e->getMessage()], 500);
+        }
     }
 }

@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     timings.forEach((timing) => {
         const card = document.createElement("a");
-        card.href = `/courses/${timing.course_slug}`; // Dynamic link to the course detail page
+        card.href = `/course/${timing.course_slug}`; // Dynamic link to the course detail page
         card.classList.add("card");
 
         card.innerHTML = `
@@ -40,8 +40,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     <span>${timing.city_title}</span>
                 </div>
                 <div class="card-buttons">
-                    <a href='/courses/${timing.course_slug}/register' class="btn-primary">Register Now</a>
-                    <a href="/courses/${timing.course_slug}" class="btn-secondary">Learn more</a>
+                    <a href='/register' class="btn-primary">Register Now</a>
+                    <a href="/course/${timing.course_slug}" class="btn-secondary">Learn more</a>
                 </div>
             </div>
         `;

@@ -9,6 +9,7 @@ use App\Services\CourseService;
 use App\Models\Course;
 use App\Models\Timing;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -29,11 +30,15 @@ class HomeController extends Controller
 
         // Get the filtered timings with related course and city data
         $timings = $query->with(['course', 'city'])
-                        ->get(['course_id', 'city_id', 'date_from', 'date_to'])
+                        ->get(['id', 'course_id', 'city_id', 'date_from', 'date_to'])
                         ->map(function ($timing) {
                             return [
+                                'id' => $timing->id,
                                 'course_title' => $timing->course->title,
-                                'course_image' => $timing->course->getFirstMediaUrl('images'), // Adjust the media collection name if needed
+                                'course_slug' => $timing->course->slug,
+                                'course_image' => $timing->course->getFirstMediaUrl('images'),
+                                'image_alt' => $timing->course->image_alt,
+                                'h1' => $timing->course->h1,
                                 'date_from' => $timing->date_from,
                                 'date_to' => $timing->date_to,
                                 'city_title' => $timing->city->title,
@@ -46,7 +51,8 @@ class HomeController extends Controller
                       ->get();
 
         // Fetch filtered banner courses
-        $bannerCourses = Course::getBannerCourses();
+        $query_banner = Timing::where('lang', $currentLocale);
+        $bannerCourses = Timing::getBanner($query_banner);
 
         // Fetch filtered categories
         $categories = Category::where('lang', $currentLocale)
@@ -58,20 +64,23 @@ class HomeController extends Controller
 
     public function getUpcomingCourses()
     {
-        $upcomingCourses = Course::getUpcomingCourses();
+        $currentLocale = app()->getLocale(); // Get the current language
+        $query = Timing::where('lang', $currentLocale);
+
+        $upcomingCourses = Timing::getUpcoming($query);
         return response()->json($upcomingCourses);
     }
 
-    public function searchCourses(Request $request)
-    {
-        $currentLocale = app()->getLocale(); // Get the current language
+    // public function searchCourses(Request $request)
+    // {
+    //     $currentLocale = app()->getLocale(); // Get the current language
 
-        // Apply language and hidden filters to the search query
-        $query = $this->courseService->applySearchFilters(
-            $request,
-            Course::query()->where('lang', $currentLocale)->where('hidden', false)
-        );
+    //     // Apply language and hidden filters to the search query
+    //     $query = $this->courseService->applySearchFilters(
+    //         $request,
+    //         Course::query()->where('lang', $currentLocale)->where('hidden', false)
+    //     );
 
-        return response()->json($query->get());
-    }
+    //     return response()->json($query->get());
+    // }
 }

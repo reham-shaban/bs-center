@@ -8,7 +8,7 @@
 <div class="breadcrumb-bar">
     <div class="about-header container">
       <ul>
-        <li><a href="./venus.html">Venus</a></li>
+        <li><a href="{{ route('cities.index') }}">Venus</a></li>
         <img src="../assets/icons/arrow.svg" />
         <li>lorem ipsum dolor sit amet, consectetur</li>
       </ul>
@@ -34,10 +34,10 @@
       <div class="container">
       <div class="venus-cards-container">
           @foreach($cities as $city)
-          <a class="venus-card" href="">
+          <a class="venus-card" href="{{ route('city.show', ['slug' => $city->slug]) }}">
               <img src="{{ $city->getFirstMediaUrl('images') }}" alt="{{ $city->image_alt }}" class="card-img" />
               <div>
-              <span href="">
+              <span href="{{ route('city.show', ['slug' => $city->slug]) }}">
                   <img src="/assets/icons/arrow.svg" alt="" />
               </span>
               <h3>{{ $city->title }}</h3>
