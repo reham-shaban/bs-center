@@ -13,7 +13,7 @@
                             <p>{{ $course->timings->first()->date_from }}</p>
                             <p>{{ $course->timings->first()->city->name }}</p>
                             <div class="buttons-hero">
-                                <a href="{{ route('register') }}" class="register-button">Register Now</a>
+                                <a href="{{ route('register.index') }}" class="register-button">Register Now</a>
                                 <a href="{{ route('course.show', ['slug' => $course->slug]) }}" class="learn-more-button">Learn More</a>
                             </div>
                         </div>

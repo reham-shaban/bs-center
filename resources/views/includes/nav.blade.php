@@ -13,7 +13,7 @@
                 <li><a class="{{ Route::currentRouteName() == 'cities.index' ? 'active-link-nav' : '' }}" href="{{ route('cities.index') }}">Venus</a></li>
                 <li><a class="{{ Route::currentRouteName() == 'blogs.index' ? 'active-link-nav' : '' }}" href="{{ route('blogs.index') }}">Blogs</a></li>
                 <li><a class="{{ Route::currentRouteName() == 'about' ? 'active-link-nav' : '' }}" href="{{ route('about') }}">About us</a></li>
-                <li><a class="{{ Route::currentRouteName() == 'contact.create' ? 'active-link-nav' : '' }}" href="{{ route('contact.create') }}">Contact</a></li>
+                <li><a class="{{ Route::currentRouteName() == 'contact.index' ? 'active-link-nav' : '' }}" href="{{ route('contact.index') }}">Contact</a></li>
             </ul>
         </div>
         <div class="search-container">
@@ -45,7 +45,7 @@
         <li><a class="{{ Route::currentRouteName() == 'cities.index' ? 'active-link-nav' : '' }}" href="{{ route('cities.index') }}">Venus</a></li>
         <li><a class="{{ Route::currentRouteName() == 'blogs.index' ? 'active-link-nav' : '' }}" href="{{ route('blogs.index') }}">Blogs</a></li>
         <li><a class="{{ Route::currentRouteName() == 'about' ? 'active-link-nav' : '' }}" href="{{ route('about') }}">About us</a></li>
-        <li><a class="{{ Route::currentRouteName() == 'contact.create' ? 'active-link-nav' : '' }}" href="{{ route('contact.create') }}">Contact</a></li>
+        <li><a class="{{ Route::currentRouteName() == 'contact.index' ? 'active-link-nav' : '' }}" href="{{ route('contact.index') }}">Contact</a></li>
     </ul>
     <div class="search-phone">
         <div>
