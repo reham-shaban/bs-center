@@ -156,7 +156,11 @@
     <div class="container">
       <div class="course-card-title">
         <h2>Related Courses</h2>
+        @if($course->category && $course->category->slug)
         <a href="{{ route('courses.index', ['slug' => $course->category->slug]) }}">see all</a>
+        @else
+        <a href="#">see all</a>
+        @endif
       </div>
       <div class="courses-container"></div>
     </div>
