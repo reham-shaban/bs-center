@@ -156,8 +156,6 @@
     <div class="container">
       <div class="course-card-title">
         <h2>Related Courses</h2>
-        <h3>{{ $course->slug }}</h3>
-        <h3>{{ $course->category->slug }}</h3>
         <a href="{{ route('courses.index', ['slug' => $course->category->slug]) }}">see all</a>
       </div>
       <div class="courses-container"></div>
