@@ -10,7 +10,13 @@
       <ul>
         <li><a href="{{ route('categories.index') }}">Categories</a></li>
         <img src="/assets/icons/arrow.svg" alt="" />
-        <li><a href="{{ route('courses.index', ['slug' => $course->category->slug]) }}">Courses</a></li>
+        <li>
+            @if($course->category && $course->category->slug)
+                <a href="{{ route('courses.index', ['slug' => $course->category->slug]) }}">Courses</a>
+            @else
+            <a href="#">Courses</a>
+            @endif
+        </li>
         <img src="/assets/icons/arrow.svg" alt="" />
         <li>{{ $course->title }}</li>
       </ul>
