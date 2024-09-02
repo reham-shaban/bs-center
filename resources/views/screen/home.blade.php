@@ -136,9 +136,9 @@
     <div class="swiper mySwiper-about">
         <div class="swiper-wrapper wrap2">
             <div class="swiper-slide"><img src="{{ asset('assets/imgs/logos/logo1.png') }}" alt=""></div>
-            <div class="swiper-slide"><img src="{{ asset('assets/imgs/logos/logo1.png') }}" alt=""></div>
-            <div class="swiper-slide"><img src="{{ asset('assets/imgs/logos/logo1.png') }}" alt=""></div>
-            <div class="swiper-slide"><img src="{{ asset('assets/imgs/logos/logo1.png') }}" alt=""></div>
+            <div class="swiper-slide"><img src="{{ asset('assets/imgs/logos/logo2.png') }}" alt=""></div>
+            <div class="swiper-slide"><img src="{{ asset('assets/imgs/logos/logo3.png') }}" alt=""></div>
+            <div class="swiper-slide"><img src="{{ asset('assets/imgs/logos/logo4.png') }}" alt=""></div>
             <div class="swiper-slide"><img src="{{ asset('assets/imgs/logos/logo1.png') }}" alt=""></div>
         </div>
     </div>
