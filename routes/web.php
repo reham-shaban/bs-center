@@ -9,7 +9,12 @@ use App\Http\Controllers\Website\ContactUsController;
 use App\Http\Controllers\Website\CourseController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-Route::group(['prefix' => LaravelLocalization::setLocale()], function()
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => ['web', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+    ],
+function()
 {
     // Navigation bar Screens
     Route::get('/', [HomeController::class, 'index'])->name('home.index');

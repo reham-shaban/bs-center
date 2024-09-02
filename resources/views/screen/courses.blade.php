@@ -16,11 +16,8 @@
 </div>
 <div class="hero-container hero-courses">
     <div class="container">
-      <div>
         <h1>{{ $category->title }}</h1>
-        <p></p>
-      </div>
-      {{ $category->description }}
+        {{ $category->description }}
     </div>
 </div>
 

@@ -24,15 +24,17 @@
             <div class="search flex-between">
                 <span class="line-search"></span>
                     @if (LaravelLocalization::getCurrentLocale() == 'en')
-                        <a style="color:#616161;" href="{{ LaravelLocalization::getLocalizedURL('ar', url()->current()) }}"
-                            role="button">
+                        <a class="btn" href="{{ LaravelLocalization::getLocalizedURL('ar', route('home.index')) }}"
+                        role="button"
+                        style="color: #616161;">
                             <h3 style="flex-shrink: 0;">
                             {{ __('الدورات بالعربية ') }}
                             </h3>
                         </a>
                     @elseif (LaravelLocalization::getCurrentLocale() == 'ar')
-                        <a style="color:#616161;" href="{{ LaravelLocalization::getLocalizedURL('en', url()->current()) }}"
-                            role="button">
+                        <a class="btn" href="{{ LaravelLocalization::getLocalizedURL('en', route('home.index')) }}"
+                        role="button"
+                        style="color: #616161;">
                             <h3 style="flex-shrink: 0;">
                             {{ __('English Courses') }}
                             </h3>

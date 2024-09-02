@@ -10,7 +10,6 @@
       <ul>
         <li><a href="{{ route('cities.index') }}">Venus</a></li>
         <img src="{{ asset('assets/icons/arrow.svg') }}" />
-        <li>lorem ipsum dolor sit amet, consectetur</li>
       </ul>
     </div>
 </div>
@@ -20,7 +19,6 @@
     <div class="container">
       <div>
         <h1>Explore Our Venue</h1>
-        <p>lorem ipsum dolor sit amet, consectetur</p>
       </div>
       @include('includes.search-form', ['searchRoute' => route('cities.index')])
     </div>

@@ -24,7 +24,8 @@
             const card = document.createElement("div");
             card.classList.add("swiper-slide");
             card.innerHTML = `
-                <div class="category-card" onclick=(changePage(${data.slug}))>
+            <a href='/courses/${data.slug}' style="color:white">
+                <div class="category-card">
                     <img src="${data.image_url}" alt="${data.title}">
                     <div class="card-overlay">
                         <h3>${data.title}</h3>
@@ -33,6 +34,7 @@
                         <a href='/courses/${data.slug}' class="category-card-arrow"><img src="{{ asset('assets/icons/arrow.svg') }}" alt=""></a>
                     </div>
                 </div>
+            </a>
             `;
 
             cardContainer2?.appendChild(card);
