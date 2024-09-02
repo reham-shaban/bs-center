@@ -21,6 +21,7 @@ class City extends Model implements HasMedia
         'slug',
         'h1',
         'description',
+        'image_title',
         'image_alt',
         'hidden',
         'meta_keywords',

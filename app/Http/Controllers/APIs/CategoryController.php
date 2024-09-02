@@ -24,7 +24,7 @@ class CategoryController extends Controller
                 $query->where('lang', $lang);
             }
 
-            $categories = $query->select('id', 'title', 'slug', 'h1', 'hidden')->get();
+            $categories = $query->get();
 
             // Add image URLs to each category
             $categories->transform(function ($category) {

@@ -21,6 +21,7 @@ class CreateCitiesTable extends Migration
             $table->string('h1', 255)->nullable();
             $table->text('description')->nullable();
             $table->boolean('hidden')->default(false);
+            $table->string('image_title', 150)->nullable();
             $table->string('image_alt', 255)->nullable();
             //
             $table->string('meta_title', 255)->nullable();

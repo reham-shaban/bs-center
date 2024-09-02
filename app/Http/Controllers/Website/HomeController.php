@@ -23,7 +23,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $currentLocale = app()->getLocale(); // Get the current language
-
+        Log::info("current Local: ", ["local" => $currentLocale]);
         // Start with the Timing model and apply filters
         $query = Timing::where('lang', $currentLocale)->where('hidden', false);
         $query = $this->courseService->applySearchFilters($request, $query);

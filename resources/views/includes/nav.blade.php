@@ -23,8 +23,26 @@
             </div>
             <div class="search flex-between">
                 <span class="line-search"></span>
-                <h3 style="flex-shrink: 0;">الدورات بالعربية</h3>
+                    @if (LaravelLocalization::getCurrentLocale() == 'en')
+                        <a style="color:#616161;" href="{{ LaravelLocalization::getLocalizedURL('ar', url()->current()) }}"
+                            role="button">
+                            <h3 style="flex-shrink: 0;">
+                            {{ __('الدورات بالعربية ') }}
+                            </h3>
+                        </a>
+                    @elseif (LaravelLocalization::getCurrentLocale() == 'ar')
+                        <a style="color:#616161;" href="{{ LaravelLocalization::getLocalizedURL('en', url()->current()) }}"
+                            role="button">
+                            <h3 style="flex-shrink: 0;">
+                            {{ __('English Courses') }}
+                            </h3>
+                        </a>
+                    @endif
             </div>
+            {{-- <div class="search flex-between">
+                <span class="line-search"></span>
+                <h3 style="flex-shrink: 0;">الدورات بالعربية</h3>
+            </div> --}}
         </div>
     </div>
 </nav>

@@ -36,7 +36,6 @@ class CourseController extends Controller
             }
 
             $courses = $query->with('category:id,title')
-                ->select('id', 'title', 'slug', 'h1', 'category_id', 'hidden')
                 ->paginate($perPage);
 
             // Add image URLs to each course
@@ -138,7 +137,7 @@ class CourseController extends Controller
                 // Get the updated URL of the single image
                 $imageUrl = $course->getFirstMediaUrl('images');
             }
-            
+
             // Include the image URL in the response
             unset($course->media);
             $response = $course->toArray();

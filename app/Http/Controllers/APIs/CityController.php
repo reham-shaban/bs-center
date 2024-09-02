@@ -25,7 +25,7 @@ class CityController extends Controller
                 $query->where('lang', $lang);
             }
 
-            $cities = $query->select('id', 'title', 'slug', 'h1', 'hidden')->get();
+            $cities = $query->get();
 
             // Add image URLs to each city
             $cities->transform(function ($city) {
@@ -72,6 +72,7 @@ class CityController extends Controller
             return response()->json(['error' => 'Failed to create City', 'message' => $e->getMessage()], 500);
         }
     }
+
 
     // Show city
     public function show($slug)

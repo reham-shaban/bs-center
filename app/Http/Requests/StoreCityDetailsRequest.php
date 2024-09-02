@@ -20,6 +20,7 @@ class StoreCityDetailsRequest extends FormRequest
             'h1' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'hidden' => 'boolean',
+            'image_title' => 'nullable|string|max:150',
             'image_alt' => 'nullable|string|max:255',
         ];
     }
