@@ -44,28 +44,28 @@
             <div class="about-right">
                 <div class="part-about">
                     <div>
-                        <img src="./assets/imgs/about/icon1.svg" alt="">
+                        <img src="{{ asset('assets/imgs/about/icon1.svg') }}" alt="">
                     </div>
                     <p>Certification
                         of completion</p>
                 </div>
                 <div class="part-about">
                     <div>
-                        <img src="./assets/imgs/about/icon2.svg" alt="">
+                        <img src="{{ asset('assets/imgs/about/icon2.svg') }}" alt="">
                     </div>
                     <p>Money Back
                         Guarantee</p>
                 </div>
                 <div class="part-about">
                     <div>
-                        <img src="./assets/imgs/about/icon3.svg" alt="">
+                        <img src="{{ asset('assets/imgs/about/icon3.svg') }}" alt="">
                     </div>
                     <p>32 Moduls
                         Access on</p>
                 </div>
                 <div class="part-about">
                     <div>
-                        <img src="./assets/imgs/about/icon4.svg" alt="">
+                        <img src="{{ asset('assets/imgs/about/icon4.svg') }}" alt="">
                     </div>
                     <p>Access on all devices</p>
                 </div>
@@ -92,7 +92,7 @@
         <div class="service-cards">
             <div class="service-card">
                 <div class="service-svg">
-                    <img src="./assets/icons/serv-icon1.svg" alt="">
+                    <img src="{{ asset('assets/icons/serv-icon1.svg') }}" alt="">
                 </div>
                 <h5>Public</h5>
                 <p><span>Lorem ipsum dolor sit amet, </span>consectetur adipiscing elit, sed do eiusmod tempor Lorem
@@ -100,7 +100,7 @@
             </div>
             <div class="service-card">
                 <div class="service-svg">
-                    <img src="./assets/icons/serv-icon2.svg" alt="">
+                    <img src="{{ asset('assets/icons/serv-icon2.svg') }}" alt="">
                 </div>
                 <h5>Online</h5>
                 <p><span>Lorem ipsum dolor sit amet, </span>consectetur adipiscing elit, sed do eiusmod tempor Lorem
@@ -108,7 +108,7 @@
             </div>
             <div class="service-card">
                 <div class="service-svg">
-                    <img src="./assets/icons/serv-icon3.svg" alt="">
+                    <img src="{{ asset('assets/icons/serv-icon3.svg') }}" alt="">
                 </div>
                 <h5>In-house</h5>
                 <p><span>Lorem ipsum dolor sit amet, </span>consectetur adipiscing elit, sed do eiusmod tempor Lorem
@@ -135,11 +135,11 @@
     </div>
     <div class="swiper mySwiper-about">
         <div class="swiper-wrapper wrap2">
-            <div class="swiper-slide"><img src="./assets/imgs/logos/logo1.png" alt=""></div>
-            <div class="swiper-slide"><img src="./assets/imgs/logos/logo2.png" alt=""></div>
-            <div class="swiper-slide"><img src="./assets/imgs/logos/logo3.png" alt=""></div>
-            <div class="swiper-slide"><img src="./assets/imgs/logos/logo4.png" alt=""></div>
-            <div class="swiper-slide"><img src="./assets/imgs/logos/logo1.png" alt=""></div>
+            <div class="swiper-slide"><img src="{{ asset('assets/imgs/logos/logo1.png') }}" alt=""></div>
+            <div class="swiper-slide"><img src="{{ asset('assets/imgs/logos/logo1.png') }}" alt=""></div>
+            <div class="swiper-slide"><img src="{{ asset('assets/imgs/logos/logo1.png') }}" alt=""></div>
+            <div class="swiper-slide"><img src="{{ asset('assets/imgs/logos/logo1.png') }}" alt=""></div>
+            <div class="swiper-slide"><img src="{{ asset('assets/imgs/logos/logo1.png') }}" alt=""></div>
         </div>
     </div>
 </section>

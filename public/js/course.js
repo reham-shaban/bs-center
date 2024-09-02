@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
           tableBtn.classList.add("table-btn");
           tableBtn.addEventListener("click", showPopup);
           const registerImg = document.createElement("img");
-          registerImg.src = "/assets/icons/download.svg";
+          registerImg.src = "{{ asset('assets/icons/download.svg') }}";
           registerImg.className = "downloadIcon";
           tableBtn.appendChild(registerImg);
           row.insertCell().appendChild(tableBtn);
@@ -119,11 +119,11 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="card-content">
                 <div class="card-title">${data.title}</div>
                 <div class="card-dates">
-                  <img src="/assets/icons/calender2.svg" alt="" />
+                  <img src="{{ asset('assets/icons/calender2.svg') }}" alt="" />
                   <span>${data.startDate} To ${data.endDate}</span>
                 </div>
                 <div class="card-location">
-                  <img src="/assets/icons/location.svg" alt="" class="location-icon"  />
+                  <img src="{{ asset('assets/icons/location.svg') }}" alt="" class="location-icon"  />
                   <span>${data.location}</span></div>
                 </div>
                 <div class="card-buttons">

@@ -9,7 +9,7 @@
     <div class="about-header container">
       <ul>
         <li><a href="{{ route('cities.index') }}">Venus</a></li>
-        <img src="../assets/icons/arrow.svg" />
+        <img src="{{ asset('assets/icons/arrow.svg') }}" />
         <li>lorem ipsum dolor sit amet, consectetur</li>
       </ul>
     </div>
@@ -38,7 +38,7 @@
               <img src="{{ $city->getFirstMediaUrl('images') }}" alt="{{ $city->image_alt }}" class="card-img" />
               <div>
               <span href="{{ route('city.show', ['slug' => $city->slug]) }}">
-                  <img src="/assets/icons/arrow.svg" alt="" />
+                  <img src="{{ asset('assets/icons/arrow.svg') }}" alt="" />
               </span>
               <h3>{{ $city->title }}</h3>
               </div>

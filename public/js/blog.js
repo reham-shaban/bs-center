@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <div class="card-blog-footer">
     <button><a href='${item.link}'>Read more</a></button>
     <div class="card-blog-views">
-      <img  src="../assets/icons/view.svg" alt="">
+      <img  src="{{ asset('assets/icons/view.svg') }}" alt="">
      <span>${item.viewNum}</span>
      </div>
     </div>

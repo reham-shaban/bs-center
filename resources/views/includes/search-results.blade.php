@@ -32,11 +32,11 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="card-content">
                 <div class="card-title">${timing.course_title}</div>
                 <div class="card-dates">
-                    <img src="/assets/icons/calendar2.svg" alt="" />
+                    <img src="{{ asset('assets/icons/calendar2.svg') }}" alt="" />
                     <span>${timing.date_from} to ${timing.date_to} ${new Date(timing.date_from).getFullYear()}</span>
                 </div>
                 <div class="card-location">
-                    <img src="/assets/icons/location.svg" alt="" class="location-icon" />
+                    <img src="{{ asset('assets/icons/location.svg') }}" alt="" class="location-icon" />
                     <span>${timing.city_title}</span>
                 </div>
                 <div class="card-buttons">

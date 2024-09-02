@@ -9,7 +9,7 @@
     <div class="about-header container">
       <ul>
         <li><a href="{{ route('categories.index') }}">Categories</a></li>
-        <img src="/assets/icons/arrow.svg" alt="" />
+        <img src="{{ asset('assets/icons/arrow.svg') }}" alt="" />
         <li>
             @if($course->category && $course->category->slug)
                 <a href="{{ route('courses.index', ['slug' => $course->category->slug]) }}">Courses</a>
@@ -17,14 +17,14 @@
             <a href="#">Courses</a>
             @endif
         </li>
-        <img src="/assets/icons/arrow.svg" alt="" />
+        <img src="{{ asset('assets/icons/arrow.svg') }}" alt="" />
         <li>{{ $course->title }}</li>
       </ul>
     </div>
 </div>
 
 <section class="hero-single-course">
-    <img src="/assets/imgs/bg-blog.webp" alt="" />
+    <img src="{{ asset('assets/imgs/bg-blog.webp') }}" alt="" />
     <div class="course-hero-title">
       <div>
         <h1>{{ $course->h1 }}</h1>
@@ -203,11 +203,11 @@
                             <img src="${item.image_url}" alt="${item.image_alt}">
                             <div class="card-title">${item.course_title}</div>
                             <div class="card-dates">
-                                <img src="/assets/icons/calender2.svg" alt="" />
+                                <img src="{{ asset('assets/icons/calender2.svg') }}" alt="" />
                                 <span>${item.date_from} to ${item.date_to}</span>
                             </div>
                             <div class="card-location">
-                                <img src="/assets/icons/location.svg" alt="" class="location-icon" />
+                                <img src="{{ asset('assets/icons/location.svg') }}" alt="" class="location-icon" />
                                 <span>${item.city_title}</span>
                             </div>
                             <div class="card-buttons">

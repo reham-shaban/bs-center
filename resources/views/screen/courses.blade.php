@@ -9,7 +9,7 @@
     <div class="about-header container">
       <ul>
         <li><a href="{{ route('categories.index') }}">Categories</a></li>
-        <img src="/assets/icons/arrow.svg" alt="" />
+        <img src="{{ asset('assets/icons/arrow.svg') }}" alt="" />
         <li>{{ $category->title }}</li>
       </ul>
     </div>
@@ -33,7 +33,7 @@
           class="search-area-input"
           placeholder="Search for courses"
         />
-        <img src="/assets/icons/search.svg" />
+        <img src="{{ asset('assets/icons/search.svg') }}" />
       </div>
     </div>
     <div class="courses-items"></div>
@@ -60,7 +60,7 @@
                         <a class="course-item" href='/course/${item.slug}'>
                         <p>${item.title}</p>
                         <span href='/course/${item.slug}'>
-                            <img src="/assets/icons/arrow.svg" alt="" />
+                            <img src="{{ asset('assets/icons/arrow.svg') }}" alt="" />
                         </span>
                         </a>
                     `;

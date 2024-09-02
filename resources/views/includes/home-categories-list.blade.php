@@ -30,7 +30,7 @@
                         <h3>${data.title}</h3>
                         <p>${data.description}</p>
                         <span class="line-card"></span>
-                        <a href='/courses/${data.slug}' class="category-card-arrow"><img src="/assets/icons/arrow.svg" alt=""></a>
+                        <a href='/courses/${data.slug}' class="category-card-arrow"><img src="{{ asset('assets/icons/arrow.svg') }}" alt=""></a>
                     </div>
                 </div>
             `;

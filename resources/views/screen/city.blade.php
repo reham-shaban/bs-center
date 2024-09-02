@@ -11,13 +11,13 @@
         <li>
           <a href="{{ route('cities.index') }}">Venus</a>
         </li>
-        <img src="/assets/icons/arrow.svg" alt="" />
+        <img src="{{ asset('assets/icons/arrow.svg') }}" alt="" />
         <li>Training Courses in {{ $city->title }}</li>
       </ul>
     </div>
 </div>
 <section class="hero-single-course">
-    <img src="/assets/imgs/bg-city.webp" alt="" />
+    <img src="{{ asset('assets/imgs/bg-city.webp') }}" alt="" />
     <div class="course-hero-title">
       <div>
         <h1>Training courses in {{ $city->title }}</h1>
@@ -49,7 +49,7 @@
             class="search-area-input"
             placeholder="Search for courses"
           />
-          <img src="/assets/icons/search.svg" />
+          <img src="{{ asset('assets/icons/search.svg') }}" />
         </div>
       </div>
       <div class="courses-items"></div>
@@ -79,7 +79,7 @@
                                 <h3>${item.title}</h3>
                                 <p>${item.description}</p>
                                 <span class="line-card"></span>
-                                <span class="category-card-arrow"><img src="/assets/icons/arrow.svg" alt=""></span>
+                                <span class="category-card-arrow"><img src="{{ asset('assets/icons/arrow.svg') }}" alt=""></span>
                             </div>
                         </a>
                         `;
@@ -105,7 +105,7 @@
                             <a class="course-item" href='/course/${item.slug}'>
                             <p>${item.title}</p>
                             <span href='/course/${item.slug}'>
-                                <img src="/assets/icons/arrow.svg" alt="" />
+                                <img src="{{ asset('assets/icons/arrow.svg') }}" alt="" />
                             </span>
                             </a>
                         `;

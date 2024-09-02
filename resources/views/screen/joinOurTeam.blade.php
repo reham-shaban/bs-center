@@ -9,7 +9,7 @@
     <div class="about-header container">
       <ul>
         <li><a href="{{ route('categories.index') }}">Categories</a></li>
-        <img src="../assets/icons/arrow.svg" />
+        <img src="{{ asset('assets/icons/arrow.svg') }}" />
         <li>Join Our Team</li>
       </ul>
     </div>
@@ -82,7 +82,7 @@
               name="cv"
             />
             <div class="upload-file">
-              <img src="/assets/icons/arrow-down-white.svg" alt="" />
+              <img src="{{ asset('assets/icons/arrow-down-white.svg') }}" alt="" />
             </div>
           </div>
           <div class="input-container" style="position: relative">
@@ -95,7 +95,7 @@
               readonly
             />
             <div class="drop-down">
-              <img src="/assets/icons/arrow-down.svg" alt="" />
+              <img src="{{ asset('assets/icons/arrow-down.svg') }}" alt="" />
             </div>
             <ul class="drop-list">
               <li>speciality 1</li>

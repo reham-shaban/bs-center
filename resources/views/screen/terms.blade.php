@@ -9,7 +9,7 @@
     <div class="about-header container">
       <ul>
         <li><a href="/index.html">Home</a></li>
-        <img src="../assets/icons/arrow.svg" />
+        <img src="{{ asset('assets/icons/arrow.svg') }}" />
         <li>Terms & conditions</li>
       </ul>
     </div>

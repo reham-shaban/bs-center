@@ -9,13 +9,13 @@
     <div class="about-header container">
       <ul>
         <li><a href="./categories.html">Categories</a></li>
-        <img src="/assets/icons/arrow.svg" />
+        <img src="{{ asset('assets/icons/arrow.svg') }}" />
         <li>courses</li>
-        <img src="/assets/icons/arrow.svg" />
+        <img src="{{ asset('assets/icons/arrow.svg') }}" />
         <li>Healthcare Management</li>
-        <img src="/assets/icons/arrow.svg" />
+        <img src="{{ asset('assets/icons/arrow.svg') }}" />
         <li>Risk Management for Medical Devices</li>
-        <img src="/assets/icons/arrow.svg" />
+        <img src="{{ asset('assets/icons/arrow.svg') }}" />
         <li>Enquire</li>
       </ul>
     </div>
@@ -88,7 +88,7 @@
               readonly
             />
             <!-- <div class="drop-down">
-              <img src="/assets/icons/arrow-down.svg" alt="" />
+              <img src="{{ asset('assets/icons/arrow-down.svg') }}" alt="" />
             </div>
             <ul class="drop-list">
               <li>item 1</li>

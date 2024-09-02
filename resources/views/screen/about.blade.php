@@ -9,7 +9,7 @@
     <div class="about-header container">
       <ul>
         <li><a href="/index.html">Home</a></li>
-        <img src="../assets/icons/arrow.svg" />
+        <img src="{{ asset('assets/icons/arrow.svg') }}" />
         <li>about us</li>
       </ul>
     </div>
@@ -62,7 +62,7 @@
           <div class="about-why">
             <div>
               <div class="about-why-img">
-                <img src="/assets/imgs/about/icon1.svg" />
+                <img src="{{ asset('assets/imgs/about/icon1.svg') }}" />
               </div>
               <p>
                 Certification<br />
@@ -71,7 +71,7 @@
             </div>
             <div>
               <div class="about-why-img">
-                <img src="/assets/imgs/about/icon2.svg" />
+                <img src="{{ asset('assets/imgs/about/icon2.svg') }}" />
               </div>
               <p>
                 Money Back<br />
@@ -80,7 +80,7 @@
             </div>
             <div>
               <div class="about-why-img">
-                <img src="/assets/imgs/about/icon3.svg" />
+                <img src="{{ asset('assets/imgs/about/icon3.svg') }}" />
               </div>
               <p>
                 32 Moduls<br />
@@ -89,7 +89,7 @@
             </div>
             <div>
               <div class="about-why-img">
-                <img src="/assets/imgs/about/icon4.svg" />
+                <img src="{{ asset('assets/imgs/about/icon4.svg') }}" />
               </div>
               <p>
                 Access on<br />
@@ -109,19 +109,19 @@
 <div class="swiper mySwiper-about">
   <div class="swiper-wrapper wrap2">
     <div class="swiper-slide">
-      <img src="/assets/imgs/logos/logo1.png" alt="" />
+      <img src="{{ asset('assets/imgs/logos/logo1.png') }}" alt="" />
     </div>
     <div class="swiper-slide">
-      <img src="/assets/imgs/logos/logo2.png" alt="" />
+      <img src="{{ asset('assets/imgs/logos/logo2.png') }}" alt="" />
     </div>
     <div class="swiper-slide">
-      <img src="/assets/imgs/logos/logo3.png" alt="" />
+      <img src="{{ asset('assets/imgs/logos/logo3.png') }}" alt="" />
     </div>
     <div class="swiper-slide">
-      <img src="/assets/imgs/logos/logo4.png" alt="" />
+      <img src="{{ asset('assets/imgs/logos/logo4.png') }}" alt="" />
     </div>
     <div class="swiper-slide">
-      <img src="/assets/imgs/logos/logo1.png" alt="" />
+      <img src="{{ asset('assets/imgs/logos/logo1.png') }}" alt="" />
     </div>
   </div>
 </div>

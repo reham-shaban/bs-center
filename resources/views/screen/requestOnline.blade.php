@@ -9,13 +9,13 @@
     <div class="about-header container">
       <ul>
         <li><a href="./categories.html">Categories</a></li>
-        <img src="/assets/icons/arrow.svg" />
+        <img src="{{ asset('assets/icons/arrow.svg') }}" />
         <li>courses</li>
-        <img src="/assets/icons/arrow.svg" />
+        <img src="{{ asset('assets/icons/arrow.svg') }}" />
         <li>Healthcare Management</li>
-        <img src="/assets/icons/arrow.svg" />
+        <img src="{{ asset('assets/icons/arrow.svg') }}" />
         <li>Risk Management for Medical Devices</li>
-        <img src="/assets/icons/arrow.svg" />
+        <img src="{{ asset('assets/icons/arrow.svg') }}" />
         <li>Request Online</li>
       </ul>
     </div>

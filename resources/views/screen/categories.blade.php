@@ -9,7 +9,7 @@
     <div class="about-header container">
       <ul>
         <li><a class="main-li" href="{{ route('home.index') }}">Categories</a></li>
-        <img src="/assets/icons/arrow.svg" />
+        <img src="{{ asset('assets/icons/arrow.svg') }}" />
       </ul>
     </div>
 </div>

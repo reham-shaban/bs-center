@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <h3>${item.title}</h3>
                     <p>${item.description}</p>
                     <span class="line-card"></span>
-                    <span class="category-card-arrow"><img src="/assets/icons/arrow.svg" alt=""></span>
+                    <span class="category-card-arrow"><img src="{{ asset('assets/icons/arrow.svg') }}" alt=""></span>
                 </div>
             </a>
         `;

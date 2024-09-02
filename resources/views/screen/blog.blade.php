@@ -9,14 +9,14 @@
     <div class="about-header container">
       <ul>
         <li><a href="./blogs.html">Blogs</a></li>
-        <img src="../assets/icons/arrow.svg" />
+        <img src="{{ asset('assets/icons/arrow.svg') }}" />
         <li>lorem ipsum dolor sit amet, consectetur</li>
       </ul>
     </div>
 </div>
 
 <section class="hero-single-blog">
-    <img src="/assets/imgs/bg-blog.webp" alt="" />
+    <img src="{{ asset('assets/imgs/bg-blog.webp') }}" alt="" />
 </section>
 
 <section class="blog-details">
@@ -27,7 +27,7 @@
           eiusmod tempos Lorem ipsum dolor sitamet?
         </h3>
         <div class="date">
-          <img src="/assets/icons/calender.svg" alt="" />
+          <img src="{{ asset('assets/icons/calender.svg') }}" alt="" />
           <span>2024-11-04</span>
         </div>
       </div>
