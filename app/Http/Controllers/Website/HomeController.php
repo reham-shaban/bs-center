@@ -59,6 +59,17 @@ class HomeController extends Controller
                               ->where('hidden', false)
                               ->get();
 
+                              // Add image URLs to each category
+        $categories->transform(function ($category) {
+            // Check if the category has associated media
+            if($category && $category->getFirstMediaUrl('images')){
+                $category->image_url = $category->getFirstMediaUrl('images');
+            } else {
+                $category->image_url = null;
+            }
+            return $category;
+        });
+
         return view('screen.home', compact('timings', 'bannerCourses', 'cities', 'categories'));
     }
 

@@ -60,11 +60,11 @@ document.addEventListener("DOMContentLoaded", function () {
               <div class="card-content">
                   <div class="card-title">${item.course_title}</div>
                   <div class="card-dates">
-                    <img src="{{ asset('assets/icons/calender2.svg') }}" alt="" />
+                    <img src="./assets/icons/calender2.svg" alt="" />
                     <span>${item.date_from} to ${item.date_to} ${new Date(item.date_from).getFullYear()}</span>
                   </div>
                 <div class="card-location">
-                  <img src="{{ asset('assets/icons/location.svg') }}" alt="" class="location-icon"  />
+                  <img src="./assets/icons/location.svg" alt="" class="location-icon"  />
                 <span>${item.city_title}</span></div>
                   <div class="card-buttons">
                       <a href='/register' class="btn-primary">Register Now</a>

@@ -38,7 +38,7 @@
 //         <a class="course-item" href=${item.link}>
 //           <p>${item.title}</p>
 //           <span href=${item.link}>
-//             <img src="{{ asset('assets/icons/arrow.svg') }}" alt="" />
+//             <img src="../assets/icons/arrow.svg" alt="" />
 //           </span>
 //         </a>
 //   `;

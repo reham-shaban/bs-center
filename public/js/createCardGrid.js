@@ -80,7 +80,7 @@ function createCategoriesGrid() {
                     <div class="card-description2">${data.description}</div>
                     <span class="line-card"></span>
                     <span class="button-search-forth-section card-button2">
-                    <img class="card-button-img" src="{{ asset('assets/imgs/Vector 9.svg') }}" alt="">
+                    <img class="card-button-img" src="../assets/imgs/Vector 9.svg" alt="">
                     <span>
                 </div>
                 </a>
