@@ -27,7 +27,7 @@ class CourseFactory extends Factory
         $slug = Str::slug($title);
 
         return [
-            'category_id' => $this->faker->optional()->randomElement($categoryIds),
+            'category_id' => $this->faker->randomElement($categoryIds),
             'title' => $title,
             'slug' => $slug,
             'h1' => $this->faker->sentence,

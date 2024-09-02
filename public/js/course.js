@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
           tableBtn.classList.add("table-btn");
           tableBtn.addEventListener("click", showPopup);
           const registerImg = document.createElement("img");
-          registerImg.src = "../assets/icons/download.svg";
+          registerImg.src = "/assets/icons/download.svg";
           registerImg.className = "downloadIcon";
           tableBtn.appendChild(registerImg);
           row.insertCell().appendChild(tableBtn);

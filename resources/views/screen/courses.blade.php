@@ -57,7 +57,7 @@
                         <a class="course-item" href='/course/${item.slug}'>
                         <p>${item.title}</p>
                         <span href='/course/${item.slug}'>
-                            <img src="{{ asset('assets/icons/arrow.svg') }}" alt="" />
+                            <img src="/assets/icons/arrow.svg" alt="" />
                         </span>
                         </a>
                     `;

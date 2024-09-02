@@ -27,7 +27,7 @@ function()
 
     // Other Screens
     Route::get('/blog/{slug}', function () {return view('screen.blog');})->name('blog.show');
-    Route::get('/city/{slug}', [CityController::class, 'show'])->name('city.show');
+    Route::get('/{slug}', [CityController::class, 'show'])->name('city.show');
     Route::get('/course/{slug}', [CourseController::class, 'show'])->name('course.show');
     Route::get('/courses/{slug}', [CategoryController::class, 'show'])->name('courses.index');
     Route::get('/privacy-policy', function () {return view('screen.privacyPolicy');})->name('privacy-policy');

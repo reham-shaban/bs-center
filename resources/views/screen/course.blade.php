@@ -203,11 +203,11 @@
                             <img src="${item.image_url}" alt="${item.image_alt}">
                             <div class="card-title">${item.course_title}</div>
                             <div class="card-dates">
-                                <img src="{{ asset('assets/icons/calender2.svg') }}" alt="" />
+                                <img src="assets/icons/calender2.svg" alt="" />
                                 <span>${item.date_from} to ${item.date_to}</span>
                             </div>
                             <div class="card-location">
-                                <img src="{{ asset('assets/icons/location.svg') }}" alt="" class="location-icon" />
+                                <img src="assets/icons/location.svg" alt="" class="location-icon" />
                                 <span>${item.city_title}</span>
                             </div>
                             <div class="card-buttons">
