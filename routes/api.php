@@ -5,7 +5,7 @@ use App\Http\Controllers\APIs\CategoryController;
 use App\Http\Controllers\APIs\CityController;
 use App\Http\Controllers\APIs\CourseController;
 use App\Http\Controllers\APIs\TimingController;
-use App\Http\Controllers\Website\HomeController;
+use App\Http\Controllers\APIs\ImportController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('api')->group(function () {
@@ -56,5 +56,14 @@ Route::middleware('api')->group(function () {
             Route::put('{slug}', [CityController::class, 'update']);
             Route::put('{slug}/seo', [CityController::class, 'updateSEO']);
         });
+
+        // Import
+        Route::prefix('imports')->group(function () {
+            Route::post('process', [ImportController::class, 'process']);
+            Route::get('progress', [ImportController::class, 'progress']);
+            Route::post('clear-status', [ImportController::class, 'clearStatus']);
+            Route::get('download', [ImportController::class, 'download']);
+        });
+
     // });
 });
