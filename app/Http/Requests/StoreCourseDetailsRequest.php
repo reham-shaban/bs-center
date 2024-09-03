@@ -23,7 +23,7 @@ class StoreCourseDetailsRequest extends FormRequest
             'description' => 'nullable|string',
             'objectives' => 'nullable|string',
             'brief' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg', // Single image
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp', // Single image
             'image_alt' => 'nullable|string|max:150',
             'image_title' => 'nullable|string|max:150',
         ];

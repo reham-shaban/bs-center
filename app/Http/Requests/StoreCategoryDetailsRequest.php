@@ -17,7 +17,7 @@ class StoreCategoryDetailsRequest extends FormRequest
             'title' => 'required|string|max:250',
             'lang' => 'required|string|max:5',
             'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg', // Single image
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp', // Single image
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg', // Multiple images
             'image_alt' => 'nullable|string|max:150',
             'image_title' => 'nullable|string|max:150',
