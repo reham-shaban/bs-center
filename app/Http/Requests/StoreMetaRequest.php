@@ -22,7 +22,7 @@ class StoreMetaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'section' => 'required|string|max:255',
+            'section' => 'required|int',
 
             'meta_title_en' => 'nullable|string|max:255',
             'meta_description_en' => 'nullable|string',

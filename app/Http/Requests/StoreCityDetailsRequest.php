@@ -14,7 +14,7 @@ class StoreCityDetailsRequest extends FormRequest
     public function rules()
     {
         return [
-            'lang' => 'nullable|string|max:5',
+            'lang' => 'required|nullable|string|max:5',
             'title' => 'required|string|max:250',
             'slug' => 'required|string|max:255|unique:cities,slug',
             'h1' => 'nullable|string|max:255',

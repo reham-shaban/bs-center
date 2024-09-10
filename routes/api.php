@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\APIs\AuthController;
+use App\Http\Controllers\APIs\BlogController;
 use App\Http\Controllers\APIs\CategoryController;
 use App\Http\Controllers\APIs\CityController;
 use App\Http\Controllers\APIs\CourseController;
 use App\Http\Controllers\APIs\TimingController;
 use App\Http\Controllers\APIs\ImportController;
+use App\Http\Controllers\APIs\MetaController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('api')->group(function () {
@@ -55,6 +57,22 @@ Route::middleware('api')->group(function () {
             Route::get('{slug}', [CityController::class, 'show']);
             Route::put('{slug}', [CityController::class, 'update']);
             Route::put('{slug}/seo', [CityController::class, 'updateSEO']);
+        });
+
+        // Blog routes
+        Route::prefix('blog')->group(function () {
+            Route::post('/toggle-hide', [BlogController::class, 'bulkHide']);
+            Route::get('/', [BlogController::class, 'index']);
+            Route::post('/', [BlogController::class, 'store']);
+            Route::get('{slug}', [BlogController::class, 'show']);
+            Route::put('{slug}', [BlogController::class, 'update']);
+            Route::put('{slug}/seo', [BlogController::class, 'updateSEO']);
+        });
+
+        // Meta routes
+        Route::prefix('meta')->group(function () {
+            Route::get('{id}', [MetaController::class, 'show']);
+            Route::put('{id}', [MetaController::class, 'update']);
         });
 
         // Import

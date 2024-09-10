@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateBlogRequest extends FormRequest
+class UpdateBlogSEORequest extends FormRequest
 {
     public function authorize()
     {
@@ -14,15 +14,6 @@ class UpdateBlogRequest extends FormRequest
     public function rules()
     {
         return [
-            'sort_order' => 'integer|nullable',
-            'status' => 'integer|nullable',
-            'title' => 'string|max:250|nullable',
-            'h1' => 'string|max:255|nullable',
-            'lang' => 'string|max:5|nullable',
-            'description' => 'string|nullable',
-            'image' => 'string|max:150|nullable',
-            'image_alt' => 'string|max:150|nullable',
-            'slug' => 'string|max:255|unique:blogs,slug,' . $this->blog->id,
             'meta_title' => 'string|max:255|nullable',
             'meta_description' => 'string|nullable',
             'meta_keywords' => 'string|nullable',

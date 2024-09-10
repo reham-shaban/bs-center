@@ -22,7 +22,7 @@ class UpdateMetaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'section' => 'string|max:255',
+            'section' => 'int',
 
             'meta_title_en' => 'nullable|string|max:255',
             'meta_description_en' => 'nullable|string',

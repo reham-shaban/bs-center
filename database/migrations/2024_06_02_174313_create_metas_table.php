@@ -15,8 +15,10 @@ class CreateMetasTable extends Migration
     {
         Schema::create('metas', function (Blueprint $table) {
             $table->id();
-            $table->string('section', 255);
-
+            $table->tinyInteger('section')
+                  ->default(1)
+                  ->index()
+                  ->comment('1:home page, 2:categories, 3:courses, 4:venues, 5:blogs, 6:contact us, 7:about us, 8:citycategory');
             $table->string('meta_title_en', 255)->nullable();
             $table->text('meta_description_en')->nullable();
             $table->string('meta_keywords_en', 255)->nullable();
@@ -51,3 +53,15 @@ class CreateMetasTable extends Migration
         Schema::dropIfExists('metas');
     }
 };
+
+/**
+ * Sections:
+ * 0 - home page
+ * 1 - categories
+ * 2 - courses
+ * 3 - venus
+ * 4 - blogs
+ * 5 - contact us
+ * 6 - about us
+ * 7 - citycategory
+ */

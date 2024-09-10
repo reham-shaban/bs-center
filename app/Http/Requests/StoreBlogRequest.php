@@ -16,13 +16,15 @@ class StoreBlogRequest extends FormRequest
         return [
             'sort_order' => 'integer|nullable',
             'status' => 'integer|nullable',
-            'title' => 'string|max:250|nullable',
+
+            'title' => 'required|string|max:250|nullable',
+            'slug' => 'required|string|max:255|unique:blogs,slug',
             'h1' => 'string|max:255|nullable',
-            'lang' => 'string|max:5|nullable',
+            'lang' => 'required|string|max:5|nullable',
             'description' => 'string|nullable',
-            'image' => 'string|max:150|nullable',
             'image_alt' => 'string|max:150|nullable',
-            'slug' => 'string|max:255|required|unique:blogs,slug',
+            'image_title' => 'string|max:150|nullable',
+
             'meta_title' => 'string|max:255|nullable',
             'meta_description' => 'string|nullable',
             'meta_keywords' => 'string|nullable',

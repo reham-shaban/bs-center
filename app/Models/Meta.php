@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Meta extends Model
+class Meta extends Model implements HasMedia
 {
     protected $table = 'metas';
 
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
         'section',
@@ -33,4 +35,9 @@ class Meta extends Model
         'meta_card_ar',
         'meta_card_en',
     ];
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('images')->singleFile();
+    }
 }

@@ -5,18 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Blog extends Model
+class Blog extends Model implements HasMedia
 {
     protected $table = 'blogs';
     use HasFactory;
     use SoftDeletes;
+    use InteractsWithMedia;
 
     protected $fillable = [
         'title',
         'lang',
         'description',
-        'image',
         'image_alt',
         'image_title',
         'slug',
@@ -37,5 +39,10 @@ class Blog extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('images')->singleFile();
     }
 }
