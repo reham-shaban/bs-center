@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Jobs\ImportDataJob;
 use Exception;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
 
@@ -72,6 +73,32 @@ class ImportController extends Controller
         } else {
             // If the file does not exist, return a 404 response
             return response()->json(['message' => 'File not found'], 404);
+        }
+    }
+
+    public function truncateTables()
+    {
+        try {
+            // Disable foreign key checks to allow truncating tables with relationships
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+            // Truncate the tables
+            DB::table('timings')->truncate();
+            DB::table('cities')->truncate();
+            DB::table('courses')->truncate();
+            DB::table('categories')->truncate();
+
+            // Enable foreign key checks again
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+            return response()->json([
+                'message' => 'Tables truncated successfully.'
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'error' => 'Failed to truncate tables.',
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
 }

@@ -82,6 +82,7 @@ Route::middleware('api')->group(function () {
             Route::post('clear-status', [ImportController::class, 'clearStatus']);
             Route::get('download', [ImportController::class, 'download']);
         });
+        Route::post('truncate-tables', [ImportController::class, 'truncateTables']);
 
     // });
 });
