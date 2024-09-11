@@ -22,7 +22,6 @@ class CreateBlogsTable extends Migration
             $table->tinyInteger('status')->default(0);
             $table->integer('number_of_views')->default(0);
             $table->string('lang', 5)->nullable();
-            $table->string('image', 150)->nullable();
             $table->string('image_alt', 150)->nullable();
             $table->string('image_title', 150)->nullable();
             $table->boolean('hidden')->default(false);

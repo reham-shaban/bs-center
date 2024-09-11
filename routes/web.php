@@ -26,8 +26,7 @@ function()
     Route::post('/contact', [ContactUsController::class, 'store'])->name('contact.store');
 
     // Other Screens
-    Route::get('/blog/{slug}', function () {return view('screen.blog');})->name('blog.show');
-    Route::get('/{slug}', [CityController::class, 'show'])->name('city.show');
+    Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
     Route::get('/course/{slug}', [CourseController::class, 'show'])->name('course.show');
     Route::get('/courses/{slug}', [CategoryController::class, 'show'])->name('courses.index');
     Route::get('/privacy-policy', function () {return view('screen.privacyPolicy');})->name('privacy-policy');
@@ -49,5 +48,9 @@ function()
     Route::get('/get-courses/{city}', [CityController::class, 'getCoursesByCity']);
     Route::get('/api/upcoming-courses', [HomeController::class, 'getUpcomingCourses']);
     Route::get('/api/search-courses', [HomeController::class, 'searchCourses']);
+    Route::get('/blogs/get-blogs', [BlogController::class, 'getBlogs']);
+    Route::get('/blogs/get-related-blogs/{status}', [BlogController::class, 'getBlogsByStatus']);
+
+    Route::get('/{slug}', [CityController::class, 'show'])->name('city.show');
 
 });

@@ -1,47 +1,46 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const data = [
-    {
-      img: "../assets/imgs/card-blog.png",
-      title:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempos Lorem ipsum dolor sitamet, consectetur ",
-      desc: " Lorem ipsum dolor sitamet, consectetur adipiscing elit, sed do eiusmod temporLorem ipsum dolor eiusmod temporLorem ipsum......",
-      viewNum: 251,
-      link: "./blog.html",
-    },
-    {
-      img: "../assets/imgs/card-blog.png",
-      title:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempos Lorem ipsum dolor sitamet, consectetur ",
-      desc: " Lorem ipsum dolor sitamet, consectetur adipiscing elit, sed do eiusmod temporLorem ipsum dolor eiusmod temporLorem ipsum......",
-      viewNum: 251,
-      link: "./blog.html",
-    },
-  ];
-  data.forEach((item) => {
-    const card = document.createElement("div");
-    card.classList.add("card-blogs");
-    card.innerHTML = `
-  <img src="${item.img}" alt="${item.title}" class="card-blog-img">
-  <div class="card-blog-content">
-    <h3>${item.title}</h3>
-   <div class="card-blog-desc">
-    ${
-      item.desc.length > 125
-        ? `<p>${item.desc}</p>
-          <a href='${item.link}'>more</a>
-        `
-        : `<p>${item.desc}</p>`
-    }
-   </div>
-    <div class="card-blog-footer">
-    <button><a href='${item.link}'>Read more</a></button>
-    <div class="card-blog-views">
-      <img  src="../assets/icons/view.svg" alt="">
-     <span>${item.viewNum}</span>
-     </div>
-    </div>
-  </div>`;
+document.addEventListener("DOMContentLoaded", async function () {
+    // Assuming you have the status variable available
+    const status = 1; // Replace this with the actual status you want to filter by
 
-    document.querySelector(".card-container-blog").appendChild(card);
+    // Fetch related blogs from the API
+    const response = await fetch(`/blogs/get-related-blogs/${status}`);
+    const result = await response.json();
+
+    const data = result.blogs.map(blog => ({
+      img: blog.image_url || "/assets/imgs/card-blog.png", // Fallback image if none is provided
+      title: blog.title,
+      desc: blog.description,
+      viewNum: blog.number_of_views,
+      link: `/blog/${blog.slug}`,
+    }));
+
+    // Create and append blog cards dynamically
+    data.forEach((item) => {
+      const card = document.createElement("div");
+      card.classList.add("card-blogs");
+
+      card.innerHTML = `
+        <img src="${item.img}" alt="${item.title}" class="card-blog-img">
+        <div class="card-blog-content">
+          <h3>${item.title}</h3>
+          <div class="card-blog-desc">
+            ${
+              item.desc.length > 125
+                ? `<p>${item.desc.substring(0, 125)}...</p>
+                  <a href='${item.link}'>more</a>`
+                : `<p>${item.desc}</p>`
+            }
+          </div>
+          <div class="card-blog-footer">
+            <button><a href='${item.link}'>Read more</a></button>
+            <div class="card-blog-views">
+              <img src="/assets/icons/view.svg" alt="Views icon">
+              <span>${item.viewNum}</span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.querySelector(".card-container-blog").appendChild(card);
+    });
   });
-});
