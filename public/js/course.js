@@ -29,14 +29,14 @@ document.addEventListener("DOMContentLoaded", function () {
           // Create and add the Register button
           const registerBtn = document.createElement("a");
           registerBtn.textContent = "Register";
-          registerBtn.href = "/pages/registration.html";
+          registerBtn.href = `/register/${item.id}`;
           registerBtn.classList.add("table-btn");
           row.insertCell().appendChild(registerBtn);
 
           // Create and add the Enquire button
           const enquireBtn = document.createElement("a");
           enquireBtn.textContent = "Enquire";
-          enquireBtn.href = "/pages/enquireNow.html";
+          enquireBtn.href = `/enquire/${item.course.slug}`;
           enquireBtn.classList.add("table-btn");
           row.insertCell().appendChild(enquireBtn);
 

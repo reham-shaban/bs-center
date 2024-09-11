@@ -13,6 +13,7 @@ class Register extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'timing_id',
         'full_name',
         'email',
         'phone_number',

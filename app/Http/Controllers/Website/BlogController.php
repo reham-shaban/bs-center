@@ -34,8 +34,6 @@ class BlogController extends Controller
                         $blog->image_url = $blog->getFirstMediaUrl('images');
                         return $blog;
                     });
-        Log::info("message");
-        Log::info(["blogs" => $blogs]);
         return response()->json(["blogs" => $blogs], 200);
     }
 

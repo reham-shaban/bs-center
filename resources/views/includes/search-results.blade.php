@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <span>${timing.city_title}</span>
                 </div>
                 <div class="card-buttons">
-                    <a href='/register' class="btn-primary">Register Now</a>
+                    <a href='/register/${timing.id}' class="btn-primary">Register Now</a>
                     <a href="/course/${timing.course_slug}" class="btn-secondary">Learn more</a>
                 </div>
             </div>

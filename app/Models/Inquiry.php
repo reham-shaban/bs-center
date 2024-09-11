@@ -13,6 +13,7 @@ class Inquiry extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'course_id',
         'full_name',
         'email',
         'phone_number',

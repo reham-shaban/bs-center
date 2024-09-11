@@ -7,6 +7,9 @@ use App\Http\Controllers\Website\CityController;
 use App\Http\Controllers\Website\BlogController;
 use App\Http\Controllers\Website\ContactUsController;
 use App\Http\Controllers\Website\CourseController;
+use App\Http\Controllers\Website\InquiryController;
+use App\Http\Controllers\Website\JoinTeamController;
+use App\Http\Controllers\Website\RegisterController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::group(
@@ -33,10 +36,15 @@ function()
     Route::get('/sitemap', function () {return view('screen.sitemap');})->name('sitemap');
     Route::get('/terms', function () {return view('screen.terms');})->name('terms');
 
+    // Forms
+    Route::get('/enquire/{slug}', [InquiryController::class, 'index'])->name('enquire.index');
+    Route::post('/enquire/create', [InquiryController::class, 'store'])->name('enquire.store');
+    Route::get('/register/{id}', [RegisterController::class, 'index'])->name('register.index');
+    Route::post('/register/create', [RegisterController::class, 'store'])->name('register.store');
+    Route::get('/join-team', [JoinTeamController::class, 'index'])->name('join-team.index');
+    Route::post('/join-team/create', [JoinTeamController::class, 'store'])->name('join-team.store');
+
     // Forms Screens
-    Route::get('/register', function () {return view('screen.registration');})->name('register.index');
-    Route::get('/enquire/{slug}', function () {return view('screen.enquireNow');})->name('enquire.index');
-    Route::get('/join-team', function () {return view('screen.joinOurTeam');})->name('join-team.index');
     Route::get('/request-in-house/{slug}', function () {return view('screen.requestInHouse');})->name('request-in-house.index');
     Route::get('/request-online/{slug}', function () {return view('screen.requestOnline');})->name('request-online.index');
 

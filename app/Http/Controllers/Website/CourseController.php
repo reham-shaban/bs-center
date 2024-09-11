@@ -30,6 +30,7 @@ class CourseController extends Controller
 
             $timings = $course->timings()
                                 ->with('city')
+                                ->with('course')
                                 ->where('hidden', false)
                                 ->where('lang', $currentLocale)
                                 ->get();

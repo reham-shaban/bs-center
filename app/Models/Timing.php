@@ -95,7 +95,7 @@ class Timing extends Model
         $this->attributes['is_upcoming'] = intval($value);
     }
 
-    public function setIsUBanaingAttribute($value)
+    public function setIsBannerAttribute($value)
     {
         $this->attributes['display_in_banner'] = intval($value);
     }

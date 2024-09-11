@@ -24,12 +24,13 @@
 <div class="hero-container hero-forms">
     <div class="container">
       <h1>Enquire Now</h1>
-      <p>Risk Management for Medical Devices</p>
+      <p>{{ $course->h1 }}</p>
     </div>
 </div>
 
 <section class="form-container">
-    <form>
+    <form action="{{ route('enquire.store') }}" method="POST">
+    @csrf
       <div>
         <div class="form-title">
           <h2>Contact Information</h2>
@@ -41,7 +42,7 @@
               type="text"
               placeholder="Full Name"
               id="name"
-              name="name"
+              name="full_name"
             />
           </div>
           <div class="input-container">
@@ -53,7 +54,7 @@
                 </div>
                 <input
                   type="tel"
-                  name="tel"
+                  name="phone_number"
                   id="tel"
                   class="tel"
                   placeholder="Phone Number"
@@ -78,28 +79,19 @@
               name="email"
             />
           </div>
+
           <div class="input-container" style="position: relative">
             <label for="course">Course</label>
+            <!-- Hidden input to include course_id -->
             <input
-              type="text"
-              placeholder="Marketing"
-              id="course"
-              name="course"
-              readonly
+              type="number"
+              value="{{ $course->id }}"
+              id="course_id"
+              name="course_id"
             />
-            <!-- <div class="drop-down">
-              <img src="{{ asset('assets/icons/arrow-down.svg') }}" alt="" />
-            </div>
-            <ul class="drop-list">
-              <li>item 1</li>
-              <li>item 2</li>
-              <li>item 3</li>
-              <li>item 4</li>
-              <li>item 5</li>
-              <li>item 6</li>
-              <li>item 7</li>
-            </ul> -->
-          </div>
+        </div>
+
+
           <div class="input-container">
             <label for="company">Company </label>
             <input
@@ -125,7 +117,7 @@
       </div>
 
       <div class="form-actions">
-        <button>Send</button>
+        <button type="submit">Send</button>
         <div class="g-recaptcha" data-sitekey="your_site_key"></div>
       </div>
     </form>

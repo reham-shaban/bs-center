@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   <img src="./assets/icons/location.svg" alt="" class="location-icon"  />
                 <span>${item.city_title}</span></div>
                   <div class="card-buttons">
-                      <a href='/register' class="btn-primary">Register Now</a>
+                      <a href='/register/${item.id}' class="btn-primary">Register Now</a>
                       <a href="/course/${item.course_slug}" class="btn-secondary">Learn more</a>
                   </div>
               </div>

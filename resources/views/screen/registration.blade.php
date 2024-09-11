@@ -8,13 +8,13 @@
 <div class="breadcrumb-bar">
     <div class="about-header container">
       <ul>
-        <li><a href="./categories.html">Categories</a></li>
+        <li><a href="{{ route('categories.index') }}">Categories</a></li>
         <img src="{{ asset('assets/icons/arrow.svg') }}" />
         <li>courses</li>
         <img src="{{ asset('assets/icons/arrow.svg') }}" />
-        <li>Healthcare Management</li>
+        <li>{{ $timing->course->title }}</li>
         <img src="{{ asset('assets/icons/arrow.svg') }}" />
-        <li>Risk Management for Medical Devices</li>
+        <li>{{ $timing->title }}</li>
         <img src="{{ asset('assets/icons/arrow.svg') }}" />
         <li>Registration</li>
       </ul>
@@ -24,25 +24,35 @@
 <div class="hero-container hero-forms">
     <div class="container">
       <h1>Registration</h1>
-      <p>Risk Management for Medical Devices</p>
+      <p>{{ $timing->title }}</p>
     </div>
 </div>
 
 <section class="form-container">
-    <form>
+    <form action="{{ route('register.store') }}" method="POST">
+    @csrf
       <div>
         <div class="form-title">
           <h2>Contact Information</h2>
         </div>
         <div class="form-inputs">
+
+
           <div class="input-container">
             <label for="name">Full Name</label>
             <input
               type="text"
               placeholder="Full Name"
               id="name"
-              name="name"
+              name="full_name"
             />
+            <input
+                  type="hidden"
+                  placeholder="Course timing"
+                  id="timing_id"
+                  name="timing_id"
+                  value={{ $timing->id }}
+                />
           </div>
 
           <div class="input-container">
@@ -54,7 +64,7 @@
                 </div>
                 <input
                   type="tel"
-                  name="tel"
+                  name="phone_number"
                   id="tel"
                   class="tel"
                   placeholder="Phone Number"
@@ -102,7 +112,7 @@
               type="text"
               placeholder="Full Name"
               id="company"
-              name="company"
+              name="company_name"
             />
           </div>
           <div class="input-container">
@@ -136,7 +146,7 @@
               type="text"
               placeholder="Full Name"
               id="name2"
-              name="name"
+              name="instructor_name"
             />
           </div>
           <div class="input-container">
@@ -146,7 +156,7 @@
                 <div>
                   <span class="callcode"></span>
                 </div>
-                <input type="tel" name="tel" placeholder="Phone Number" />
+                <input type="tel" name="instructor_phone_number" placeholder="Phone Number" />
               </div>
               <div class="options" id="options-2">
                 <input
@@ -163,7 +173,7 @@
             <input
               type="email"
               placeholder="hello@creative-tim.com"
-              name="email"
+              name="instructor_email"
               id="email2"
             />
           </div>
@@ -172,7 +182,7 @@
             <input
               type="text"
               placeholder="Position"
-              name="position2"
+              name="instructor_position"
               id="position2"
             />
           </div>
@@ -180,7 +190,7 @@
       </div>
 
       <div class="form-actions">
-        <button>Send</button>
+        <button type="submit">Send</button>
         <div class="g-recaptcha" data-sitekey="your_site_key"></div>
       </div>
     </form>
