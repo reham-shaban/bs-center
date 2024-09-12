@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
  // class for JWT Authentication In Laravel 11
 class User extends Authenticatable implements JWTSubject
 {
-    use Notifiable;
+    use Notifiable, HasRoles;
 
 
     /**
@@ -39,6 +40,7 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
+        'phone_number',
     ];
 
     /**

@@ -2,14 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use App\Models\Blog;
-use App\Models\ContactUs;
 use App\Models\Course;
 use App\Models\Timing;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,14 +14,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('password'),
-            'role' => 'admin',
-        ]);
-
         $this->call([
+            PermissionTableSeeder::class,
+            CreateAdminUserSeeder::class,
             CategorySeeder::class,
             CitiesTableSeeder::class,
             MetaSeeder::class
@@ -34,6 +25,5 @@ class DatabaseSeeder extends Seeder
         Blog::factory()->count(10)->create();
         Course::factory()->count(10)->create();
         Timing::factory()->count(50)->create();
-
     }
 }

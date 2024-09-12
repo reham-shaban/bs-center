@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('role')->default('user'); // default role
+            $table->boolean('status')->default(true); // active
+            $table->string('phone_number', 50)->nullable();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
@@ -30,7 +31,7 @@ return new class extends Migration
 
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->foreignId('user_id')->nullable()->index();
+            $table->foreignId('user_id')->nulplable()->index();
             $table->string('ip_address', 45)->nullable();
             $table->text('user_agent')->nullable();
             $table->longText('payload');

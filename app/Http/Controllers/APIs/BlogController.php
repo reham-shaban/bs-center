@@ -2,17 +2,30 @@
 
 namespace App\Http\Controllers\APIs;
 
-use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use Exception;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreBlogRequest;
 use App\Http\Requests\UpdateBlogDetailsRequest;
 use App\Http\Requests\UpdateBlogSEORequest;
+use Illuminate\Routing\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class BlogController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware('permission:blog-list|blog-create|blog-edit|blog-hide', ['only' => ['index','show']]);
+        $this->middleware('permission:blog-create', ['only' => ['store']]);
+        $this->middleware('permission:blog-edit', ['only' => ['update','updateSEO']]);
+        $this->middleware('permission:blog-hide', ['only' => ['bulkHide']]);
+    }
+
     // Show Blogs page english & arabic
     public function index(Request $request)
     {
@@ -112,7 +125,7 @@ class BlogController extends Controller
 
             // Initialize arrays to store image URLs
             $imageUrl = $blog->getFirstMediaUrl('images');
-          
+
             // Handle image upload and association
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
