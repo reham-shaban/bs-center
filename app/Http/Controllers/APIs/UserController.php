@@ -27,11 +27,11 @@ class UserController extends Controller
     {
         try{
             $validated = $request->validate([
-                'name' => 'required|string',
+                'name' => 'required|string|unique:users',
                 'email' => 'nullable|email|unique:users',
                 'password' => 'required|string|min:6',
                 'phone_number' => 'nullable|string|max:50',
-                'role' => 'required',
+                'role' => 'nullable|string|exists:roles,name',
             ]);
 
             $user = User::create([
@@ -41,7 +41,7 @@ class UserController extends Controller
                 'phone_number' => $validated['phone_number'] ?? null,
             ]);
 
-            if($validated['role']){
+            if (isset($validated['role']) && $validated['role']) {
                 $user->assignRole($validated['role']);
             }
 
@@ -62,11 +62,11 @@ class UserController extends Controller
             $user = User::findOrFail($id);
 
             $validated = $request->validate([
-                'name' => 'nullable|string',
-                'email' => 'nullable|email|unique:users,email,' . $user,
+                'name' => 'nullable|string|unique:users,name,' . $user->id,
+                'email' => 'nullable|email|unique:users,email,' . $user->id,
                 'password' => 'nullable|string|min:6',
                 'phone_number' => 'nullable|string|max:50',
-                'role' => 'required',
+                'role' => 'nullable|string|exists:roles,name',
             ]);
 
             $user->update([
@@ -80,7 +80,7 @@ class UserController extends Controller
             }
 
             // Update the user's role
-            if($validated['role']){
+            if(!empty($validated['role'])){
                 $user->syncRoles($validated['role']);
             }
 

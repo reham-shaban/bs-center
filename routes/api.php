@@ -8,6 +8,7 @@ use App\Http\Controllers\APIs\CourseController;
 use App\Http\Controllers\APIs\TimingController;
 use App\Http\Controllers\APIs\ImportController;
 use App\Http\Controllers\APIs\MetaController;
+use App\Http\Controllers\APIs\RoleController;
 use App\Http\Controllers\APIs\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,16 @@ Route::middleware('api')->group(function () {
         Route::put('/{id}', [UserController::class, 'update']);
         Route::patch('/{id}/toggle-status', [UserController::class, 'toggleStatus']);
         Route::delete('/{id}', [UserController::class, 'destroy']);
+    });
+
+    // Role routes
+    Route::prefix('roles')->group(function() {
+        Route::get('/', [RoleController::class, 'index']);
+        Route::post('/', [RoleController::class, 'store']);
+        Route::get('/{id}', [RoleController::class, 'show']);
+        Route::put('/{id}', [RoleController::class, 'update']);
+        Route::post('/{id}/add-user', [RoleController::class, 'addUsersToRole']);
+        Route::delete('/{id}', [RoleController::class, 'destroy']);
     });
 
     // Categories routes
