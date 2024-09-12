@@ -12,9 +12,9 @@
         <img src="{{ asset('assets/icons/arrow.svg') }}" />
         <li>courses</li>
         <img src="{{ asset('assets/icons/arrow.svg') }}" />
-        <li>Healthcare Management</li>
+        <li>{{ $course->category->title }}</li>
         <img src="{{ asset('assets/icons/arrow.svg') }}" />
-        <li>Risk Management for Medical Devices</li>
+        <li>{{ $course->title }}</li>
         <img src="{{ asset('assets/icons/arrow.svg') }}" />
         <li>Request Online</li>
       </ul>
@@ -24,12 +24,13 @@
   <div class="hero-container hero-forms">
     <div class="container">
       <h1>Request Online</h1>
-      <p>Risk Management for Medical Devices</p>
+      <p><li>{{ $course->title }}</li></p>
     </div>
   </div>
 
   <section class="form-container form-online-container">
-    <form>
+    <form action="{{ route('request-online.store') }}" method="POST">
+    @csrf
       <div>
         <div class="form-title">
           <h2>Contact Information</h2>
@@ -41,7 +42,7 @@
               type="text"
               placeholder="Full Name"
               id="name"
-              name="name"
+              name="full_name"
             />
           </div>
           <div class="input-container">
@@ -53,7 +54,7 @@
                 </div>
                 <input
                   type="tel"
-                  name="tel"
+                  name="phone_number"
                   id="tel"
                   class="tel"
                   placeholder="Phone Number"
@@ -84,7 +85,7 @@
               type="text"
               placeholder="Company"
               id="company"
-              name="company"
+              name="company_name"
             />
           </div>
           <div class="input-container">
@@ -108,22 +109,33 @@
           <div class="input-container" style="position: relative">
             <label for="category">Category</label>
             <input
-              type="text"
-              placeholder="Category"
+              type="hidden"
+              value="{{ $course->category->id }}"
               id="category"
-              name="category"
+              name="category_id"
+            />
+            <input
+              type="text"
+              value="{{ $course->category->title }}"
+              id="category"
               readonly
             />
           </div>
           <div class="input-container" style="position: relative">
             <label for="course">Course</label>
             <input
+              type="hidden"
+              value="{{ $course->id }}"
+              id="course_id"
+              name="course_id"
+            />
+            <input
               type="text"
-              placeholder="Risk Management for Medical Devices"
+              value="{{ $course->title }}"
               id="course"
-              name="course"
               readonly
             />
+          </div>
           </div>
           <div class="input-container">
             <label for="date">Date</label>
@@ -141,7 +153,7 @@
       </div>
 
       <div class="form-actions">
-        <button>Send</button>
+        <button type="submit">Send</button>
         <div class="g-recaptcha" data-sitekey="your_site_key"></div>
       </div>
     </form>

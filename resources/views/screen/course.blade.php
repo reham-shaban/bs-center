@@ -37,7 +37,9 @@
     <div class="flex-between">
       <div class="popup-bg" onclick="hidePopup()"></div>
       <div id="popup-3" class="form-popup popup">
-        <form>
+        <form action="{{ route('download.store') }}" method="POST">
+        @csrf
+          <input type="hidden" name="course_id" value="{{ $course->id }}">
           <div>
             <div class="form-title">
               <h2>Download Brochure</h2>
@@ -61,7 +63,7 @@
                     </div>
                     <input
                       type="tel"
-                      name="tel"
+                      name="phone"
                       id="tel"
                       class="tel"
                       placeholder="Phone Number"
@@ -82,7 +84,7 @@
                 <input
                   type="email"
                   placeholder="hello@creative-tim.com"
-                  name="position"
+                  name="email"
                   id="position"
                 />
               </div>
@@ -92,13 +94,13 @@
                   type="text"
                   placeholder="Company"
                   id="company"
-                  name="company"
+                  name="company_name"
                 />
               </div>
             </div>
           </div>
           <div class="form-actions">
-            <button>Send</button>
+            <button type="submit">Send</button>
             <div class="g-recaptcha" data-sitekey="your_site_key"></div>
           </div>
         </form>

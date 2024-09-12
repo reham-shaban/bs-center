@@ -40,10 +40,16 @@
           <div class="input-container" style="position: relative">
             <label for="course">Course</label>
             <input
-              type="number"
+              type="hidden"
               value="{{ $course->id }}"
               id="course_id"
               name="course_id"
+            />
+            <input
+              type="text"
+              value="{{ $course->title }}"
+              id="course"
+              readonly
             />
           </div>
           <div class="input-container">

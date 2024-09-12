@@ -7,10 +7,12 @@ use App\Http\Controllers\Website\CityController;
 use App\Http\Controllers\Website\BlogController;
 use App\Http\Controllers\Website\ContactUsController;
 use App\Http\Controllers\Website\CourseController;
+use App\Http\Controllers\Website\DownloadController;
 use App\Http\Controllers\Website\InquiryController;
 use App\Http\Controllers\Website\JoinTeamController;
 use App\Http\Controllers\Website\RegisterController;
 use App\Http\Controllers\Website\RequestInHouseController;
+use App\Http\Controllers\Website\RequestOnlineController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::group(
@@ -48,8 +50,10 @@ function()
     Route::get('/request-in-house/{slug}', [RequestInHouseController::class, 'index'])->name('request-in-house.index');
     Route::post('/request-in-house/create', [RequestInHouseController::class, 'store'])->name('request-in-house.store');
 
-    // Forms Screens
-    Route::get('/request-online/{slug}', function () {return view('screen.requestOnline');})->name('request-online.index');
+    Route::get('/request-online/{slug}', [RequestOnlineController::class, 'index'])->name('request-online.index');
+    Route::post('/request-online/create', [RequestOnlineController::class, 'store'])->name('request-online.store');
+
+    Route::post('/download/create', [DownloadController::class, 'store'])->name('download.store');
 
     // helper apis for getting data
     Route::get('{slug}/all-timings', [CourseController::class, 'getAllCourseTimings'])->name('course.timings');

@@ -50,8 +50,10 @@ class CategoryController extends Controller
 
         // Filter cities by language and hidden
         $cities = City::where('lang', $currentLocale)->where('hidden', false)->get();
+        // Fetch durations
+        $durations = Timing::select('duration')->distinct()->pluck('duration');
 
-        return view('screen.categories', compact('timings', 'categories', 'cities'));
+        return view('screen.categories', compact('timings', 'categories', 'cities', 'durations'));
     }
 
     public function show($slug)

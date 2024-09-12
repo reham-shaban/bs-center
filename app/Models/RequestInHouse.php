@@ -11,6 +11,7 @@ class RequestInHouse extends Model
     use HasFactory;
 
     protected $fillable = [
+        'course_id',
         'location',
         'number_of_days',
         'number_of_participants',

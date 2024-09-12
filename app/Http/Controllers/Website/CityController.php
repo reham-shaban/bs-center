@@ -40,9 +40,23 @@ class CityController extends Controller
                             ];
                         });
 
-        $cities = City::where('lang', $currentLocale)->with('media')->get(); // Fetch cities with their media
+        // Fetch filtered cities
+        $cities = City::where('lang', $currentLocale)
+                      ->where('hidden', false)
+                      ->get();
+        // Fetch durations
+        $durations = Timing::select('duration')->distinct()->pluck('duration');
 
-        return view('screen.venus', compact('timings', 'cities'));
+        // Fetch filtered categories
+        $categories = Category::where('lang', $currentLocale)
+                              ->where('hidden', false)
+                              ->get();
+
+        $cities = City::where('lang', $currentLocale)
+                        ->where('hidden', false)
+                        ->with('media')->get(); // Fetch cities with their media
+
+        return view('screen.venus', compact('timings', 'cities', 'categories', 'durations'));
     }
 
     public function show($slug){

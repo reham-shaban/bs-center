@@ -13,13 +13,12 @@ return new class extends Migration
     {
         Schema::create('request_online', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('course_id');
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('course_id')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
 
             $table->string('full_name', 150)->nullable();
             $table->string('email', 150)->nullable();
             $table->string('phone_number', 50)->nullable();
-            $table->string('position', 150)->nullable();
             $table->string('company_name', 150)->nullable();
             $table->string('subject', 150)->nullable();
             $table->string('location', 150)->nullable();

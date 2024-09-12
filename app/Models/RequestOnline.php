@@ -12,6 +12,8 @@ class RequestOnline extends Model
     use HasFactory;
 
     protected $fillable = [
+        'course_id',
+        'category_id',
         'full_name',
         'email',
         'phone_number',

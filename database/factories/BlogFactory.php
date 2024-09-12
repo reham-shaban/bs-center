@@ -21,7 +21,7 @@ class BlogFactory extends Factory
             'h1' => $this->faker->sentence,
             'lang' => $this->faker->randomElement(['en', 'ar']),
             'description' => $this->faker->paragraphs(3, true),
-            'tag_name' => $this->faker->name,
+            'tag_name' => $this->faker->randomElement(['article', 'blog', 'tag1', 'tag2']),
             'slug' => $slug,
             'number_of_views' => $this->faker->numberBetween(0, 300),
             'image_alt' => $this->faker->sentence,
