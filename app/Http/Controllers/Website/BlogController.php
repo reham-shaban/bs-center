@@ -29,7 +29,6 @@ class BlogController extends Controller
         $currentLocale = app()->getLocale();
         $blogs = Blog::where('lang', $currentLocale)
                     ->where('hidden', false)
-                    ->orderBy('sort_order', 'asc')
                     ->get()->map(function($blog) {
                         $blog->image_url = $blog->getFirstMediaUrl('images');
                         return $blog;
@@ -43,7 +42,6 @@ class BlogController extends Controller
         $blogs = Blog::where('tag_name', $tag)
                 ->where('lang', $currentLocale)
                 ->where('hidden', false)
-                ->orderBy('sort_order', 'asc')
                 ->get()->map(function($blog) {
                     $blog->image_url = $blog->getFirstMediaUrl('images');
                     return $blog;
