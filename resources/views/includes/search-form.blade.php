@@ -1,13 +1,32 @@
 {{-- Form --}}
 <form action="{{ $searchRoute }}" method="GET" class="search-courses-form">
+    @foreach($categories as $category)
+    {{ $category->title }}
+@endforeach
+    {{-- Row 1 --}}
     <div class="row1">
         <div>
             <input type="text" name="course_title" id="course_title" placeholder="Search for course" value="{{ request('course_title') }}">
             <img src="{{ asset('assets/icons/search.svg') }}" alt="">
         </div>
-        <input class="category-input" type="text" name="category_title" id="category_title" placeholder="Categories" value="{{ request('category_title') }}">
+        <div class="custom-select-wrapper">
+            <div class="custom-select">
+                <div class="custom-select-trigger">
+                    <span>{{ request('category_title', 'Category') }}</span>
+                    <img src="{{ asset('assets/icons/arrow-down-2.svg') }}" alt="Arrow Down">
+                </div>
+                <div class="custom-options">
+                    @foreach($categories as $category)
+                        <span class="custom-option" data-value="{{ $category->title }}">{{ $category->title }}</span>
+                    @endforeach
+                </div>
+            </div>
+            <input type="hidden" name="category_title" id="category_title_input" value="{{ request('category_title') }}">
+        </div>
+        {{-- <input class="category-input" type="text" name="category_title" id="category_title" placeholder="Categories" value="{{ request('category_title') }}"> --}}
     </div>
 
+    {{-- Row 2 --}}
     <div class="row2">
         <div class="custom-select-wrapper">
             <div class="custom-select">
@@ -46,16 +65,16 @@
                     <img src="{{ asset('assets/icons/arrow-down-2.svg') }}" alt="Arrow Down">
                 </div>
                 <div class="custom-options">
-                    <span class="custom-option" data-value="1week">1 Week</span>
-                    <span class="custom-option" data-value="1month">1 Month</span>
-                    <span class="custom-option" data-value="3months">3 Months</span>
-                    <span class="custom-option" data-value="6months">6 Months</span>
+                    @foreach($durations as $duration)
+                        <span class="custom-option" data-value="{{ $duration }}">{{ $duration }}</span>
+                    @endforeach
                 </div>
             </div>
             <input type="hidden" name="duration" id="duration_input" value="{{ request('duration') }}">
         </div>
     </div>
 
+    {{-- Row 3 --}}
     <div class="row3">
         <button type="submit">Search
             <img src="{{ asset('assets/icons/arrow-right.svg') }}" alt="">

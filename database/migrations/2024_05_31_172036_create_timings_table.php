@@ -22,7 +22,7 @@ class CreateTimingsTable extends Migration
 
             $table->date('date_from')->nullable();
             $table->date('date_to')->nullable();
-            $table->string('duration', 255)->nullable();
+            $table->integer('duration')->nullable()->index();
 
             $table->string('lang', 5)->nullable();
             $table->boolean('is_upcoming')->default(1);

@@ -49,6 +49,8 @@ class HomeController extends Controller
         $cities = City::where('lang', $currentLocale)
                       ->where('hidden', false)
                       ->get();
+        // Fetch durations
+        $durations = Timing::select('duration')->distinct()->pluck('duration');
 
         // Fetch filtered banner courses
         $query_banner = Timing::where('lang', $currentLocale);
@@ -59,7 +61,7 @@ class HomeController extends Controller
                               ->where('hidden', false)
                               ->get();
 
-                              // Add image URLs to each category
+        // Add image URLs to each category
         $categories->transform(function ($category) {
             // Check if the category has associated media
             if($category && $category->getFirstMediaUrl('images')){
@@ -70,7 +72,7 @@ class HomeController extends Controller
             return $category;
         });
 
-        return view('screen.home', compact('timings', 'bannerCourses', 'cities', 'categories'));
+        return view('screen.home', compact('timings', 'bannerCourses', 'cities', 'categories', 'durations'));
     }
 
     public function getUpcomingCourses()

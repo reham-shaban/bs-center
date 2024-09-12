@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
 
+@if (LaravelLocalization::getCurrentLocale() == 'en')
+<html lang="en">
+@else
+<html lang="en" dir="rtl">
+@endif
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +14,9 @@
     <!-- Css File -->
     <link rel="icon" href="{{ asset('assets/favIcon.svg') }}" />
     <link rel="stylesheet" href="{{ asset('style.css') }}">
+    @if (LaravelLocalization::getCurrentLocale() == 'ar')
+    <link rel="stylesheet" href="{{ asset('ar.css') }}">
+    @endif
     <link rel="stylesheet" href="{{ asset('css/about.css') }}">
     <link rel="stylesheet" href="{{ asset('css/blog.css') }}">
     <link rel="stylesheet" href="{{ asset('css/blogs.css') }}">

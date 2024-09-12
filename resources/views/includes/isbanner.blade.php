@@ -13,7 +13,7 @@
                             <p>{{ $item['date_from'] }}</p>
                             <p>{{ $item['city_title'] }}</p>
                             <div class="buttons-hero">
-                                <a href="{{ route('register.index') }}" class="register-button">Register Now</a>
+                                <a href="{{ route('register.index', ['id' => $item['id']]) }}" class="register-button">Register Now</a>
                                 <a href="{{ route('course.show', ['slug' => $item['course_slug']]) }}" class="learn-more-button">Learn More</a>
                             </div>
                         </div>

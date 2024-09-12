@@ -27,7 +27,7 @@
   width: 100%;
   box-shadow: 0 10px 50px rgb(0, 0, 0, 0.12);
   margin-block: 20px;
-  text-align: left;
+  text-align: start;
   .card-blog-content {
     display: flex;
     flex-direction: column;

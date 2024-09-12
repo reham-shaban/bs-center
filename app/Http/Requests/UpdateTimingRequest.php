@@ -24,7 +24,7 @@ class UpdateTimingRequest extends FormRequest
             'price' => 'nullable|numeric|min:0',
             'date_from' => 'nullable|date',
             'date_to' => 'nullable|date|after_or_equal:date_from',
-            'duration' => 'nullable|string|max:255',
+            'duration' => 'int|string|max:255',
         ];
     }
 

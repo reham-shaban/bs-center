@@ -21,7 +21,7 @@ class StoreTimingRequest extends FormRequest
             'price' => 'nullable|numeric|min:0',
             'date_from' => 'nullable|date',
             'date_to' => 'nullable|date',
-            'duration' => 'nullable|string|max:255',
+            'duration' => 'nullable|int|max:255',
             'lang' => 'nullable|string|max:5',
             'is_upcoming' => 'boolean',
             'is_banner' => 'boolean',

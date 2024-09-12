@@ -105,7 +105,7 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 28.6px;
-  text-align: left;
+  text-align: start;
   color: #313131;
 }
 
@@ -115,7 +115,7 @@
   font-size: 14px;
   font-weight: 600;
   line-height: 28.6px;
-  text-align: left;
+  text-align: start;
   color: #253a7b;
 }
 .course-table table tr:first-child th {

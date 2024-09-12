@@ -107,6 +107,16 @@
                     </ul>
                 </div> --}}
                 <div class="input-container">
+                    <label for="speciality">Speciality</label>
+                    <input
+                        type="text"
+                        placeholder="speciality"
+                        id="speciality"
+                        name="speciality"
+                        class="speciality"
+                    />
+                </div>
+                <div class="input-container">
                     <label for="country">Country</label>
                     <input
                         type="text"

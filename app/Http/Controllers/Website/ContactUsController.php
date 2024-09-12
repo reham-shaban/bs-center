@@ -27,6 +27,6 @@ class ContactUsController extends Controller
 
         ContactUs::create($validatedData);
 
-        return redirect()->route('contact.index')->with('success', 'Contact form submitted successfully.');
+        return redirect()->back()->with('success', 'Contact form submitted successfully.');
     }
 }

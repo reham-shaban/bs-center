@@ -9,13 +9,13 @@
     <div class="breadcrumb-bar">
         <div class="about-header container">
         <ul>
-            <li><a href="./categories.html">Categories</a></li>
+            <li><a href="{{ route('categories.index') }}">Categories</a></li>
             <img src="{{ asset('assets/icons/arrow.svg') }}" />
             <li>courses</li>
             <img src="{{ asset('assets/icons/arrow.svg') }}" />
-            <li>Healthcare Management</li>
+            <li>{{ $course->category->title }}</li>
             <img src="{{ asset('assets/icons/arrow.svg') }}" />
-            <li>Risk Management for Medical Devices</li>
+            <li>{{ $course->title }}</li>
             <img src="{{ asset('assets/icons/arrow.svg') }}" />
             <li>Request In House</li>
         </ul>
@@ -25,12 +25,13 @@
   <div class="hero-container hero-forms">
     <div class="container">
       <h1>Request In House</h1>
-      <p>Risk Management for Medical Devices</p>
+      <p>{{ $course->title }}</p>
     </div>
   </div>
 
   <section class="form-container">
-    <form>
+    <form action="{{ route('request-in-house.store') }}" method="POST">
+    @csrf
       <div>
         <div class="form-title">
           <h2>Course Details</h2>
@@ -39,11 +40,10 @@
           <div class="input-container" style="position: relative">
             <label for="course">Course</label>
             <input
-              type="text"
-              placeholder="Risk Management for Medical Devices"
-              id="course"
-              name="course"
-              readonly
+              type="number"
+              value="{{ $course->id }}"
+              id="course_id"
+              name="course_id"
             />
           </div>
           <div class="input-container">
@@ -57,11 +57,21 @@
           </div>
           <div class="input-container">
             <label for="days">Number of days</label>
-            <input type="number" placeholder="5" id="days" />
+            <input
+              type="number"
+              placeholder="5"
+              id="days"
+              name="number_of_days"
+            />
           </div>
           <div class="input-container">
             <label for="pract">Number of participants</label>
-            <input type="number" placeholder="3" id="pract" name="pract" />
+            <input
+              type="number"
+              placeholder="3"
+              id="pract"
+              name="number_of_participants"
+            />
           </div>
         </div>
         <div class="textarea">
@@ -69,7 +79,7 @@
           <textarea
             placeholder="Describe your problem in at least 250 characters"
             id="message"
-            name="message"
+            name="message1"
           ></textarea>
         </div>
       </div>
@@ -85,7 +95,7 @@
               type="text"
               placeholder="Full Name"
               id="name"
-              name="name"
+              name="full_name"
             />
           </div>
           <div class="input-container">
@@ -97,7 +107,7 @@
                 </div>
                 <input
                   type="tel"
-                  name="tel"
+                  name="phone_number"
                   id="tel"
                   class="tel"
                   placeholder="Phone Number"
@@ -115,31 +125,37 @@
           </div>
           <div class="input-container">
             <label for="full-name">Email</label>
-            <input type="text" placeholder="hello@creative-tim.com" />
+            <input
+              type="email"
+              placeholder="hello@creative-tim.com"
+              id="email"
+              name="email"
+            />
           </div>
           <div class="input-container">
             <label for="full-name">Subject</label>
-            <input type="text" placeholder="123456789" />
+            <input type="text" placeholder="123456789" name="subject" />
           </div>
           <div class="input-container">
             <label for="full-name">Company </label>
-            <input type="text" placeholder="Company" />
+            <input type="text" placeholder="Company" name="company" />
           </div>
           <div class="input-container">
             <label for="full-name">City</label>
-            <input type="text" placeholder="Dubai" />
+            <input type="text" placeholder="Dubai" name="city" />
           </div>
         </div>
         <div class="textarea">
           <label for="full-name">How can we help you?</label>
           <textarea
             placeholder="Describe your problem in at least 250 characters"
+            name="message2"
           ></textarea>
         </div>
       </div>
 
       <div class="form-actions">
-        <button>Send</button>
+        <button type="submit">Send</button>
         <div class="g-recaptcha" data-sitekey="your_site_key"></div>
       </div>
     </form>

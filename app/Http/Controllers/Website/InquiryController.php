@@ -31,12 +31,7 @@ class InquiryController extends Controller
 
         $inquiry = Inquiry::create($validatedData);
 
-        // Check if course_id is provided and valid
-        if ($inquiry->course) {
-            return redirect()->route('enquire.index', ['slug' => $inquiry->course->slug])->with('success', 'Inquiry form submitted successfully.');
-        }
-
-        return redirect()->route('home.index')->with('success', 'Inquiry form submitted successfully.');
+        return redirect()->back()->with('success', 'Inquiry form submitted successfully.');
     }
 
 }

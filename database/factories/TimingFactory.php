@@ -27,7 +27,7 @@ class TimingFactory extends Factory
         $dateTo = (clone $dateFrom)->modify('+'.rand(1, 10).' days');
 
         // Calculate duration
-        $duration = $dateFrom->diff($dateTo)->format('%a days');
+        $duration = (int) $dateFrom->diff($dateTo)->format('%a');
 
         return [
             'course_id' => $course->id,
@@ -39,6 +39,7 @@ class TimingFactory extends Factory
             'duration' => $duration,
             'lang' => $this->faker->randomElement(['en', 'ar']),
             'is_upcoming' => $this->faker->boolean,
+            'is_banner' => $this->faker->boolean,
             'created_at' => now(),
             'updated_at' => now(),
         ];

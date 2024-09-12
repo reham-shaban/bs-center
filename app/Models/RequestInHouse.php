@@ -14,7 +14,14 @@ class RequestInHouse extends Model
         'location',
         'number_of_days',
         'number_of_participants',
-        'message'
+        'message1',
+        'full_name',
+        'country',
+        'email',
+        'phone_number',
+        'company',
+        'subject',
+        'message2',
     ];
 
     public function course()

@@ -37,7 +37,7 @@ class JoinTeamController extends Controller
         $joinTeam = JoinTeam::create($validatedData);
 
         // Redirect with success message
-        return redirect()->route('join-team.index')->with('success', 'Join Team form submitted successfully.');
+        return redirect()->back()->with('success', 'Join Team form submitted successfully.');
     } catch (\Exception $e) {
         // Log the exception
         Log::error('Join Team form submission failed: ' . $e->getMessage());

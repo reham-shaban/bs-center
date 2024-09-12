@@ -10,6 +10,7 @@ use App\Http\Controllers\Website\CourseController;
 use App\Http\Controllers\Website\InquiryController;
 use App\Http\Controllers\Website\JoinTeamController;
 use App\Http\Controllers\Website\RegisterController;
+use App\Http\Controllers\Website\RequestInHouseController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::group(
@@ -44,8 +45,10 @@ function()
     Route::get('/join-team', [JoinTeamController::class, 'index'])->name('join-team.index');
     Route::post('/join-team/create', [JoinTeamController::class, 'store'])->name('join-team.store');
 
+    Route::get('/request-in-house/{slug}', [RequestInHouseController::class, 'index'])->name('request-in-house.index');
+    Route::post('/request-in-house/create', [RequestInHouseController::class, 'store'])->name('request-in-house.store');
+
     // Forms Screens
-    Route::get('/request-in-house/{slug}', function () {return view('screen.requestInHouse');})->name('request-in-house.index');
     Route::get('/request-online/{slug}', function () {return view('screen.requestOnline');})->name('request-online.index');
 
     // helper apis for getting data

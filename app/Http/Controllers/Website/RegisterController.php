@@ -39,7 +39,7 @@ class RegisterController extends Controller
         $registerForm = Register::create($validatedData);
 
         // Redirect or respond with success message
-        return redirect()->route('register.index', ['id' => $registerForm->timing->id])->with('success', 'Registration form submitted successfully.');
+        return redirect()->back()->with('success', 'Registration form submitted successfully.');
     }
 
 }

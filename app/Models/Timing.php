@@ -97,7 +97,7 @@ class Timing extends Model
 
     public function setIsBannerAttribute($value)
     {
-        $this->attributes['display_in_banner'] = intval($value);
+        $this->attributes['is_banner'] = intval($value);
     }
 
 }

@@ -13,12 +13,21 @@ return new class extends Migration
     {
         Schema::create('request_in_house', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('course_id');
+            $table->unsignedBigInteger('course_id')->nullable();
 
+            // Course details
             $table->string('location', 150)->nullable();
             $table->integer('number_of_days')->nullable();
             $table->integer('number_of_participants')->nullable();
-            $table->longText('message')->nullable();
+            $table->longText('message1')->nullable();
+            // Contact info
+            $table->string('full_name', 150)->nullable();
+            $table->string('country', 150)->nullable();
+            $table->string('email', 150)->nullable();
+            $table->string('phone_number', 50)->nullable();
+            $table->string('company', 150)->nullable();
+            $table->string('subject', 150)->nullable();
+            $table->longText('message2')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
