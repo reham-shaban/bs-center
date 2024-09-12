@@ -18,8 +18,7 @@ class CreateBlogsTable extends Migration
             $table->string('h1', 255)->nullable();
             $table->string('slug', 255);
             $table->longText('description')->nullable();
-            $table->integer('sort_order')->default(0);
-            $table->tinyInteger('status')->default(0);
+            $table->string('tag_name')->nullable();
             $table->integer('number_of_views')->default(0);
             $table->string('lang', 5)->nullable();
             $table->string('image_alt', 150)->nullable();

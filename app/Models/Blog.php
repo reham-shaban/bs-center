@@ -22,6 +22,8 @@ class Blog extends Model implements HasMedia
         'image_alt',
         'image_title',
         'slug',
+        'tag_name',
+        'number_of_views',
         'meta_keywords',
         'meta_title',
         'meta_description',

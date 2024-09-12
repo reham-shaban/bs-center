@@ -57,7 +57,7 @@ function()
     Route::get('/api/upcoming-courses', [HomeController::class, 'getUpcomingCourses']);
     Route::get('/api/search-courses', [HomeController::class, 'searchCourses']);
     Route::get('/blogs/get-blogs', [BlogController::class, 'getBlogs']);
-    Route::get('/blogs/get-related-blogs/{status}', [BlogController::class, 'getBlogsByStatus']);
+    Route::get('/blogs/get-related-blogs/{tag}', [BlogController::class, 'getBlogsByTag']);
 
     Route::get('/{slug}', [CityController::class, 'show'])->name('city.show');
 

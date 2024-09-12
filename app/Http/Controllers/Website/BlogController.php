@@ -37,10 +37,10 @@ class BlogController extends Controller
         return response()->json(["blogs" => $blogs], 200);
     }
 
-    public function getBlogsByStatus($status)
+    public function getBlogsByTag($tag)
     {
         $currentLocale = app()->getLocale();
-        $blogs = Blog::where('status', $status)
+        $blogs = Blog::where('tag_name', $tag)
                 ->where('lang', $currentLocale)
                 ->where('hidden', false)
                 ->orderBy('sort_order', 'asc')

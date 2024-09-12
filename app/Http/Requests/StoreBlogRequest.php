@@ -14,9 +14,6 @@ class StoreBlogRequest extends FormRequest
     public function rules()
     {
         return [
-            'sort_order' => 'integer|nullable',
-            'status' => 'integer|nullable',
-
             'title' => 'required|string|max:250|nullable',
             'slug' => 'required|string|max:255|unique:blogs,slug',
             'h1' => 'string|max:255|nullable',
@@ -24,6 +21,7 @@ class StoreBlogRequest extends FormRequest
             'description' => 'string|nullable',
             'image_alt' => 'string|max:150|nullable',
             'image_title' => 'string|max:150|nullable',
+            'tag_name' => 'string|max:150|nullable',
 
             'meta_title' => 'string|max:255|nullable',
             'meta_description' => 'string|nullable',

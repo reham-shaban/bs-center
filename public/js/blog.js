@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", async function () {
-    // Assuming you have the status variable available
-    const status = 1; // Replace this with the actual status you want to filter by
+    // Assuming you have the tag variable available
+    const tag = 'tag_name'; // Replace this with the actual tag you want to filter by
 
     // Fetch related blogs from the API
-    const response = await fetch(`/blogs/get-related-blogs/${status}`);
+    const response = await fetch(`/blogs/get-related-blogs/${tag}`);
     const result = await response.json();
 
     const data = result.blogs.map(blog => ({

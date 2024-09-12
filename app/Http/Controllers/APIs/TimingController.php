@@ -54,7 +54,23 @@ class TimingController extends Controller
         }
 
         // Get the results without pagination
-        $timings = $query->get();
+        $timings = $query->get()->map(function ($timing) {
+            return [
+                'id' => $timing->id,
+                'title' => $timing->title,
+                'price' => $timing->price,
+                'date_from' => $timing->date_from,
+                'date_to' => $timing->date_to,
+                'duration' => $timing->duration,
+                'lang' => $timing->lang,
+                'city_title' => $timing->city->title ?? null,
+                'course_title' => $timing->course->title ?? null,
+                'category_title' => $timing->course->category->title ?? null,
+                'is_upcoming' => $timing->is_upcoming,
+                'is_banner' => $timing->is_banner,
+                'hidden' => $timing->hidden,
+            ];
+        });
 
         return response()->json($timings, 200);
     }
