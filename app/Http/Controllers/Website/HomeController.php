@@ -55,6 +55,7 @@ class HomeController extends Controller
         // Fetch filtered banner courses
         $query_banner = Timing::where('lang', $currentLocale);
         $bannerCourses = Timing::getBanner($query_banner);
+        Log::info("Banner courses: ", ["banner" => $bannerCourses]);
 
         // Fetch filtered categories
         $categories = Category::where('lang', $currentLocale)

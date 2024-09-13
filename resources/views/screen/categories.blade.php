@@ -19,7 +19,6 @@
     <div class="container">
       <div>
         <h1>All Categories</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur</p>
       </div>
       @include('includes.search-form', ['searchRoute' => route('categories.index')])
     </div>

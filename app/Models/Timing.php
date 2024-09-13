@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Log;
 
 class Timing extends Model
 {
@@ -34,11 +35,17 @@ class Timing extends Model
         $timings = $query->with(['course', 'city'])
                         ->get(['id', 'course_id', 'city_id', 'date_from', 'date_to'])
                         ->map(function ($timing) {
+                            if($timing->course->getFirstMediaUrl('images')){
+                                $image = $timing->course->getFirstMediaUrl('images');
+                            }
+                            else{
+                                $image = $timing->course->category->getFirstMediaUrl('images');
+                            }
                             return [
                                 'id' => $timing->id,
                                 'course_title' => $timing->course->title,
                                 'course_slug' => $timing->course->slug,
-                                'course_image' => $timing->course->getFirstMediaUrl('images'),
+                                'course_image' => $image,
                                 'image_alt' => $timing->course->image_alt,
                                 'h1' => $timing->course->h1,
                                 'date_from' => $timing->date_from,
@@ -58,11 +65,17 @@ class Timing extends Model
         $timings = $query->with(['course', 'city'])
                         ->get(['id', 'course_id', 'city_id', 'date_from', 'date_to'])
                         ->map(function ($timing) {
+                            if($timing->course->getFirstMediaUrl('images')){
+                                $image = $timing->course->getFirstMediaUrl('images');
+                            }
+                            else{
+                                $image = $timing->course->category->getFirstMediaUrl('images');
+                            }
                             return [
                                 'id' => $timing->id,
                                 'course_title' => $timing->course->title,
                                 'course_slug' => $timing->course->slug,
-                                'course_image' => $timing->course->getFirstMediaUrl('images'),
+                                'course_image' => $image,
                                 'image_alt' => $timing->course->image_alt,
                                 'h1' => $timing->course->h1,
                                 'date_from' => $timing->date_from,

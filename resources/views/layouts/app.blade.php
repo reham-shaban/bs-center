@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="{{ asset('css/privacy.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sitemap.css') }}">
     <link rel="stylesheet" href="{{ asset('css/venus.css') }}">
+    @yield('style')
     <!-- Swiper js CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>

@@ -24,7 +24,11 @@
 </div>
 
 <section class="hero-single-course">
+    @if ( $course->image )
+    <img src="{{ $course->image }}" alt="" />
+    @else
     <img src="{{ asset('assets/imgs/bg-blog.webp') }}" alt="" />
+    @endif
     <div class="course-hero-title">
       <div>
         <h1>{{ $course->h1 }}</h1>
@@ -187,7 +191,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const slug = "{{ $course->slug }}";
+        const slug = @json($course->slug);
         const url = `/${slug}/related-timings`;
         console.log("in scripte -------------")
         fetch(url)
@@ -202,14 +206,14 @@
                 data.timings.forEach(item => {
                     container.innerHTML += `
                         <div class="card">
-                            <img src="${item.image_url}" alt="${item.image_alt}">
+                            <img src="${item.course_image}" alt="${item.image_alt}">
                             <div class="card-title">${item.course_title}</div>
                             <div class="card-dates">
-                                <img src="assets/icons/calender2.svg" alt="" />
+                                <img src="/assets/icons/calender2.svg" alt="" />
                                 <span>${item.date_from} to ${item.date_to}</span>
                             </div>
                             <div class="card-location">
-                                <img src="assets/icons/location.svg" alt="" class="location-icon" />
+                                <img src="/assets/icons/location.svg" alt="" class="location-icon" />
                                 <span>${item.city_title}</span>
                             </div>
                             <div class="card-buttons">

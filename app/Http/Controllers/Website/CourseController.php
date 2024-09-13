@@ -14,6 +14,7 @@ class CourseController extends Controller
     public function show($slug)
     {
         $course = Course::with(['category', 'timings.city'])->where('slug', $slug)->firstOrFail();
+        $course['image'] = $course->getFirstMediaUrl('images') ?? $course->category->getFirstMediaUrl('images');
 
         return view('screen.course', compact('course'));
     }
@@ -62,11 +63,17 @@ class CourseController extends Controller
                 ->where('lang', $currentLocale)
                 ->get(['id', 'course_id', 'city_id', 'date_from', 'date_to'])
                 ->map(function ($timing) {
+                    if($timing->course->getFirstMediaUrl('images')){
+                        $image = $timing->course->getFirstMediaUrl('images');
+                    }
+                    else{
+                        $image = $timing->course->category->getFirstMediaUrl('images');
+                    }
                     return [
                         'id' => $timing->id,
                         'course_title' => $timing->course->title,
                         'course_slug' => $timing->course->slug,
-                        'course_image' => $timing->course->getFirstMediaUrl('images'),
+                        'course_image' => $image,
                         'image_alt' => $timing->course->image_alt,
                         'h1' => $timing->course->h1,
                         'date_from' => $timing->date_from,

@@ -25,7 +25,7 @@ class CreateTimingsTable extends Migration
             $table->integer('duration')->nullable()->index();
 
             $table->string('lang', 5)->nullable();
-            $table->boolean('is_upcoming')->default(1);
+            $table->boolean('is_upcoming')->default(0);
             $table->boolean('is_banner')->default(0);
             $table->boolean('hidden')->default(false);
 

@@ -13,18 +13,26 @@ class TimingFactory extends Factory
 
     public function definition()
     {
-        // Retrieve random course and city IDs
-        $course = Course::inRandomOrder()->first();
-        $city = City::inRandomOrder()->first();
+        // Randomly select language
+        $lang = $this->faker->randomElement(['en', 'ar']);
+
+        // Set Faker locale based on language
+        $faker = $lang === 'ar' ? \Faker\Factory::create('ar_SA') : $this->faker;
+
+        // Retrieve a course with the same language
+        $course = Course::where('lang', $lang)->inRandomOrder()->first();
+
+        // Retrieve a city with the same language
+        $city = City::where('lang', $lang)->inRandomOrder()->first();
 
         // Ensure we have valid course and city before proceeding
         if (!$course || !$city) {
-            throw new \Exception('Make sure to have some courses and cities created before running the factory.');
+            throw new \Exception('Make sure to have some courses and cities with the appropriate language created before running the factory.');
         }
 
         // Generate random date range
         $dateFrom = $this->faker->dateTimeBetween('+1 week', '+1 month');
-        $dateTo = (clone $dateFrom)->modify('+'.rand(1, 10).' days');
+        $dateTo = (clone $dateFrom)->modify('+' . rand(1, 10) . ' days');
 
         // Calculate duration
         $duration = (int) $dateFrom->diff($dateTo)->format('%a');
@@ -32,14 +40,14 @@ class TimingFactory extends Factory
         return [
             'course_id' => $course->id,
             'city_id' => $city->id,
-            'title' => $this->faker->sentence,
-            'price' => $this->faker->randomFloat(2, 100, 1000),
+            'title' => $faker->sentence,
+            'price' => $faker->randomFloat(2, 100, 1000),
             'date_from' => $dateFrom->format('Y-m-d'),
             'date_to' => $dateTo->format('Y-m-d'),
             'duration' => $duration,
-            'lang' => $this->faker->randomElement(['en', 'ar']),
-            'is_upcoming' => $this->faker->boolean,
-            'is_banner' => $this->faker->boolean,
+            'lang' => $lang,
+            'is_upcoming' => $faker->boolean,
+            'is_banner' => $faker->boolean,
             'created_at' => now(),
             'updated_at' => now(),
         ];

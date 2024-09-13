@@ -61,7 +61,7 @@
 <script>
 // get categories
     document.addEventListener("DOMContentLoaded", function() {
-        const slug = "{{ $city->slug }}";
+        const slug = @json($city->slug);
         const url = `/categories/${slug}`;
 
         fetch(url)
@@ -79,7 +79,7 @@
                                 <h3>${item.title}</h3>
                                 <p>${item.description}</p>
                                 <span class="line-card"></span>
-                                <span class="category-card-arrow"><img src="{{ asset('assets/icons/arrow.svg') }}" alt=""></span>
+                                <span class="category-card-arrow"><img src="/assets/icons/arrow.svg" alt=""></span>
                             </div>
                         </a>
                         `;
@@ -90,7 +90,7 @@
 
 // get courses
     document.addEventListener("DOMContentLoaded", function() {
-        const slug = "{{ $city->slug }}";
+        const slug = @json($city->slug);
         const url = `/get-courses/${slug}`;
 
         fetch(url)
@@ -105,7 +105,7 @@
                             <a class="course-item" href='/course/${item.slug}'>
                             <p>${item.title}</p>
                             <span href='/course/${item.slug}'>
-                                <img src="assets/icons/arrow.svg" alt="" />
+                                <img src="/assets/icons/arrow.svg" alt="" />
                             </span>
                             </a>
                         `;

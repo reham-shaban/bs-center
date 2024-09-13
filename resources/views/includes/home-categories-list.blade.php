@@ -22,6 +22,12 @@
         const cardContainer2 = document.querySelector(".my-wrap");
         categoryData.forEach((data) => {
             const card = document.createElement("div");
+            if (data.description) {
+                description = data.description
+            }
+            else{
+                description = ""
+            }
             card.classList.add("swiper-slide");
             card.innerHTML = `
             <a href='/courses/${data.slug}' style="color:white">
@@ -29,7 +35,7 @@
                     <img src="${data.image_url}" alt="${data.title}">
                     <div class="card-overlay">
                         <h3>${data.title}</h3>
-                        <p>${data.description}</p>
+                        <p>${description}</p>
                         <span class="line-card"></span>
                         <a href='/courses/${data.slug}' class="category-card-arrow"><img src="{{ asset('assets/icons/arrow.svg') }}" alt=""></a>
                     </div>

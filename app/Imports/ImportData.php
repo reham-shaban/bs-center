@@ -31,7 +31,7 @@ class ImportData
         Log::info("Processing row:", $row);
 
         $startFormatted = $row[5];
-        $endFormatted = $row[6] ? $row[5] : null;
+        $endFormatted = $row[6] ? $row[6] : null;
 
         // Process the rest of the row
         $category = $this->categories->where('title', $row[2])->first();

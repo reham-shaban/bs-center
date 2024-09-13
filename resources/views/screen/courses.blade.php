@@ -40,7 +40,7 @@
 @section('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const slug = "{{ $category->slug }}";
+        const slug = @json($category->slug);
         const url = `/categories/${slug}/courses`;
         console.log("in scripte -------------")
         fetch(url)
