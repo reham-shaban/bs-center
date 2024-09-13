@@ -769,6 +769,7 @@ nav {
     height: 50px;
     font-weight: 300;
     background-color: var(--white);
+    overflow: hidden;
 }
 
 .custom-select-trigger {
@@ -781,9 +782,11 @@ nav {
     align-items: center;
     padding: 0 20px;
     background-color: var(--white);
+    text-align: start;
 
     span {
         color: var(--black);
+        /* white-space: nowrap; */
     }
 }
 
