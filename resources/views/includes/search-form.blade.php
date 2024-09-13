@@ -1,15 +1,12 @@
 {{-- Form --}}
 <form action="{{ $searchRoute }}" method="GET" class="search-courses-form">
-    {{-- @foreach($categories as $category)
-    {{ $category->title }}
-@endforeach --}}
     {{-- Row 1 --}}
     <div class="row1">
         <div>
             <input type="text" name="course_title" id="course_title" placeholder="Search for course" value="{{ request('course_title') }}">
             <img src="{{ asset('assets/icons/search.svg') }}" alt="">
         </div>
-        {{-- <div class="custom-select-wrapper">
+        <div class="custom-select-wrapper">
             <div class="custom-select">
                 <div class="custom-select-trigger">
                     <span>{{ request('category_title', 'Category') }}</span>
@@ -22,8 +19,8 @@
                 </div>
             </div>
             <input type="hidden" name="category_title" id="category_title_input" value="{{ request('category_title') }}">
-        </div> --}}
-        <input class="category-input" type="text" name="category_title" id="category_title" placeholder="Categories" value="{{ request('category_title') }}">
+        </div>
+        {{-- <input class="category-input" type="text" name="category_title" id="category_title" placeholder="Categories" value="{{ request('category_title') }}"> --}}
     </div>
 
     {{-- Row 2 --}}
