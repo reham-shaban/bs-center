@@ -9,24 +9,24 @@ use Exception;
 
 class AuthController extends Controller
 {
-    // Login API - POST (name, password)
+    // Login API - POST (email, password)
     public function login(Request $request)
     {
         try {
-            // Check if name and password are present in the request
-            if (!$request->has('name') || !$request->has('password')) {
-                return response()->json(['message' => 'Name and password are required'], 400);
+            // Check if email and password are present in the request
+            if (!$request->has('email') || !$request->has('password')) {
+                return response()->json(['message' => 'Email and password are required'], 400);
             }
 
             // Validation
             $request->validate([
-                "name" => "required|string",
+                "email" => "required|string",
                 "password" => "required"
             ]);
 
             // Attempt to authenticate the user
             $token = auth()->attempt([
-                "name" => $request->name,
+                "email" => $request->email,
                 "password" => $request->password
             ]);
 

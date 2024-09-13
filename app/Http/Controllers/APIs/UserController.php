@@ -27,8 +27,8 @@ class UserController extends Controller
     {
         try{
             $validated = $request->validate([
-                'name' => 'required|string|unique:users',
-                'email' => 'nullable|email|unique:users',
+                'name' => 'required|string',
+                'email' => 'required|email|unique:users',
                 'password' => 'required|string|min:6',
                 'phone_number' => 'nullable|string|max:50',
                 'role' => 'nullable|string|exists:roles,name',
@@ -36,7 +36,7 @@ class UserController extends Controller
 
             $user = User::create([
                 'name' => $validated['name'],
-                'email' => $validated['email'] ?? null,
+                'email' => $validated['email'],
                 'password' => Hash::make($validated['password']),
                 'phone_number' => $validated['phone_number'] ?? null,
             ]);
@@ -62,7 +62,7 @@ class UserController extends Controller
             $user = User::findOrFail($id);
 
             $validated = $request->validate([
-                'name' => 'nullable|string|unique:users,name,' . $user->id,
+                'name' => 'nullable|string',
                 'email' => 'nullable|email|unique:users,email,' . $user->id,
                 'password' => 'nullable|string|min:6',
                 'phone_number' => 'nullable|string|max:50',
