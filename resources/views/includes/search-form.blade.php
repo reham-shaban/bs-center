@@ -2,7 +2,7 @@
 <form action="{{ $searchRoute }}" method="GET" class="search-courses-form">
     {{-- Row 1 --}}
     <div class="row1">
-        <div>
+        <div class="search-courses-form-input">
             <input type="text" name="course_title" id="course_title" placeholder="Search for course" value="{{ request('course_title') }}">
             <img src="{{ asset('assets/icons/search.svg') }}" alt="">
         </div>

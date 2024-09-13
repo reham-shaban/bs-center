@@ -3,7 +3,7 @@
   right: 95px !important;
 }
 .nav-links-phone {
-  transform: translateX(100%) !important;
+  transform: translateX(100%);
 }
 .search-courses-form {
   .row1 {
